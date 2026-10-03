@@ -1,0 +1,13 @@
+{
+  "path": "artifacts\\experiments_v3\\iteration_4\\dqn_s74\\step_0.zip",
+  "sha256": "bce734bca02609e272eb5b20832aba4176eef9ed18f63222abdb8680e30b8b38",
+  "steps": 0,
+  "development": {
+    "episodes": 36,
+    "crashes": 0,
+    "qualification_rate": 0.0,
+    "mean_score": 850.0,
+    "mean_distance_m": 549.5999999999809,
+    "mean_overtakes": 0.0
+  }
+}

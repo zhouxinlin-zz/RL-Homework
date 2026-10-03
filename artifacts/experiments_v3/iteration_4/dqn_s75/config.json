@@ -1,0 +1,16 @@
+{
+  "algorithm": "dqn",
+  "seed": 75,
+  "env_version": "3.1",
+  "requested_steps": 200000,
+  "source": "artifacts\\experiments_v3\\iteration_4\\dqn_s74\\step_125000.zip",
+  "source_sha256": "261142ef0070377b6f7dc43cef8c69ca01e5a304e32a92942882c9a22713761e",
+  "actor_from_ppo": null,
+  "actor_source_sha256": null,
+  "training_source_sha256": "05c3faa52a5ab2cafc8d655bceb50ee4177a1d54b15f5d4b0f4e55a6ea71f645",
+  "environment_source_sha256": "47e504164db11206f93a4be3b55c878a79d6d8faa856b282bd2565aa1f0e3f7e",
+  "reward": "original v3.1 + .035/metre + .2/overtake; total collision penalty -60",
+  "development_start": 631100,
+  "fresh_holdout_start": 1631100,
+  "selection": "fewest development crashes, then qualification, then score"
+}

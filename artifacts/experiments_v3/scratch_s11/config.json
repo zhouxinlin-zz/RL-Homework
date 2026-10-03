@@ -1,0 +1,20 @@
+{
+  "run_id": "scratch_s11",
+  "algorithm": "ppo",
+  "seed": 11,
+  "env_version": "3.0",
+  "envs": 4,
+  "requested_timesteps": 100000,
+  "initialize_path": null,
+  "initialize_sha256": null,
+  "demonstrations_path": null,
+  "demonstrations_sha256": null,
+  "imitation_epochs": 0,
+  "imitation_transitions": 0,
+  "environment_source_sha256": "e0e8899e212b1eba9ac99bb3fe64360fb9b7b495636780838992450328007a25",
+  "training_source_sha256": "decff53bda13b4d4ef5d0036b6161f7f96f2e5c9da5dfd067e0f4f8133e17c56",
+  "validation_seed_start": 531100,
+  "validation_seed_count_per_scenario": 8,
+  "test_seed_start": 931100,
+  "selection_metric": "v2_metrics.episode quality, pooled across 3 scenarios"
+}

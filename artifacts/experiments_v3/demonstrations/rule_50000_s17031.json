@@ -1,0 +1,23 @@
+{
+  "env_version": "3.0",
+  "transitions": 50000,
+  "episodes": 267,
+  "crashes": 89,
+  "seed": 17031,
+  "scenario_set": [
+    "convoy",
+    "weave",
+    "pressure"
+  ],
+  "random_action_probability": 0.03,
+  "label_counts": [
+    383,
+    44848,
+    503,
+    2271,
+    1995
+  ],
+  "sha256": "747cc47e8643585108c5ad622471cb72ce3a2ee3df383ae4591f23273f111c18",
+  "environment_source_sha256": "e0e8899e212b1eba9ac99bb3fe64360fb9b7b495636780838992450328007a25",
+  "teacher": "transparent 30-feature rule_action; no rule executes during neural inference"
+}

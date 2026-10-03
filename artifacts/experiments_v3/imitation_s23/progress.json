@@ -1,0 +1,186 @@
+{
+  "run_id": "imitation_s23",
+  "algorithm": "ppo",
+  "seed": 23,
+  "env_version": "3.0",
+  "envs": 4,
+  "requested_timesteps": 100000,
+  "initialize_path": null,
+  "initialize_sha256": null,
+  "demonstrations_path": "artifacts\\experiments_v3\\demonstrations\\rule_50000_s17031.npz",
+  "demonstrations_sha256": "747cc47e8643585108c5ad622471cb72ce3a2ee3df383ae4591f23273f111c18",
+  "imitation_epochs": 30,
+  "imitation_transitions": 50000,
+  "environment_source_sha256": "e0e8899e212b1eba9ac99bb3fe64360fb9b7b495636780838992450328007a25",
+  "training_source_sha256": "decff53bda13b4d4ef5d0036b6161f7f96f2e5c9da5dfd067e0f4f8133e17c56",
+  "validation_seed_start": 531100,
+  "validation_seed_count_per_scenario": 8,
+  "test_seed_start": 931100,
+  "selection_metric": "v2_metrics.episode quality, pooled across 3 scenarios",
+  "actual_timesteps": 100352,
+  "elapsed_session_s": 517.3,
+  "validations": [
+    {
+      "timesteps": 0,
+      "episodes": 24,
+      "crashes": 7,
+      "completion_rate": 0.7083333333333334,
+      "mean_quality": 2.195962890642497,
+      "mean_distance_m": 957.6999023673703,
+      "mean_overtakes": 3.6666666666666665,
+      "mean_danger_seconds": 0.7750000000000004,
+      "by_scenario": {
+        "convoy": {
+          "crashes": 3,
+          "mean_distance_m": 969.3801016226964,
+          "mean_overtakes": 6.25
+        },
+        "weave": {
+          "crashes": 0,
+          "mean_distance_m": 947.1168484491641,
+          "mean_overtakes": 1.125
+        },
+        "pressure": {
+          "crashes": 4,
+          "mean_distance_m": 956.6027570302507,
+          "mean_overtakes": 3.625
+        }
+      }
+    },
+    {
+      "timesteps": 25000,
+      "episodes": 24,
+      "crashes": 8,
+      "completion_rate": 0.6666666666666666,
+      "mean_quality": 2.091382493622193,
+      "mean_distance_m": 942.4913663899606,
+      "mean_overtakes": 3.2916666666666665,
+      "mean_danger_seconds": 1.3333333333333337,
+      "by_scenario": {
+        "convoy": {
+          "crashes": 2,
+          "mean_distance_m": 1039.673184231591,
+          "mean_overtakes": 5.375
+        },
+        "weave": {
+          "crashes": 0,
+          "mean_distance_m": 957.5912986268219,
+          "mean_overtakes": 1.5
+        },
+        "pressure": {
+          "crashes": 6,
+          "mean_distance_m": 830.2096163114688,
+          "mean_overtakes": 3.0
+        }
+      }
+    },
+    {
+      "timesteps": 50000,
+      "episodes": 24,
+      "crashes": 5,
+      "completion_rate": 0.7916666666666666,
+      "mean_quality": 2.391259475339106,
+      "mean_distance_m": 989.3252917077931,
+      "mean_overtakes": 3.875,
+      "mean_danger_seconds": 0.5416666666666669,
+      "by_scenario": {
+        "convoy": {
+          "crashes": 3,
+          "mean_distance_m": 986.0003129325058,
+          "mean_overtakes": 5.5
+        },
+        "weave": {
+          "crashes": 0,
+          "mean_distance_m": 987.274459564235,
+          "mean_overtakes": 2.5
+        },
+        "pressure": {
+          "crashes": 2,
+          "mean_distance_m": 994.7011026266384,
+          "mean_overtakes": 3.625
+        }
+      }
+    },
+    {
+      "timesteps": 75000,
+      "episodes": 24,
+      "crashes": 0,
+      "completion_rate": 1.0,
+      "mean_quality": 2.8297732828019577,
+      "mean_distance_m": 1024.868931782643,
+      "mean_overtakes": 3.5416666666666665,
+      "mean_danger_seconds": 0.049999999999999996,
+      "by_scenario": {
+        "convoy": {
+          "crashes": 0,
+          "mean_distance_m": 1151.6120362712056,
+          "mean_overtakes": 7.875
+        },
+        "weave": {
+          "crashes": 0,
+          "mean_distance_m": 943.3111253450194,
+          "mean_overtakes": 1.125
+        },
+        "pressure": {
+          "crashes": 0,
+          "mean_distance_m": 979.6836337317036,
+          "mean_overtakes": 1.625
+        }
+      }
+    },
+    {
+      "timesteps": 100000,
+      "episodes": 24,
+      "crashes": 1,
+      "completion_rate": 0.9583333333333334,
+      "mean_quality": 2.7422015122656433,
+      "mean_distance_m": 1013.9220415586187,
+      "mean_overtakes": 3.75,
+      "mean_danger_seconds": 0.11666666666666665,
+      "by_scenario": {
+        "convoy": {
+          "crashes": 1,
+          "mean_distance_m": 1081.7397414246452,
+          "mean_overtakes": 7.5
+        },
+        "weave": {
+          "crashes": 0,
+          "mean_distance_m": 967.7237624642974,
+          "mean_overtakes": 1.625
+        },
+        "pressure": {
+          "crashes": 0,
+          "mean_distance_m": 992.3026207869138,
+          "mean_overtakes": 2.125
+        }
+      }
+    },
+    {
+      "timesteps": 100352,
+      "episodes": 24,
+      "crashes": 1,
+      "completion_rate": 0.9583333333333334,
+      "mean_quality": 2.753894156232048,
+      "mean_distance_m": 1028.1321109132648,
+      "mean_overtakes": 3.875,
+      "mean_danger_seconds": 0.41666666666666674,
+      "by_scenario": {
+        "convoy": {
+          "crashes": 0,
+          "mean_distance_m": 1161.9901354312324,
+          "mean_overtakes": 7.875
+        },
+        "weave": {
+          "crashes": 0,
+          "mean_distance_m": 965.3446453294578,
+          "mean_overtakes": 1.625
+        },
+        "pressure": {
+          "crashes": 1,
+          "mean_distance_m": 957.0615519791039,
+          "mean_overtakes": 2.125
+        }
+      }
+    }
+  ]
+}

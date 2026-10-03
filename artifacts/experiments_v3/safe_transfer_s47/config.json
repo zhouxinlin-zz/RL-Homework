@@ -1,0 +1,20 @@
+{
+  "run_id": "safe_transfer_s47",
+  "algorithm": "ppo",
+  "seed": 47,
+  "env_version": "3.1",
+  "envs": 4,
+  "requested_timesteps": 200000,
+  "initialize_path": "artifacts\\experiments_v3\\transfer_s47\\best.zip",
+  "initialize_sha256": "896239203cdfe13696a81e66ee8414a2564e8e81efc66821af3dfc78852bb5cb",
+  "demonstrations_path": null,
+  "demonstrations_sha256": null,
+  "imitation_epochs": 0,
+  "imitation_transitions": 0,
+  "environment_source_sha256": "47e504164db11206f93a4be3b55c878a79d6d8faa856b282bd2565aa1f0e3f7e",
+  "training_source_sha256": "decff53bda13b4d4ef5d0036b6161f7f96f2e5c9da5dfd067e0f4f8133e17c56",
+  "validation_seed_start": 531100,
+  "validation_seed_count_per_scenario": 8,
+  "test_seed_start": 931100,
+  "selection_metric": "v2_metrics.episode quality, pooled across 3 scenarios"
+}

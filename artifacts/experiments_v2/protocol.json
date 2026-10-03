@@ -1,0 +1,151 @@
+{
+  "environment_version": "2.0",
+  "training_budget_comparison": {
+    "algorithms": [
+      "ppo",
+      "dqn",
+      "a2c"
+    ],
+    "requested_steps": 200000,
+    "seed": 11,
+    "selection": "best development quality within identical requested budget; rollout rounding recorded",
+    "frozen_registry": "comparison_200k.json"
+  },
+  "main_training": {
+    "method": "rule actor pretraining followed by PPO reinforcement learning",
+    "seeds": [
+      11,
+      23,
+      47
+    ],
+    "requested_rl_steps_each": 1000000,
+    "shared_demonstration_steps": 60000,
+    "demonstration_seed_range": [
+      17011,
+      17327
+    ],
+    "pretraining_epochs": 60,
+    "inference": "neural network only; no rule or safety override",
+    "evaluation_selection": "For main RL replicate rows, select the best development checkpoint with timesteps>0. Report each seed step0 pure BC separately; keep original best-including-initialization files unchanged."
+  },
+  "same_budget_reference": {
+    "run": "ppo_curriculum_s11",
+    "requested_rl_steps": 1000000,
+    "demonstration_steps": 0
+  },
+  "ablations": [
+    {
+      "run": "ppo_normal_s11",
+      "factor": "fixed normal traffic instead of curriculum",
+      "steps": 200000
+    },
+    {
+      "run": "ppo_base_s11",
+      "factor": "omit passing, danger and lane-change reward terms",
+      "steps": 200000
+    }
+  ],
+  "selection_roads": {
+    "seeds": [
+      31100,
+      31101,
+      31102,
+      31103,
+      31104,
+      31105
+    ],
+    "conditions": [
+      [
+        "light",
+        30
+      ],
+      [
+        "normal",
+        45
+      ],
+      [
+        "dense",
+        45
+      ]
+    ]
+  },
+  "difficulty_calibration_roads": {
+    "seeds": [
+      31200,
+      31201,
+      31202,
+      31203,
+      31204,
+      31205,
+      31206,
+      31207,
+      31208,
+      31209,
+      31210,
+      31211,
+      31212,
+      31213,
+      31214,
+      31215,
+      31216,
+      31217,
+      31218,
+      31219
+    ],
+    "conditions": [
+      [
+        "light",
+        30
+      ],
+      [
+        "normal",
+        45
+      ],
+      [
+        "dense",
+        45
+      ],
+      [
+        "normal",
+        60
+      ],
+      [
+        "dense",
+        60
+      ]
+    ]
+  },
+  "final_test_roads": {
+    "seed_start": 891000,
+    "episodes_per_condition": 100,
+    "conditions": [
+      [
+        "light",
+        30
+      ],
+      [
+        "normal",
+        45
+      ],
+      [
+        "dense",
+        45
+      ],
+      [
+        "normal",
+        60
+      ],
+      [
+        "dense",
+        60
+      ]
+    ],
+    "checkpoint_selection_allowed": false
+  },
+  "reporting": [
+    "All training and demonstration budgets reported separately",
+    "Same-road paired uncertainty resamples entire seed clusters",
+    "No claims of human-level performance without measured human trials",
+    "Poor checkpoints and interrupted pilots retained with status"
+  ]
+}

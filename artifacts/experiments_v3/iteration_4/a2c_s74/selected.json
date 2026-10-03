@@ -1,0 +1,13 @@
+{
+  "path": "artifacts\\experiments_v3\\iteration_4\\a2c_s74\\step_0.zip",
+  "sha256": "7e3933ca2c8304e0556b8325648e9286d5d6686f52b67c2d800cbe97995b6e51",
+  "steps": 0,
+  "development": {
+    "episodes": 36,
+    "crashes": 0,
+    "qualification_rate": 0.0,
+    "mean_score": 849.9444444444445,
+    "mean_distance_m": 549.8334368140012,
+    "mean_overtakes": 0.0
+  }
+}

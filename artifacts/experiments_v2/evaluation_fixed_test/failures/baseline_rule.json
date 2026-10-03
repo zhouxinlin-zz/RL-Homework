@@ -1,0 +1,13 @@
+{
+  "metadata": {
+    "id": "baseline_rule",
+    "baseline": "rule",
+    "env_version": "2.0",
+    "seed_start": 891000,
+    "split": "test",
+    "environment_source_sha256": "c569f0afbb28d07f9ff541718c3de5d168091f1575d211630523ee05e116f017",
+    "metrics_source_sha256": "9ed37e1301a5d68af15d40fcf8059b20fecfe39bf0787bf13ee3842ddc7912da",
+    "episodes_per_condition": 100
+  },
+  "failures": []
+}

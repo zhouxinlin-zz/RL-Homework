@@ -1,0 +1,56 @@
+{
+  "algorithm": "a2c",
+  "seed": 75,
+  "env_version": "3.1",
+  "requested_steps": 50000,
+  "source": null,
+  "source_sha256": null,
+  "actor_from_ppo": "artifacts\\experiments_v3\\deployment\\v3_expert-b4f0d5f66de4.zip",
+  "actor_source_sha256": "b4f0d5f66de4a589f240654ad21b09705beaf52eb71a4c43abe4ce5765a5419a",
+  "training_source_sha256": "05c3faa52a5ab2cafc8d655bceb50ee4177a1d54b15f5d4b0f4e55a6ea71f645",
+  "environment_source_sha256": "47e504164db11206f93a4be3b55c878a79d6d8faa856b282bd2565aa1f0e3f7e",
+  "reward": "original v3.1 + .035/metre + .2/overtake; total collision penalty -60",
+  "development_start": 631100,
+  "fresh_holdout_start": 1631100,
+  "selection": "fewest development crashes, then qualification, then score",
+  "actual_steps": 50048,
+  "elapsed_s": 561.4,
+  "validations": [
+    {
+      "steps": 0,
+      "episodes": 36,
+      "crashes": 1,
+      "qualification_rate": 0.8333333333333334,
+      "mean_score": 1532.638888888889,
+      "mean_distance_m": 1082.6476168089648,
+      "mean_overtakes": 4.722222222222222
+    },
+    {
+      "steps": 25000,
+      "episodes": 36,
+      "crashes": 1,
+      "qualification_rate": 0.8611111111111112,
+      "mean_score": 1537.4166666666667,
+      "mean_distance_m": 1086.4211620211036,
+      "mean_overtakes": 4.777777777777778
+    },
+    {
+      "steps": 50000,
+      "episodes": 36,
+      "crashes": 0,
+      "qualification_rate": 0.8888888888888888,
+      "mean_score": 1585.4444444444443,
+      "mean_distance_m": 1108.0803877892392,
+      "mean_overtakes": 5.166666666666667
+    },
+    {
+      "steps": 50048,
+      "episodes": 36,
+      "crashes": 0,
+      "qualification_rate": 0.8888888888888888,
+      "mean_score": 1585.4444444444443,
+      "mean_distance_m": 1107.9695456417444,
+      "mean_overtakes": 5.166666666666667
+    }
+  ]
+}

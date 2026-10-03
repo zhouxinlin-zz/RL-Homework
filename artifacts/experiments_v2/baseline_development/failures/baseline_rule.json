@@ -1,0 +1,10 @@
+{
+  "metadata": {
+    "id": "baseline_rule",
+    "baseline": "rule",
+    "env_version": "2.0",
+    "seed_start": 31100,
+    "episodes_per_condition": 6
+  },
+  "failures": []
+}

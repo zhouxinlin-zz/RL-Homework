@@ -1,0 +1,47 @@
+{
+  "run_id": "safe_imitation_s23",
+  "algorithm": "ppo",
+  "seed": 23,
+  "env_version": "3.1",
+  "envs": 4,
+  "requested_timesteps": 500000,
+  "initialize_path": "artifacts\\experiments_v3\\imitation_s23\\best.zip",
+  "initialize_sha256": "a9e4bde97e29dc4be3f1e68552bf6bdc5b63c8b2477190a0dc329592c090d318",
+  "demonstrations_path": null,
+  "demonstrations_sha256": null,
+  "imitation_epochs": 0,
+  "imitation_transitions": 0,
+  "environment_source_sha256": "47e504164db11206f93a4be3b55c878a79d6d8faa856b282bd2565aa1f0e3f7e",
+  "training_source_sha256": "decff53bda13b4d4ef5d0036b6161f7f96f2e5c9da5dfd067e0f4f8133e17c56",
+  "validation_seed_start": 531100,
+  "validation_seed_count_per_scenario": 8,
+  "test_seed_start": 931100,
+  "selection_metric": "v2_metrics.episode quality, pooled across 3 scenarios",
+  "checkpoint_steps": 250704,
+  "validation": {
+    "episodes": 24,
+    "crashes": 0,
+    "completion_rate": 1.0,
+    "mean_quality": 2.917144184493005,
+    "mean_distance_m": 1091.1696490655565,
+    "mean_overtakes": 5.625,
+    "mean_danger_seconds": 0.8166666666666664,
+    "by_scenario": {
+      "convoy": {
+        "crashes": 0,
+        "mean_distance_m": 1181.102160286326,
+        "mean_overtakes": 8.875
+      },
+      "weave": {
+        "crashes": 0,
+        "mean_distance_m": 1084.0217949712933,
+        "mean_overtakes": 5.5
+      },
+      "pressure": {
+        "crashes": 0,
+        "mean_distance_m": 1008.3849919390502,
+        "mean_overtakes": 2.5
+      }
+    }
+  }
+}

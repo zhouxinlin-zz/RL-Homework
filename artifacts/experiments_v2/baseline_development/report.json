@@ -1,0 +1,344 @@
+{
+  "schema_version": 1,
+  "split": "development",
+  "total_episodes": 90,
+  "conditions": [
+    [
+      "light",
+      30
+    ],
+    [
+      "normal",
+      45
+    ],
+    [
+      "dense",
+      45
+    ],
+    [
+      "normal",
+      60
+    ],
+    [
+      "dense",
+      60
+    ]
+  ],
+  "models": [
+    {
+      "id": "baseline_slow",
+      "baseline": "slow",
+      "env_version": "2.0",
+      "seed_start": 31100,
+      "episodes_per_condition": 6
+    },
+    {
+      "id": "baseline_cruise",
+      "baseline": "cruise",
+      "env_version": "2.0",
+      "seed_start": 31100,
+      "episodes_per_condition": 6
+    },
+    {
+      "id": "baseline_rule",
+      "baseline": "rule",
+      "env_version": "2.0",
+      "seed_start": 31100,
+      "episodes_per_condition": 6
+    }
+  ],
+  "summary": [
+    {
+      "policy": "baseline_slow",
+      "scenario": "light",
+      "duration": 30,
+      "episodes": 6,
+      "crashes": 0,
+      "crash_rate": 0.0,
+      "crash_ci95": [
+        0,
+        0.39033428790215224
+      ],
+      "mean_quality": 2.6040000000000094,
+      "mean_distance_m": 543.6000000000085,
+      "mean_speed_kmh": 65.13976036866363,
+      "mean_overtakes": 0.0,
+      "mean_lane_changes": 0.0,
+      "mean_danger_seconds": 0.0,
+      "mean_return": 16.590000000000206
+    },
+    {
+      "policy": "baseline_slow",
+      "scenario": "normal",
+      "duration": 45,
+      "episodes": 6,
+      "crashes": 0,
+      "crash_rate": 0.0,
+      "crash_ci95": [
+        0,
+        0.39033428790215224
+      ],
+      "mean_quality": 2.6060000000000136,
+      "mean_distance_m": 813.6000000000187,
+      "mean_speed_kmh": 65.02650691244243,
+      "mean_overtakes": 0.16666666666666666,
+      "mean_lane_changes": 0.0,
+      "mean_danger_seconds": 0.0,
+      "mean_return": 23.40666666666713
+    },
+    {
+      "policy": "baseline_slow",
+      "scenario": "dense",
+      "duration": 45,
+      "episodes": 6,
+      "crashes": 2,
+      "crash_rate": 0.3333333333333333,
+      "crash_ci95": [
+        0.09677141110578363,
+        0.7000066848616004
+      ],
+      "mean_quality": 1.849080003373941,
+      "mean_distance_m": 671.3580045548202,
+      "mean_speed_kmh": 65.11057828904055,
+      "mean_overtakes": 1.1666666666666667,
+      "mean_lane_changes": 0.0,
+      "mean_danger_seconds": 1.1000000000000003,
+      "mean_return": 14.590616780537175
+    },
+    {
+      "policy": "baseline_slow",
+      "scenario": "normal",
+      "duration": 60,
+      "episodes": 6,
+      "crashes": 0,
+      "crash_rate": 0.0,
+      "crash_ci95": [
+        0,
+        0.39033428790215224
+      ],
+      "mean_quality": 2.608666666666679,
+      "mean_distance_m": 1083.6000000000222,
+      "mean_speed_kmh": 64.96988018433184,
+      "mean_overtakes": 0.3333333333333333,
+      "mean_lane_changes": 0.0,
+      "mean_danger_seconds": 0.0,
+      "mean_return": 30.22333333333388
+    },
+    {
+      "policy": "baseline_slow",
+      "scenario": "dense",
+      "duration": 60,
+      "episodes": 6,
+      "crashes": 2,
+      "crash_rate": 0.3333333333333333,
+      "crash_ci95": [
+        0.09677141110578363,
+        0.7000066848616004
+      ],
+      "mean_quality": 1.8259766691971235,
+      "mean_distance_m": 851.3580045548227,
+      "mean_speed_kmh": 65.07282713696684,
+      "mean_overtakes": 1.1666666666666667,
+      "mean_lane_changes": 0.0,
+      "mean_danger_seconds": 1.1000000000000003,
+      "mean_return": 19.09061678053723
+    },
+    {
+      "policy": "baseline_cruise",
+      "scenario": "light",
+      "duration": 30,
+      "episodes": 6,
+      "crashes": 2,
+      "crash_rate": 0.3333333333333333,
+      "crash_ci95": [
+        0.09677141110578363,
+        0.7000066848616004
+      ],
+      "mean_quality": 2.084831317624679,
+      "mean_distance_m": 667.9481858622111,
+      "mean_speed_kmh": 86.38538582677164,
+      "mean_overtakes": 0.8333333333333334,
+      "mean_lane_changes": 0.0,
+      "mean_danger_seconds": 1.1000000000000003,
+      "mean_return": 14.372037979888644
+    },
+    {
+      "policy": "baseline_cruise",
+      "scenario": "normal",
+      "duration": 45,
+      "episodes": 6,
+      "crashes": 3,
+      "crash_rate": 0.5,
+      "crash_ci95": [
+        0.18761630648265576,
+        0.8123836935173443
+      ],
+      "mean_quality": 1.670198335895378,
+      "mean_distance_m": 836.6677534587601,
+      "mean_speed_kmh": 86.38160329821346,
+      "mean_overtakes": 2.8333333333333335,
+      "mean_lane_changes": 0.0,
+      "mean_danger_seconds": 1.3999999999999997,
+      "mean_return": 16.71002716980239
+    },
+    {
+      "policy": "baseline_cruise",
+      "scenario": "dense",
+      "duration": 45,
+      "episodes": 6,
+      "crashes": 6,
+      "crash_rate": 1.0,
+      "crash_ci95": [
+        0.6096657120978477,
+        1
+      ],
+      "mean_quality": 0.218026652328009,
+      "mean_distance_m": 280.3359806428121,
+      "mean_speed_kmh": 86.26278148552903,
+      "mean_overtakes": 1.0,
+      "mean_lane_changes": 0.0,
+      "mean_danger_seconds": 2.1666666666666665,
+      "mean_return": -5.8916004839297
+    },
+    {
+      "policy": "baseline_cruise",
+      "scenario": "normal",
+      "duration": 60,
+      "episodes": 6,
+      "crashes": 3,
+      "crash_rate": 0.5,
+      "crash_ci95": [
+        0.18761630648265576,
+        0.8123836935173443
+      ],
+      "mean_quality": 1.6234820852548608,
+      "mean_distance_m": 1016.6677534587499,
+      "mean_speed_kmh": 86.38160329821346,
+      "mean_overtakes": 3.1666666666666665,
+      "mean_lane_changes": 0.0,
+      "mean_danger_seconds": 1.3999999999999997,
+      "mean_return": 21.343360503135415
+    },
+    {
+      "policy": "baseline_cruise",
+      "scenario": "dense",
+      "duration": 60,
+      "episodes": 6,
+      "crashes": 6,
+      "crash_rate": 1.0,
+      "crash_ci95": [
+        0.6096657120978477,
+        1
+      ],
+      "mean_quality": 0.16851998924600675,
+      "mean_distance_m": 280.3359806428121,
+      "mean_speed_kmh": 86.26278148552903,
+      "mean_overtakes": 1.0,
+      "mean_lane_changes": 0.0,
+      "mean_danger_seconds": 2.1666666666666665,
+      "mean_return": -5.8916004839297
+    },
+    {
+      "policy": "baseline_rule",
+      "scenario": "light",
+      "duration": 30,
+      "episodes": 6,
+      "crashes": 0,
+      "crash_rate": 0.0,
+      "crash_ci95": [
+        0,
+        0.39033428790215224
+      ],
+      "mean_quality": 2.886858337436802,
+      "mean_distance_m": 759.1725036931217,
+      "mean_speed_kmh": 91.13760126322074,
+      "mean_overtakes": 2.1666666666666665,
+      "mean_lane_changes": 1.1666666666666667,
+      "mean_danger_seconds": 0.0,
+      "mean_return": 22.822645925661377
+    },
+    {
+      "policy": "baseline_rule",
+      "scenario": "normal",
+      "duration": 45,
+      "episodes": 6,
+      "crashes": 0,
+      "crash_rate": 0.0,
+      "crash_ci95": [
+        0,
+        0.39033428790215224
+      ],
+      "mean_quality": 2.8868545289648355,
+      "mean_distance_m": 1066.7536141025273,
+      "mean_speed_kmh": 85.40830293009502,
+      "mean_overtakes": 4.833333333333333,
+      "mean_lane_changes": 2.1666666666666665,
+      "mean_danger_seconds": 0.0,
+      "mean_return": 31.558840352563184
+    },
+    {
+      "policy": "baseline_rule",
+      "scenario": "dense",
+      "duration": 45,
+      "episodes": 6,
+      "crashes": 0,
+      "crash_rate": 0.0,
+      "crash_ci95": [
+        0,
+        0.39033428790215224
+      ],
+      "mean_quality": 2.74531048853007,
+      "mean_distance_m": 916.169159515595,
+      "mean_speed_kmh": 73.26806411972694,
+      "mean_overtakes": 3.3333333333333335,
+      "mean_lane_changes": 1.6666666666666667,
+      "mean_danger_seconds": 0.0,
+      "mean_return": 27.20422898788988
+    },
+    {
+      "policy": "baseline_rule",
+      "scenario": "normal",
+      "duration": 60,
+      "episodes": 6,
+      "crashes": 0,
+      "crash_rate": 0.0,
+      "crash_ci95": [
+        0,
+        0.39033428790215224
+      ],
+      "mean_quality": 2.9241970299352356,
+      "mean_distance_m": 1435.554653883424,
+      "mean_speed_kmh": 86.19628717903674,
+      "mean_overtakes": 6.333333333333333,
+      "mean_lane_changes": 2.6666666666666665,
+      "mean_danger_seconds": 0.0,
+      "mean_return": 41.36886634708557
+    },
+    {
+      "policy": "baseline_rule",
+      "scenario": "dense",
+      "duration": 60,
+      "episodes": 6,
+      "crashes": 0,
+      "crash_rate": 0.0,
+      "crash_ci95": [
+        0,
+        0.39033428790215224
+      ],
+      "mean_quality": 2.7624413410105757,
+      "mean_distance_m": 1216.3944138190363,
+      "mean_speed_kmh": 72.9925100073914,
+      "mean_overtakes": 4.333333333333333,
+      "mean_lane_changes": 1.8333333333333333,
+      "mean_danger_seconds": 0.0,
+      "mean_return": 35.10652701214257
+    }
+  ],
+  "paired_baseline_comparisons": [],
+  "limitations": [
+    "No human-level performance claim: no systematic human baseline has been collected.",
+    "Collision intervals quantify road-seed variation for each checkpoint, not training uncertainty.",
+    "Rule baseline receives the same 30 observations and five actions as RL, without future traffic information.",
+    "Delayed difficulty levels predict every N ticks and send IDLE on skipped ticks; no safety override is used."
+  ]
+}

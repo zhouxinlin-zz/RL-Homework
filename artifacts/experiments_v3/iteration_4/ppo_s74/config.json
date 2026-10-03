@@ -1,0 +1,14 @@
+{
+  "algorithm": "ppo",
+  "seed": 74,
+  "env_version": "3.1",
+  "requested_steps": 200000,
+  "source": "artifacts\\experiments_v3\\deployment\\v3_expert-b4f0d5f66de4.zip",
+  "source_sha256": "b4f0d5f66de4a589f240654ad21b09705beaf52eb71a4c43abe4ce5765a5419a",
+  "training_source_sha256": "9df361c930b23116f0bb5ec985c75ea543882b7b2afa258bc7793e59d72265aa",
+  "environment_source_sha256": "47e504164db11206f93a4be3b55c878a79d6d8faa856b282bd2565aa1f0e3f7e",
+  "reward": "original v3.1 + .035/metre + .2/overtake; total collision penalty -60",
+  "development_start": 631100,
+  "fresh_holdout_start": 1631100,
+  "selection": "fewest development crashes, then qualification, then score"
+}

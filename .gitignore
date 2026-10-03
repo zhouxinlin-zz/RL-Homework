@@ -1,0 +1,32 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+# Keep the evaluated models and experiment evidence with the project.
+# Machine-specific saves, build/test logs and temporary downloads stay local.
+artifacts/*
+!artifacts/experiments_v2/
+!artifacts/experiments_v3/
+!artifacts/preview/
+artifacts/preview/*
+!artifacts/preview/v3/
+*.pkl
+*.log
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+node_modules/
+# The committed game build lets the classroom computer run without Node.js.
+web/test-results/
+web/playwright-report/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

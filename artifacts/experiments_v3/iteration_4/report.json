@@ -1,0 +1,724 @@
+{
+  "stage": "final",
+  "env_version": "3.1",
+  "seed_start": 1631100,
+  "environment_source_sha256": "47e504164db11206f93a4be3b55c878a79d6d8faa856b282bd2565aa1f0e3f7e",
+  "rules_source_sha256": "4217e49bc8745909442bb4732f33ec7fcda13cd669cbcf100f87b81c509fde3d",
+  "evaluation_source_sha256": "05c3faa52a5ab2cafc8d655bceb50ee4177a1d54b15f5d4b0f4e55a6ea71f645",
+  "release_source_sha256": "0d539e49bc4007e0526e862d6572554e865c17be665b44f2e149b5890ec3bac1",
+  "selection_sha256": "ad67c9d680f1e3fabe43e960be75a794322b7e17682ca57ff3ed8e3e1261ca30",
+  "models": {
+    "v3_beginner": {
+      "summary": {
+        "episodes": 300,
+        "crashes": 12,
+        "qualification_rate": 0.52,
+        "mean_score": 1374.5266666666666,
+        "mean_distance_m": 990.9990960404056,
+        "mean_overtakes": 3.0366666666666666
+      },
+      "by_scenario": {
+        "convoy": {
+          "episodes": 100,
+          "crashes": 0,
+          "qualification_rate": 1.0,
+          "mean_score": 1380.07,
+          "mean_distance_m": 904.3738147453072,
+          "mean_overtakes": 5.02
+        },
+        "weave": {
+          "episodes": 100,
+          "crashes": 0,
+          "qualification_rate": 0.55,
+          "mean_score": 1272.08,
+          "mean_distance_m": 927.6923273448058,
+          "mean_overtakes": 1.28
+        },
+        "pressure": {
+          "episodes": 100,
+          "crashes": 12,
+          "qualification_rate": 0.01,
+          "mean_score": 1471.43,
+          "mean_distance_m": 1140.931146031104,
+          "mean_overtakes": 2.81
+        }
+      }
+    },
+    "v3_standard": {
+      "summary": {
+        "episodes": 300,
+        "crashes": 1,
+        "qualification_rate": 0.6133333333333333,
+        "mean_score": 1536.62,
+        "mean_distance_m": 1072.2387828020683,
+        "mean_overtakes": 4.783333333333333
+      },
+      "by_scenario": {
+        "convoy": {
+          "episodes": 100,
+          "crashes": 0,
+          "qualification_rate": 1.0,
+          "mean_score": 1421.97,
+          "mean_distance_m": 922.5364601635347,
+          "mean_overtakes": 5.73
+        },
+        "weave": {
+          "episodes": 100,
+          "crashes": 1,
+          "qualification_rate": 0.84,
+          "mean_score": 1588.8,
+          "mean_distance_m": 1096.147426985013,
+          "mean_overtakes": 5.67
+        },
+        "pressure": {
+          "episodes": 100,
+          "crashes": 0,
+          "qualification_rate": 0.0,
+          "mean_score": 1599.09,
+          "mean_distance_m": 1198.0324612576574,
+          "mean_overtakes": 2.95
+        }
+      }
+    },
+    "v3_expert": {
+      "summary": {
+        "episodes": 300,
+        "crashes": 0,
+        "qualification_rate": 0.7233333333333334,
+        "mean_score": 1544.6166666666666,
+        "mean_distance_m": 1080.0822835677557,
+        "mean_overtakes": 4.703333333333333
+      },
+      "by_scenario": {
+        "convoy": {
+          "episodes": 100,
+          "crashes": 0,
+          "qualification_rate": 1.0,
+          "mean_score": 1414.34,
+          "mean_distance_m": 925.3915878142484,
+          "mean_overtakes": 5.4
+        },
+        "weave": {
+          "episodes": 100,
+          "crashes": 0,
+          "qualification_rate": 0.85,
+          "mean_score": 1488.64,
+          "mean_distance_m": 1055.8063691783502,
+          "mean_overtakes": 3.8
+        },
+        "pressure": {
+          "episodes": 100,
+          "crashes": 0,
+          "qualification_rate": 0.32,
+          "mean_score": 1730.87,
+          "mean_distance_m": 1259.0488937106682,
+          "mean_overtakes": 4.91
+        }
+      }
+    },
+    "v3_ppo": {
+      "summary": {
+        "episodes": 300,
+        "crashes": 8,
+        "qualification_rate": 0.7833333333333333,
+        "mean_score": 1544.9633333333334,
+        "mean_distance_m": 1089.7107606286513,
+        "mean_overtakes": 5.006666666666667
+      },
+      "by_scenario": {
+        "convoy": {
+          "episodes": 100,
+          "crashes": 7,
+          "qualification_rate": 0.93,
+          "mean_score": 1363.72,
+          "mean_distance_m": 911.7424565323013,
+          "mean_overtakes": 5.5
+        },
+        "weave": {
+          "episodes": 100,
+          "crashes": 0,
+          "qualification_rate": 0.95,
+          "mean_score": 1549.0,
+          "mean_distance_m": 1093.5750429949298,
+          "mean_overtakes": 4.51
+        },
+        "pressure": {
+          "episodes": 100,
+          "crashes": 1,
+          "qualification_rate": 0.47,
+          "mean_score": 1722.17,
+          "mean_distance_m": 1263.8147823587233,
+          "mean_overtakes": 5.01
+        }
+      }
+    },
+    "v3_dqn": {
+      "summary": {
+        "episodes": 300,
+        "crashes": 65,
+        "qualification_rate": 0.5666666666666667,
+        "mean_score": 1200.8366666666666,
+        "mean_distance_m": 914.9151791031077,
+        "mean_overtakes": 3.0366666666666666
+      },
+      "by_scenario": {
+        "convoy": {
+          "episodes": 100,
+          "crashes": 0,
+          "qualification_rate": 0.93,
+          "mean_score": 1270.72,
+          "mean_distance_m": 838.2695035983882,
+          "mean_overtakes": 3.78
+        },
+        "weave": {
+          "episodes": 100,
+          "crashes": 21,
+          "qualification_rate": 0.77,
+          "mean_score": 1351.14,
+          "mean_distance_m": 1024.4283944476206,
+          "mean_overtakes": 4.1
+        },
+        "pressure": {
+          "episodes": 100,
+          "crashes": 44,
+          "qualification_rate": 0.0,
+          "mean_score": 980.65,
+          "mean_distance_m": 882.0476392633145,
+          "mean_overtakes": 1.23
+        }
+      }
+    },
+    "v3_a2c": {
+      "summary": {
+        "episodes": 300,
+        "crashes": 5,
+        "qualification_rate": 0.79,
+        "mean_score": 1556.8233333333333,
+        "mean_distance_m": 1094.0274102013009,
+        "mean_overtakes": 5.03
+      },
+      "by_scenario": {
+        "convoy": {
+          "episodes": 100,
+          "crashes": 1,
+          "qualification_rate": 0.99,
+          "mean_score": 1424.81,
+          "mean_distance_m": 932.7812731951121,
+          "mean_overtakes": 5.69
+        },
+        "weave": {
+          "episodes": 100,
+          "crashes": 0,
+          "qualification_rate": 0.95,
+          "mean_score": 1547.92,
+          "mean_distance_m": 1093.4336146448504,
+          "mean_overtakes": 4.47
+        },
+        "pressure": {
+          "episodes": 100,
+          "crashes": 4,
+          "qualification_rate": 0.43,
+          "mean_score": 1697.74,
+          "mean_distance_m": 1255.86734276394,
+          "mean_overtakes": 4.93
+        }
+      }
+    },
+    "rule": {
+      "summary": {
+        "episodes": 300,
+        "crashes": 0,
+        "qualification_rate": 0.6333333333333333,
+        "mean_score": 1454.4033333333334,
+        "mean_distance_m": 1027.695398389578,
+        "mean_overtakes": 3.62
+      },
+      "by_scenario": {
+        "convoy": {
+          "episodes": 100,
+          "crashes": 0,
+          "qualification_rate": 0.87,
+          "mean_score": 1240.59,
+          "mean_distance_m": 826.8436882048529,
+          "mean_overtakes": 3.25
+        },
+        "weave": {
+          "episodes": 100,
+          "crashes": 0,
+          "qualification_rate": 0.66,
+          "mean_score": 1376.22,
+          "mean_distance_m": 993.6100121156835,
+          "mean_overtakes": 2.36
+        },
+        "pressure": {
+          "episodes": 100,
+          "crashes": 0,
+          "qualification_rate": 0.37,
+          "mean_score": 1746.4,
+          "mean_distance_m": 1262.6324948481974,
+          "mean_overtakes": 5.25
+        }
+      }
+    }
+  },
+  "paired_game_outcomes": {
+    "standard_vs_beginner": {
+      "left": "v3_standard",
+      "right": "v3_beginner",
+      "env_version": "3.1",
+      "paired": {
+        "convoy": {
+          "pairs": 100,
+          "wins": 94,
+          "losses": 6,
+          "draws": 0
+        },
+        "weave": {
+          "pairs": 100,
+          "wins": 99,
+          "losses": 1,
+          "draws": 0
+        },
+        "pressure": {
+          "pairs": 100,
+          "wins": 80,
+          "losses": 20,
+          "draws": 0
+        },
+        "all": {
+          "pairs": 300,
+          "wins": 273,
+          "losses": 27,
+          "draws": 0
+        }
+      }
+    },
+    "expert_vs_rule": {
+      "left": "v3_expert",
+      "right": "rule",
+      "env_version": "3.1",
+      "paired": {
+        "convoy": {
+          "pairs": 100,
+          "wins": 97,
+          "losses": 2,
+          "draws": 1
+        },
+        "weave": {
+          "pairs": 100,
+          "wins": 82,
+          "losses": 18,
+          "draws": 0
+        },
+        "pressure": {
+          "pairs": 100,
+          "wins": 49,
+          "losses": 51,
+          "draws": 0
+        },
+        "all": {
+          "pairs": 300,
+          "wins": 228,
+          "losses": 71,
+          "draws": 1
+        }
+      }
+    },
+    "new_vs_previous_expert": {
+      "left": "v3_a2c_candidate",
+      "right": "v3_expert",
+      "env_version": "3.1",
+      "paired": {
+        "convoy": {
+          "pairs": 100,
+          "wins": 78,
+          "losses": 16,
+          "draws": 6
+        },
+        "weave": {
+          "pairs": 100,
+          "wins": 78,
+          "losses": 21,
+          "draws": 1
+        },
+        "pressure": {
+          "pairs": 100,
+          "wins": 61,
+          "losses": 35,
+          "draws": 4
+        },
+        "all": {
+          "pairs": 300,
+          "wins": 217,
+          "losses": 72,
+          "draws": 11
+        }
+      }
+    }
+  },
+  "algorithm_comparison": [
+    {
+      "id": "v3_ppo",
+      "algorithm": "PPO",
+      "method": "PPO 安全与效率微调",
+      "checkpoint_steps": 25000,
+      "training_steps": 200704,
+      "pretrained": true,
+      "overall": {
+        "episodes": 300,
+        "crashes": 8,
+        "qualification_rate": 0.7833333333333333,
+        "mean_score": 1544.9633333333334,
+        "mean_distance_m": 1089.7107606286513,
+        "mean_overtakes": 5.006666666666667
+      },
+      "routes": {
+        "convoy": {
+          "episodes": 100,
+          "crashes": 7,
+          "qualification_rate": 0.93,
+          "mean_score": 1363.72,
+          "mean_distance_m": 911.7424565323013,
+          "mean_overtakes": 5.5
+        },
+        "weave": {
+          "episodes": 100,
+          "crashes": 0,
+          "qualification_rate": 0.95,
+          "mean_score": 1549.0,
+          "mean_distance_m": 1093.5750429949298,
+          "mean_overtakes": 4.51
+        },
+        "pressure": {
+          "episodes": 100,
+          "crashes": 1,
+          "qualification_rate": 0.47,
+          "mean_score": 1722.17,
+          "mean_distance_m": 1263.8147823587233,
+          "mean_overtakes": 5.01
+        }
+      },
+      "history": [
+        {
+          "steps": 0,
+          "episodes": 36,
+          "crashes": 1,
+          "qualification_rate": 0.8333333333333334,
+          "mean_score": 1532.638888888889,
+          "mean_distance_m": 1082.6476168089648,
+          "mean_overtakes": 4.722222222222222
+        },
+        {
+          "steps": 25000,
+          "episodes": 36,
+          "crashes": 0,
+          "qualification_rate": 0.8888888888888888,
+          "mean_score": 1583.75,
+          "mean_distance_m": 1106.7512782839663,
+          "mean_overtakes": 5.166666666666667
+        },
+        {
+          "steps": 50000,
+          "episodes": 36,
+          "crashes": 2,
+          "qualification_rate": 0.8333333333333334,
+          "mean_score": 1523.25,
+          "mean_distance_m": 1085.6743760778018,
+          "mean_overtakes": 5.055555555555555
+        },
+        {
+          "steps": 75000,
+          "episodes": 36,
+          "crashes": 0,
+          "qualification_rate": 0.8888888888888888,
+          "mean_score": 1580.5555555555557,
+          "mean_distance_m": 1108.3436442168054,
+          "mean_overtakes": 5.083333333333333
+        },
+        {
+          "steps": 100000,
+          "episodes": 36,
+          "crashes": 0,
+          "qualification_rate": 0.8888888888888888,
+          "mean_score": 1586.9166666666667,
+          "mean_distance_m": 1108.4779320236937,
+          "mean_overtakes": 5.194444444444445
+        },
+        {
+          "steps": 125000,
+          "episodes": 36,
+          "crashes": 3,
+          "qualification_rate": 0.8055555555555556,
+          "mean_score": 1469.8333333333333,
+          "mean_distance_m": 1054.7054857176458,
+          "mean_overtakes": 4.861111111111111
+        },
+        {
+          "steps": 150000,
+          "episodes": 36,
+          "crashes": 1,
+          "qualification_rate": 0.8611111111111112,
+          "mean_score": 1546.4166666666667,
+          "mean_distance_m": 1095.5338666898829,
+          "mean_overtakes": 4.972222222222222
+        },
+        {
+          "steps": 175000,
+          "episodes": 36,
+          "crashes": 2,
+          "qualification_rate": 0.8333333333333334,
+          "mean_score": 1519.111111111111,
+          "mean_distance_m": 1084.5429414219966,
+          "mean_overtakes": 5.055555555555555
+        },
+        {
+          "steps": 200000,
+          "episodes": 36,
+          "crashes": 0,
+          "qualification_rate": 0.8888888888888888,
+          "mean_score": 1586.4166666666667,
+          "mean_distance_m": 1106.2714200001546,
+          "mean_overtakes": 5.166666666666667
+        },
+        {
+          "steps": 200704,
+          "episodes": 36,
+          "crashes": 0,
+          "qualification_rate": 0.8888888888888888,
+          "mean_score": 1581.9166666666667,
+          "mean_distance_m": 1104.7773803901596,
+          "mean_overtakes": 5.083333333333333
+        }
+      ]
+    },
+    {
+      "id": "v3_dqn",
+      "algorithm": "DQN",
+      "method": "DQN 检查点继续训练",
+      "checkpoint_steps": 200000,
+      "training_steps": 200000,
+      "pretrained": true,
+      "overall": {
+        "episodes": 300,
+        "crashes": 65,
+        "qualification_rate": 0.5666666666666667,
+        "mean_score": 1200.8366666666666,
+        "mean_distance_m": 914.9151791031077,
+        "mean_overtakes": 3.0366666666666666
+      },
+      "routes": {
+        "convoy": {
+          "episodes": 100,
+          "crashes": 0,
+          "qualification_rate": 0.93,
+          "mean_score": 1270.72,
+          "mean_distance_m": 838.2695035983882,
+          "mean_overtakes": 3.78
+        },
+        "weave": {
+          "episodes": 100,
+          "crashes": 21,
+          "qualification_rate": 0.77,
+          "mean_score": 1351.14,
+          "mean_distance_m": 1024.4283944476206,
+          "mean_overtakes": 4.1
+        },
+        "pressure": {
+          "episodes": 100,
+          "crashes": 44,
+          "qualification_rate": 0.0,
+          "mean_score": 980.65,
+          "mean_distance_m": 882.0476392633145,
+          "mean_overtakes": 1.23
+        }
+      },
+      "history": [
+        {
+          "steps": 0,
+          "episodes": 36,
+          "crashes": 21,
+          "qualification_rate": 0.25,
+          "mean_score": 892.9722222222222,
+          "mean_distance_m": 787.2494924846093,
+          "mean_overtakes": 3.8333333333333335
+        },
+        {
+          "steps": 25000,
+          "episodes": 36,
+          "crashes": 28,
+          "qualification_rate": 0.2222222222222222,
+          "mean_score": 780.2222222222222,
+          "mean_distance_m": 756.0172019328646,
+          "mean_overtakes": 4.611111111111111
+        },
+        {
+          "steps": 50000,
+          "episodes": 36,
+          "crashes": 29,
+          "qualification_rate": 0.16666666666666666,
+          "mean_score": 801.4444444444445,
+          "mean_distance_m": 802.9882920385148,
+          "mean_overtakes": 4.388888888888889
+        },
+        {
+          "steps": 75000,
+          "episodes": 36,
+          "crashes": 32,
+          "qualification_rate": 0.1111111111111111,
+          "mean_score": 681.5277777777778,
+          "mean_distance_m": 729.7415402811536,
+          "mean_overtakes": 4.361111111111111
+        },
+        {
+          "steps": 100000,
+          "episodes": 36,
+          "crashes": 34,
+          "qualification_rate": 0.05555555555555555,
+          "mean_score": 633.9444444444445,
+          "mean_distance_m": 710.4980021207988,
+          "mean_overtakes": 4.472222222222222
+        },
+        {
+          "steps": 125000,
+          "episodes": 36,
+          "crashes": 12,
+          "qualification_rate": 0.4722222222222222,
+          "mean_score": 1171.0277777777778,
+          "mean_distance_m": 924.127230796429,
+          "mean_overtakes": 3.861111111111111
+        },
+        {
+          "steps": 150000,
+          "episodes": 36,
+          "crashes": 34,
+          "qualification_rate": 0.05555555555555555,
+          "mean_score": 606.3888888888889,
+          "mean_distance_m": 689.2418711047709,
+          "mean_overtakes": 4.277777777777778
+        },
+        {
+          "steps": 175000,
+          "episodes": 36,
+          "crashes": 19,
+          "qualification_rate": 0.4722222222222222,
+          "mean_score": 930.5555555555555,
+          "mean_distance_m": 792.6231865671051,
+          "mean_overtakes": 3.888888888888889
+        },
+        {
+          "steps": 200000,
+          "episodes": 36,
+          "crashes": 9,
+          "qualification_rate": 0.5277777777777778,
+          "mean_score": 1156.6944444444443,
+          "mean_distance_m": 898.4428114627585,
+          "mean_overtakes": 2.7777777777777777
+        }
+      ]
+    },
+    {
+      "id": "v3_a2c",
+      "algorithm": "A2C",
+      "method": "PPO 权重初始化后 A2C 更新",
+      "checkpoint_steps": 50000,
+      "training_steps": 50048,
+      "pretrained": true,
+      "overall": {
+        "episodes": 300,
+        "crashes": 5,
+        "qualification_rate": 0.79,
+        "mean_score": 1556.8233333333333,
+        "mean_distance_m": 1094.0274102013009,
+        "mean_overtakes": 5.03
+      },
+      "routes": {
+        "convoy": {
+          "episodes": 100,
+          "crashes": 1,
+          "qualification_rate": 0.99,
+          "mean_score": 1424.81,
+          "mean_distance_m": 932.7812731951121,
+          "mean_overtakes": 5.69
+        },
+        "weave": {
+          "episodes": 100,
+          "crashes": 0,
+          "qualification_rate": 0.95,
+          "mean_score": 1547.92,
+          "mean_distance_m": 1093.4336146448504,
+          "mean_overtakes": 4.47
+        },
+        "pressure": {
+          "episodes": 100,
+          "crashes": 4,
+          "qualification_rate": 0.43,
+          "mean_score": 1697.74,
+          "mean_distance_m": 1255.86734276394,
+          "mean_overtakes": 4.93
+        }
+      },
+      "history": [
+        {
+          "steps": 0,
+          "episodes": 36,
+          "crashes": 1,
+          "qualification_rate": 0.8333333333333334,
+          "mean_score": 1532.638888888889,
+          "mean_distance_m": 1082.6476168089648,
+          "mean_overtakes": 4.722222222222222
+        },
+        {
+          "steps": 25000,
+          "episodes": 36,
+          "crashes": 1,
+          "qualification_rate": 0.8611111111111112,
+          "mean_score": 1537.4166666666667,
+          "mean_distance_m": 1086.4211620211036,
+          "mean_overtakes": 4.777777777777778
+        },
+        {
+          "steps": 50000,
+          "episodes": 36,
+          "crashes": 0,
+          "qualification_rate": 0.8888888888888888,
+          "mean_score": 1585.4444444444443,
+          "mean_distance_m": 1108.0803877892392,
+          "mean_overtakes": 5.166666666666667
+        },
+        {
+          "steps": 50048,
+          "episodes": 36,
+          "crashes": 0,
+          "qualification_rate": 0.8888888888888888,
+          "mean_score": 1585.4444444444443,
+          "mean_distance_m": 1107.9695456417444,
+          "mean_overtakes": 5.166666666666667
+        }
+      ]
+    }
+  ],
+  "improvement": {
+    "promoted": false,
+    "algorithm": "A2C",
+    "before": {
+      "episodes": 300,
+      "crashes": 0,
+      "qualification_rate": 0.7233333333333334,
+      "mean_score": 1544.6166666666666,
+      "mean_distance_m": 1080.0822835677557,
+      "mean_overtakes": 4.703333333333333
+    },
+    "candidate": {
+      "episodes": 300,
+      "crashes": 5,
+      "qualification_rate": 0.79,
+      "mean_score": 1556.8233333333333,
+      "mean_distance_m": 1094.0274102013009,
+      "mean_overtakes": 5.03
+    }
+  },
+  "limitations": [
+    "No human benchmark was collected.",
+    "Algorithms have different initialization and training budgets; this is a project comparison, not a claim of universal algorithm superiority."
+  ]
+}

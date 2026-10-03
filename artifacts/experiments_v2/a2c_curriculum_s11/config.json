@@ -1,0 +1,33 @@
+{
+  "run_id": "a2c_curriculum_s11",
+  "algorithm": "a2c",
+  "seed": 11,
+  "traffic": "curriculum",
+  "reward": "shaped",
+  "env_version": "2.0",
+  "requested_timesteps": 200000,
+  "envs": 4,
+  "validation_seeds": [
+    31100,
+    31101,
+    31102,
+    31103,
+    31104,
+    31105
+  ],
+  "selection_metric": "2*completion+distance/(30*duration)+.02*min(overtakes,15)-.2*danger/duration",
+  "resume_semantics": "network and optimizer restored; DQN replay restored; episode and RNG streams restart",
+  "hyperparameters": {
+    "learning_rate": 0.0005,
+    "gamma": 0.99,
+    "n_steps": 32,
+    "batch_size": null,
+    "n_epochs": null,
+    "ent_coef": 0.01,
+    "gae_lambda": 0.95,
+    "buffer_size": null,
+    "learning_starts": null,
+    "target_update_interval": null,
+    "exploration_fraction": null
+  }
+}

@@ -1,0 +1,535 @@
+{
+  "schema_version": 1,
+  "game_version": "3.1.0",
+  "env_version": "3.1",
+  "stage": "final",
+  "split": "held_out_test",
+  "seed_start": 931100,
+  "same_roads_for_all_policies": true,
+  "checkpoint_selection": "locked using development roads before held-out test runs",
+  "selection_file": "artifacts/experiments_v3/selection_lock.json",
+  "selection_sha256": "5e6ca5c117544c88d031b87c1861d1da93d79a19423dc9b3f35d197c4d158b48",
+  "environment_source_sha256": "47e504164db11206f93a4be3b55c878a79d6d8faa856b282bd2565aa1f0e3f7e",
+  "rules_source_sha256": "4217e49bc8745909442bb4732f33ec7fcda13cd669cbcf100f87b81c509fde3d",
+  "evaluation_source_sha256": "34c99f32fd169b2541d9340640d937b32de17e151e5d983555e105a419b37803",
+  "levels": {
+    "beginner": "v3_beginner",
+    "standard": "v3_standard",
+    "expert": "v3_expert"
+  },
+  "models": {
+    "v3_beginner": {
+      "metadata": {
+        "source": "artifacts/experiments_v3/imitation_s23/best.zip",
+        "development_report": "artifacts/experiments_v3/development_imitation_initial_dev_routes.json",
+        "run_id": "imitation_s23",
+        "method": "rule demonstrations plus PPO",
+        "seed": 23,
+        "steps": 75000,
+        "training_steps": 100352,
+        "source_env_version": "3.0"
+      },
+      "summary": {
+        "episodes": 300,
+        "crashes": 10,
+        "crash_rate": 0.03333333333333333,
+        "qualification_rate": 0.5166666666666667,
+        "mean_distance_m": 992.0260116920325,
+        "mean_overtakes": 2.96,
+        "mean_score": 1376.7133333333334,
+        "mean_danger_seconds": 0.11800000000000002
+      },
+      "by_scenario": {
+        "convoy": {
+          "episodes": 100,
+          "crashes": 0,
+          "crash_rate": 0.0,
+          "crash_ci95": [
+            0,
+            0.036993498206983715
+          ],
+          "completion_rate": 1.0,
+          "mean_distance_m": 906.0137721028664,
+          "mean_overtakes": 5.07,
+          "mean_danger_seconds": 0.0,
+          "mean_lane_changes": 1.0,
+          "mean_quality": 2.9642702591455867,
+          "mean_formations": 6.02,
+          "mean_formation_cars": 19.83,
+          "mean_unsafe_lane_requests": 0.0,
+          "qualification_rate": 1.0,
+          "mean_score": 1383.5
+        },
+        "weave": {
+          "episodes": 100,
+          "crashes": 0,
+          "crash_rate": 0.0,
+          "crash_ci95": [
+            0,
+            0.036993498206983715
+          ],
+          "completion_rate": 1.0,
+          "mean_distance_m": 924.9563364235116,
+          "mean_overtakes": 1.17,
+          "mean_danger_seconds": 0.018,
+          "mean_lane_changes": 1.37,
+          "mean_quality": 2.7084728417951935,
+          "mean_formations": 6.48,
+          "mean_formation_cars": 16.68,
+          "mean_unsafe_lane_requests": 0.0,
+          "qualification_rate": 0.54,
+          "mean_score": 1265.84
+        },
+        "pressure": {
+          "episodes": 100,
+          "crashes": 10,
+          "crash_rate": 0.1,
+          "crash_ci95": [
+            0.055229137060675976,
+            0.174365661504911
+          ],
+          "completion_rate": 0.9,
+          "mean_distance_m": 1145.1079265497197,
+          "mean_overtakes": 2.64,
+          "mean_danger_seconds": 0.336,
+          "mean_lane_changes": 1.26,
+          "mean_quality": 2.545582985787709,
+          "mean_formations": 8.01,
+          "mean_formation_cars": 20.96,
+          "mean_unsafe_lane_requests": 0.03,
+          "qualification_rate": 0.01,
+          "mean_score": 1480.8
+        }
+      },
+      "test_report": "artifacts/experiments_v3/test_v3_beginner_routes.json",
+      "test_report_sha256": "63ffebf1bad1c2969d5aef7f10c5040d1eccccee86c472c4a0cfdef8007773ae"
+    },
+    "v3_standard": {
+      "metadata": {
+        "source": "artifacts/experiments_v3/safe_imitation_s23/checkpoints/step_200000.zip",
+        "development_report": "artifacts/experiments_v3/development_safe_imitation_200_dev_routes.json",
+        "run_id": "safe_imitation_s23",
+        "method": "rule demonstrations plus PPO and safety reward",
+        "seed": 23,
+        "steps": 200000,
+        "training_steps": 501760,
+        "source_env_version": "3.1"
+      },
+      "summary": {
+        "episodes": 300,
+        "crashes": 7,
+        "crash_rate": 0.023333333333333334,
+        "qualification_rate": 0.6133333333333333,
+        "mean_distance_m": 1072.2184951635602,
+        "mean_overtakes": 4.83,
+        "mean_score": 1525.8966666666668,
+        "mean_danger_seconds": 0.5026666666666667
+      },
+      "by_scenario": {
+        "convoy": {
+          "episodes": 100,
+          "crashes": 0,
+          "crash_rate": 0.0,
+          "crash_ci95": [
+            0,
+            0.036993498206983715
+          ],
+          "completion_rate": 1.0,
+          "mean_distance_m": 920.1758170567122,
+          "mean_overtakes": 5.71,
+          "mean_danger_seconds": 0.142,
+          "mean_lane_changes": 1.0,
+          "mean_quality": 2.9897464924349633,
+          "mean_formations": 6.03,
+          "mean_formation_cars": 19.08,
+          "mean_unsafe_lane_requests": 0.0,
+          "qualification_rate": 1.0,
+          "mean_score": 1419.36
+        },
+        "weave": {
+          "episodes": 100,
+          "crashes": 0,
+          "crash_rate": 0.0,
+          "crash_ci95": [
+            0,
+            0.036993498206983715
+          ],
+          "completion_rate": 1.0,
+          "mean_distance_m": 1093.889722592181,
+          "mean_overtakes": 5.62,
+          "mean_danger_seconds": 0.024000000000000004,
+          "mean_lane_changes": 2.64,
+          "mean_quality": 2.9225820167349483,
+          "mean_formations": 7.54,
+          "mean_formation_cars": 21.11,
+          "mean_unsafe_lane_requests": 0.52,
+          "qualification_rate": 0.84,
+          "mean_score": 1590.37
+        },
+        "pressure": {
+          "episodes": 100,
+          "crashes": 7,
+          "crash_rate": 0.07,
+          "crash_ci95": [
+            0.03431926106727332,
+            0.13749514739073268
+          ],
+          "completion_rate": 0.93,
+          "mean_distance_m": 1202.5899458417873,
+          "mean_overtakes": 3.16,
+          "mean_danger_seconds": 1.3420000000000005,
+          "mean_lane_changes": 1.0,
+          "mean_quality": 2.6471623914192652,
+          "mean_formations": 8.44,
+          "mean_formation_cars": 21.03,
+          "mean_unsafe_lane_requests": 0.0,
+          "qualification_rate": 0.0,
+          "mean_score": 1567.96
+        }
+      },
+      "test_report": "artifacts/experiments_v3/test_v3_standard_routes.json",
+      "test_report_sha256": "3556d1a799673bff6182db9407ff30c6e768f28a087d2c4f0c210c47d6abf750"
+    },
+    "v3_expert": {
+      "metadata": {
+        "source": "artifacts/experiments_v3/safe_transfer_s47/checkpoints/step_175000.zip",
+        "development_report": "artifacts/experiments_v3/development_safe_transfer_175_dev_routes.json",
+        "run_id": "safe_transfer_s47",
+        "method": "v2 PPO transfer plus v3 safety fine-tuning",
+        "seed": 47,
+        "steps": 175000,
+        "training_steps": 501760,
+        "source_env_version": "3.1"
+      },
+      "summary": {
+        "episodes": 300,
+        "crashes": 4,
+        "crash_rate": 0.013333333333333334,
+        "qualification_rate": 0.7166666666666667,
+        "mean_distance_m": 1077.596111613632,
+        "mean_overtakes": 4.673333333333333,
+        "mean_score": 1533.76,
+        "mean_danger_seconds": 0.013333333333333334
+      },
+      "by_scenario": {
+        "convoy": {
+          "episodes": 100,
+          "crashes": 3,
+          "crash_rate": 0.03,
+          "crash_ci95": [
+            0.010254524024039209,
+            0.08451936429052548
+          ],
+          "completion_rate": 0.97,
+          "mean_distance_m": 912.1498542832238,
+          "mean_overtakes": 5.29,
+          "mean_danger_seconds": 0.004,
+          "mean_lane_changes": 2.5,
+          "mean_quality": 2.914491289793547,
+          "mean_formations": 6.02,
+          "mean_formation_cars": 20.19,
+          "mean_unsafe_lane_requests": 0.1,
+          "qualification_rate": 0.97,
+          "mean_score": 1380.76
+        },
+        "weave": {
+          "episodes": 100,
+          "crashes": 0,
+          "crash_rate": 0.0,
+          "crash_ci95": [
+            0,
+            0.036993498206983715
+          ],
+          "completion_rate": 1.0,
+          "mean_distance_m": 1061.4080332668448,
+          "mean_overtakes": 3.82,
+          "mean_danger_seconds": 0.012,
+          "mean_lane_changes": 2.64,
+          "mean_quality": 2.8625748394569217,
+          "mean_formations": 7.36,
+          "mean_formation_cars": 20.18,
+          "mean_unsafe_lane_requests": 0.24,
+          "qualification_rate": 0.86,
+          "mean_score": 1495.06
+        },
+        "pressure": {
+          "episodes": 100,
+          "crashes": 1,
+          "crash_rate": 0.01,
+          "crash_ci95": [
+            0.0017674320641407164,
+            0.05448619617870333
+          ],
+          "completion_rate": 0.99,
+          "mean_distance_m": 1259.2304472908274,
+          "mean_overtakes": 4.91,
+          "mean_danger_seconds": 0.024,
+          "mean_lane_changes": 3.04,
+          "mean_quality": 2.841282695327775,
+          "mean_formations": 8.98,
+          "mean_formation_cars": 24.61,
+          "mean_unsafe_lane_requests": 0.25,
+          "qualification_rate": 0.32,
+          "mean_score": 1725.46
+        }
+      },
+      "test_report": "artifacts/experiments_v3/test_v3_expert_routes.json",
+      "test_report_sha256": "09cf07fce0a1cd7fc4531d118e5d5e3c4e09b245fba15711848144a1ed97e1c4"
+    },
+    "rule": {
+      "metadata": null,
+      "summary": {
+        "episodes": 300,
+        "crashes": 0,
+        "crash_rate": 0.0,
+        "qualification_rate": 0.64,
+        "mean_distance_m": 1020.419755850867,
+        "mean_overtakes": 3.51,
+        "mean_score": 1443.2766666666666,
+        "mean_danger_seconds": 0.0
+      },
+      "by_scenario": {
+        "convoy": {
+          "episodes": 100,
+          "crashes": 0,
+          "crash_rate": 0.0,
+          "crash_ci95": [
+            0,
+            0.036993498206983715
+          ],
+          "completion_rate": 1.0,
+          "mean_distance_m": 816.0552164652622,
+          "mean_overtakes": 3.18,
+          "mean_danger_seconds": 0.0,
+          "mean_lane_changes": 2.69,
+          "mean_quality": 2.8407954442526306,
+          "mean_formations": 5.86,
+          "mean_formation_cars": 17.48,
+          "mean_unsafe_lane_requests": 0.0,
+          "qualification_rate": 0.8,
+          "mean_score": 1227.32
+        },
+        "weave": {
+          "episodes": 100,
+          "crashes": 0,
+          "crash_rate": 0.0,
+          "crash_ci95": [
+            0,
+            0.036993498206983715
+          ],
+          "completion_rate": 1.0,
+          "mean_distance_m": 979.4550634783237,
+          "mean_overtakes": 2.06,
+          "mean_danger_seconds": 0.0,
+          "mean_lane_changes": 2.07,
+          "mean_quality": 2.766722269243203,
+          "mean_formations": 6.75,
+          "mean_formation_cars": 17.11,
+          "mean_unsafe_lane_requests": 0.0,
+          "qualification_rate": 0.68,
+          "mean_score": 1351.58
+        },
+        "pressure": {
+          "episodes": 100,
+          "crashes": 0,
+          "crash_rate": 0.0,
+          "crash_ci95": [
+            0,
+            0.036993498206983715
+          ],
+          "completion_rate": 1.0,
+          "mean_distance_m": 1265.7489876090149,
+          "mean_overtakes": 5.29,
+          "mean_danger_seconds": 0.0,
+          "mean_lane_changes": 4.53,
+          "mean_quality": 2.8729205985509183,
+          "mean_formations": 8.97,
+          "mean_formation_cars": 24.93,
+          "mean_unsafe_lane_requests": 0.0,
+          "qualification_rate": 0.44,
+          "mean_score": 1750.93
+        }
+      },
+      "test_report": "artifacts/experiments_v3/test_rule_routes.json",
+      "test_report_sha256": "ad84255afc11d8dc00b59c0d83bf1227a0d0dc643351e12909fc11560ebe1a49"
+    },
+    "cruise": {
+      "metadata": null,
+      "summary": {
+        "episodes": 300,
+        "crashes": 300,
+        "crash_rate": 1.0,
+        "qualification_rate": 0.0,
+        "mean_distance_m": 207.1050824864601,
+        "mean_overtakes": 0.0,
+        "mean_score": 3.683333333333333,
+        "mean_danger_seconds": 2.1993333333333327
+      },
+      "by_scenario": {
+        "convoy": {
+          "episodes": 100,
+          "crashes": 100,
+          "crash_rate": 1.0,
+          "crash_ci95": [
+            0.9630065017930163,
+            1
+          ],
+          "completion_rate": 0.0,
+          "mean_distance_m": 185.60825957533714,
+          "mean_overtakes": 0.0,
+          "mean_danger_seconds": 2.1999999999999993,
+          "mean_lane_changes": 0.0,
+          "mean_quality": 0.16419834245270198,
+          "mean_formations": 2.83,
+          "mean_formation_cars": 10.49,
+          "mean_unsafe_lane_requests": 0.0,
+          "qualification_rate": 0.0,
+          "mean_score": 0.0
+        },
+        "weave": {
+          "episodes": 100,
+          "crashes": 100,
+          "crash_rate": 1.0,
+          "crash_ci95": [
+            0.9630065017930163,
+            1
+          ],
+          "completion_rate": 0.0,
+          "mean_distance_m": 250.39787370260078,
+          "mean_overtakes": 0.0,
+          "mean_danger_seconds": 2.197999999999999,
+          "mean_lane_changes": 0.0,
+          "mean_quality": 0.17571101755748206,
+          "mean_formations": 3.0,
+          "mean_formation_cars": 11.83,
+          "mean_unsafe_lane_requests": 0.0,
+          "qualification_rate": 0.0,
+          "mean_score": 11.05
+        },
+        "pressure": {
+          "episodes": 100,
+          "crashes": 100,
+          "crash_rate": 1.0,
+          "crash_ci95": [
+            0.9630065017930163,
+            1
+          ],
+          "completion_rate": 0.0,
+          "mean_distance_m": 185.30911418144245,
+          "mean_overtakes": 0.0,
+          "mean_danger_seconds": 2.1999999999999993,
+          "mean_lane_changes": 0.0,
+          "mean_quality": 0.10430855404935908,
+          "mean_formations": 3.0,
+          "mean_formation_cars": 14.46,
+          "mean_unsafe_lane_requests": 0.0,
+          "qualification_rate": 0.0,
+          "mean_score": 0.0
+        }
+      },
+      "test_report": "artifacts/experiments_v3/test_cruise_routes.json",
+      "test_report_sha256": "a674b9be2b7d27a33ffa5756023b218ea197266dcd7ad79e21b9ede8e3d36701"
+    }
+  },
+  "paired_game_outcomes": {
+    "expert_vs_rule": {
+      "left": "v3_expert",
+      "right": "rule",
+      "env_version": "3.1",
+      "paired": {
+        "convoy": {
+          "pairs": 100,
+          "wins": 94,
+          "losses": 6,
+          "draws": 0
+        },
+        "weave": {
+          "pairs": 100,
+          "wins": 88,
+          "losses": 12,
+          "draws": 0
+        },
+        "pressure": {
+          "pairs": 100,
+          "wins": 43,
+          "losses": 56,
+          "draws": 1
+        },
+        "all": {
+          "pairs": 300,
+          "wins": 225,
+          "losses": 74,
+          "draws": 1
+        }
+      }
+    },
+    "expert_vs_standard": {
+      "left": "v3_expert",
+      "right": "v3_standard",
+      "env_version": "3.1",
+      "paired": {
+        "convoy": {
+          "pairs": 100,
+          "wins": 39,
+          "losses": 56,
+          "draws": 5
+        },
+        "weave": {
+          "pairs": 100,
+          "wins": 15,
+          "losses": 85,
+          "draws": 0
+        },
+        "pressure": {
+          "pairs": 100,
+          "wins": 99,
+          "losses": 1,
+          "draws": 0
+        },
+        "all": {
+          "pairs": 300,
+          "wins": 153,
+          "losses": 142,
+          "draws": 5
+        }
+      }
+    },
+    "standard_vs_beginner": {
+      "left": "v3_standard",
+      "right": "v3_beginner",
+      "env_version": "3.1",
+      "paired": {
+        "convoy": {
+          "pairs": 100,
+          "wins": 90,
+          "losses": 9,
+          "draws": 1
+        },
+        "weave": {
+          "pairs": 100,
+          "wins": 100,
+          "losses": 0,
+          "draws": 0
+        },
+        "pressure": {
+          "pairs": 100,
+          "wins": 80,
+          "losses": 20,
+          "draws": 0
+        },
+        "all": {
+          "pairs": 300,
+          "wins": 270,
+          "losses": 29,
+          "draws": 1
+        }
+      }
+    }
+  },
+  "limitations": [
+    "These intervals reflect road-seed variation for the selected checkpoints, not variation across training seeds.",
+    "Human performance was not collected; the project does not claim to surpass all human drivers.",
+    "Twin runs share the same initial traffic seed; traffic then responds separately to each driver's actions.",
+    "The three challenges use a straight three-lane road and scripted traffic formations, not a full road network."
+  ]
+}

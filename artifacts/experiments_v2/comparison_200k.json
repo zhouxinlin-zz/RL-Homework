@@ -1,0 +1,103 @@
+{
+  "comparison_ppo_200k": {
+    "path": "artifacts/experiments_v2/deployment/comparison_ppo_200k.zip",
+    "algorithm": "ppo",
+    "steps": 100000,
+    "training_steps": 200704,
+    "seed": 11,
+    "run_id": "ppo_curriculum_s11",
+    "env_version": "2.0",
+    "method": "pure-rl",
+    "demonstration_steps": 0,
+    "sha256": "c995e436d8335c8d4758d5e89fbd81c4a5aa90c52969c416b3d883d1d1d3fbc1",
+    "source_checkpoint": "artifacts/experiments_v2/ppo_curriculum_s11/checkpoints/step_100000.zip",
+    "environment_source_sha256": null,
+    "validation": {
+      "episodes": 18,
+      "crashes": 1,
+      "crash_rate": 0.05555555555555555,
+      "crash_ci95": [
+        0.009875190978303486,
+        0.25757300781871845
+      ],
+      "mean_quality": 2.518882594040231,
+      "mean_distance_m": 732.9127558184324,
+      "mean_speed_kmh": 69.40887665750859,
+      "mean_overtakes": 0.5555555555555556,
+      "mean_lane_changes": 1.0,
+      "mean_danger_seconds": 0.1222222222222222,
+      "mean_return": 20.61837445101636
+    },
+    "training_source_hash_status": "historical_hash_not_recorded",
+    "training_source_history_complete": false,
+    "training_resume_history": [
+      {
+        "from_timesteps": 200704,
+        "previous_requested_timesteps": 200000,
+        "new_requested_timesteps": 1000000,
+        "previous_environment_source_sha256": null
+      }
+    ],
+    "source_path_at_freeze": "artifacts/experiments_v2/ppo_curriculum_s11/best.zip"
+  },
+  "comparison_dqn_200k": {
+    "path": "artifacts/experiments_v2/deployment/comparison_dqn_200k.zip",
+    "algorithm": "dqn",
+    "steps": 100000,
+    "training_steps": 200000,
+    "seed": 11,
+    "run_id": "dqn_curriculum_s11",
+    "env_version": "2.0",
+    "method": "pure-rl",
+    "demonstration_steps": 0,
+    "sha256": "4c08542eca415da9996869cfd075aaeaa739a13799652586152c086a5f8b980d",
+    "source_checkpoint": "artifacts/experiments_v2/dqn_curriculum_s11/best.zip",
+    "environment_source_sha256": null,
+    "validation": {
+      "episodes": 18,
+      "crashes": 6,
+      "crash_rate": 0.3333333333333333,
+      "crash_ci95": [
+        0.16278774750834019,
+        0.5625053270405429
+      ],
+      "mean_quality": 2.115650317709837,
+      "mean_distance_m": 831.2457236432169,
+      "mean_speed_kmh": 89.72557289668211,
+      "mean_overtakes": 4.444444444444445,
+      "mean_lane_changes": 3.888888888888889,
+      "mean_danger_seconds": 1.1111111111111114,
+      "mean_return": 19.801143091080416
+    }
+  },
+  "comparison_a2c_200k": {
+    "path": "artifacts/experiments_v2/deployment/comparison_a2c_200k.zip",
+    "algorithm": "a2c",
+    "steps": 150000,
+    "training_steps": 200064,
+    "seed": 11,
+    "run_id": "a2c_curriculum_s11",
+    "env_version": "2.0",
+    "method": "pure-rl",
+    "demonstration_steps": 0,
+    "sha256": "a7c14ff5a0e705ae303c08aee873a291c72e53e3a20e0f05d6e8258c8212617d",
+    "source_checkpoint": "artifacts/experiments_v2/a2c_curriculum_s11/best.zip",
+    "environment_source_sha256": null,
+    "validation": {
+      "episodes": 18,
+      "crashes": 1,
+      "crash_rate": 0.05555555555555555,
+      "crash_ci95": [
+        0.009875190978303486,
+        0.25757300781871845
+      ],
+      "mean_quality": 2.5680362477497436,
+      "mean_distance_m": 782.0762687054591,
+      "mean_speed_kmh": 72.5881207434744,
+      "mean_overtakes": 1.0,
+      "mean_lane_changes": 1.0,
+      "mean_danger_seconds": 0.17777777777777778,
+      "mean_return": 21.991906717636493
+    }
+  }
+}

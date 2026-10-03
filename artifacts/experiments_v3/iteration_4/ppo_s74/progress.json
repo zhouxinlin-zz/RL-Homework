@@ -1,0 +1,108 @@
+{
+  "algorithm": "ppo",
+  "seed": 74,
+  "env_version": "3.1",
+  "requested_steps": 200000,
+  "source": "artifacts\\experiments_v3\\deployment\\v3_expert-b4f0d5f66de4.zip",
+  "source_sha256": "b4f0d5f66de4a589f240654ad21b09705beaf52eb71a4c43abe4ce5765a5419a",
+  "training_source_sha256": "9df361c930b23116f0bb5ec985c75ea543882b7b2afa258bc7793e59d72265aa",
+  "environment_source_sha256": "47e504164db11206f93a4be3b55c878a79d6d8faa856b282bd2565aa1f0e3f7e",
+  "reward": "original v3.1 + .035/metre + .2/overtake; total collision penalty -60",
+  "development_start": 631100,
+  "fresh_holdout_start": 1631100,
+  "selection": "fewest development crashes, then qualification, then score",
+  "actual_steps": 200704,
+  "elapsed_s": 1841.7,
+  "validations": [
+    {
+      "steps": 0,
+      "episodes": 36,
+      "crashes": 1,
+      "qualification_rate": 0.8333333333333334,
+      "mean_score": 1532.638888888889,
+      "mean_distance_m": 1082.6476168089648,
+      "mean_overtakes": 4.722222222222222
+    },
+    {
+      "steps": 25000,
+      "episodes": 36,
+      "crashes": 0,
+      "qualification_rate": 0.8888888888888888,
+      "mean_score": 1583.75,
+      "mean_distance_m": 1106.7512782839663,
+      "mean_overtakes": 5.166666666666667
+    },
+    {
+      "steps": 50000,
+      "episodes": 36,
+      "crashes": 2,
+      "qualification_rate": 0.8333333333333334,
+      "mean_score": 1523.25,
+      "mean_distance_m": 1085.6743760778018,
+      "mean_overtakes": 5.055555555555555
+    },
+    {
+      "steps": 75000,
+      "episodes": 36,
+      "crashes": 0,
+      "qualification_rate": 0.8888888888888888,
+      "mean_score": 1580.5555555555557,
+      "mean_distance_m": 1108.3436442168054,
+      "mean_overtakes": 5.083333333333333
+    },
+    {
+      "steps": 100000,
+      "episodes": 36,
+      "crashes": 0,
+      "qualification_rate": 0.8888888888888888,
+      "mean_score": 1586.9166666666667,
+      "mean_distance_m": 1108.4779320236937,
+      "mean_overtakes": 5.194444444444445
+    },
+    {
+      "steps": 125000,
+      "episodes": 36,
+      "crashes": 3,
+      "qualification_rate": 0.8055555555555556,
+      "mean_score": 1469.8333333333333,
+      "mean_distance_m": 1054.7054857176458,
+      "mean_overtakes": 4.861111111111111
+    },
+    {
+      "steps": 150000,
+      "episodes": 36,
+      "crashes": 1,
+      "qualification_rate": 0.8611111111111112,
+      "mean_score": 1546.4166666666667,
+      "mean_distance_m": 1095.5338666898829,
+      "mean_overtakes": 4.972222222222222
+    },
+    {
+      "steps": 175000,
+      "episodes": 36,
+      "crashes": 2,
+      "qualification_rate": 0.8333333333333334,
+      "mean_score": 1519.111111111111,
+      "mean_distance_m": 1084.5429414219966,
+      "mean_overtakes": 5.055555555555555
+    },
+    {
+      "steps": 200000,
+      "episodes": 36,
+      "crashes": 0,
+      "qualification_rate": 0.8888888888888888,
+      "mean_score": 1586.4166666666667,
+      "mean_distance_m": 1106.2714200001546,
+      "mean_overtakes": 5.166666666666667
+    },
+    {
+      "steps": 200704,
+      "episodes": 36,
+      "crashes": 0,
+      "qualification_rate": 0.8888888888888888,
+      "mean_score": 1581.9166666666667,
+      "mean_distance_m": 1104.7773803901596,
+      "mean_overtakes": 5.083333333333333
+    }
+  ]
+}

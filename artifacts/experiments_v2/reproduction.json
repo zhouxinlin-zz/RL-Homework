@@ -1,0 +1,34 @@
+{
+  "working_directory": "project root",
+  "python": ".venv\\Scripts\\python.exe",
+  "training_note": "These are the recorded experiment commands. Existing run IDs are protected against overwrite; use a new ID for a fresh experiment. Exact bitwise continuation is not promised because resume restores weights/optimizer but starts new environment and RNG streams.",
+  "training_commands": [
+    "python -m rl_course.train_v2 --run ppo_curriculum_s11 --algorithm ppo --seed 11 --steps 200000 --envs 4 --checkpoint-every 50000",
+    "python -m rl_course.train_v2 --run dqn_curriculum_s11 --algorithm dqn --seed 11 --steps 200000 --envs 4 --checkpoint-every 50000",
+    "python -m rl_course.train_v2 --run a2c_curriculum_s11 --algorithm a2c --seed 11 --steps 200000 --envs 4 --checkpoint-every 50000",
+    "python -m rl_course.train_v2 --run ppo_normal_s11 --algorithm ppo --seed 11 --steps 200000 --traffic normal --envs 4 --checkpoint-every 50000",
+    "python -m rl_course.train_v2 --run ppo_base_s11 --algorithm ppo --seed 11 --steps 200000 --reward base --envs 4 --checkpoint-every 50000",
+    "python -m rl_course.train_v2 --run ppo_curriculum_s11 --algorithm ppo --seed 11 --steps 1000000 --envs 4 --checkpoint-every 100000 --resume",
+    "python -m rl_course.demonstrations_v2 --steps 60000 --seed 17011",
+    "python -m rl_course.train_v2 --run ppo_warm60_s11 --algorithm ppo --seed 11 --steps 1000000 --envs 4 --checkpoint-every 100000 --demonstrations artifacts/experiments_v2/demonstrations/rule_60000_s17011.npz",
+    "python -m rl_course.train_v2 --run ppo_warm60_s23 --algorithm ppo --seed 23 --steps 1000000 --envs 4 --checkpoint-every 100000 --demonstrations artifacts/experiments_v2/demonstrations/rule_60000_s17011.npz",
+    "python -m rl_course.train_v2 --run ppo_warm60_s47 --algorithm ppo --seed 47 --steps 1000000 --envs 4 --checkpoint-every 100000 --demonstrations artifacts/experiments_v2/demonstrations/rule_60000_s17011.npz"
+  ],
+  "selection_note": "comparison_200k.json and fixed_comparisons.json preserve the selected 200k-budget checkpoints before the PPO run was resumed. Final difficulty selection is explicitly recorded in selection_lock.json and never uses test-road results.",
+  "calibration_commands": [
+    "python -m rl_course.finalize_v2 prepare-calibration",
+    "python -m rl_course.evaluate_v2 --registry artifacts/experiments_v2/calibration_candidates.json --baselines --episodes 20 --seed-start 31200 --workers 4 --output calibration --split development",
+    "python -m rl_course.finalize_v2 freeze-levels --beginner cal_early_ppo --standard cal_pure_ppo --expert cal_rl_s47"
+  ],
+  "test_commands": [
+    "python -m rl_course.evaluate_v2 --registry artifacts/experiments_v2/fixed_comparisons.json --episodes 100 --seed-start 891000 --workers 4 --output evaluation_fixed_test --split test",
+    "python -m rl_course.evaluate_v2 --registry artifacts/experiments_v2/final_main_candidates.json --baselines --episodes 100 --seed-start 891000 --workers 4 --output evaluation_main_test --split test",
+    "python -m rl_course.finalize_v2 merge-final"
+  ],
+  "evaluate_shipped_game_only": "python -m rl_course.evaluate_v2 --deployment --baselines slow rule --episodes 100 --seed-start 891000 --workers 4 --output reproduced_game_test --split test",
+  "verification_commands": [
+    "python -m unittest tests.test_training_v2 -q",
+    "python -m rl_course.imitation_figures_v2"
+  ],
+  "packaging_note": "The delivery archive contains fixed inference models and actual reports. Full training checkpoints, replay buffers and demonstration arrays remain in the original workspace. DQN resume requires its replay buffer; fresh imitation experiments can regenerate the demonstration dataset."
+}

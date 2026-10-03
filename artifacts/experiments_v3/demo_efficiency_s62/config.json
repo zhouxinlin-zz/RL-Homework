@@ -1,0 +1,15 @@
+{
+  "run_id": "demo_efficiency_s62",
+  "seed": 62,
+  "source": "D:\\Projects\\RL-Homework\\artifacts\\experiments_v3\\safe_imitation_s23\\checkpoints\\step_200000.zip",
+  "source_sha256": "657ef692c8dc33787ee096e485524af546658225696d6345dbf1630c8350548f",
+  "environment_version": "3.1",
+  "scenario": "weave",
+  "reward_change": "additional 0.045 per metre and 0.3 per new overtake; original -30 collision and unsafe lane penalties retained",
+  "reward_source_sha256": "353e4c0ec40429d385480c7425e94a7a3ca8f194b4e399daa2fb5fe818bb1f90",
+  "requested_timesteps": 100000,
+  "parallel_envs": 4,
+  "checkpoint_interval": 25000,
+  "selection_split": "development seeds 531100-531179",
+  "fresh_holdout_start_if_selected": 1331100
+}

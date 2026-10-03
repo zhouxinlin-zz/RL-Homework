@@ -1,0 +1,50 @@
+{
+  "env_version": "3.1",
+  "selection_basis": "80 development seeds per challenge route; prioritize zero crashes, then pressure qualification and paired game outcomes. Locked before running held-out test seeds.",
+  "models": {
+    "v3_beginner": {
+      "source": "artifacts/experiments_v3/imitation_s23/best.zip",
+      "development_report": "artifacts/experiments_v3/development_imitation_initial_dev_routes.json",
+      "run_id": "imitation_s23",
+      "method": "rule demonstrations plus PPO",
+      "seed": 23,
+      "steps": 75000,
+      "training_steps": 100352,
+      "source_env_version": "3.0"
+    },
+    "v3_standard": {
+      "source": "artifacts/experiments_v3/safe_imitation_s23/checkpoints/step_200000.zip",
+      "development_report": "artifacts/experiments_v3/development_safe_imitation_200_dev_routes.json",
+      "run_id": "safe_imitation_s23",
+      "method": "rule demonstrations plus PPO and safety reward",
+      "seed": 23,
+      "steps": 200000,
+      "training_steps": 501760,
+      "source_env_version": "3.1"
+    },
+    "v3_expert": {
+      "source": "artifacts/experiments_v3/safe_transfer_s47/checkpoints/step_175000.zip",
+      "development_report": "artifacts/experiments_v3/development_safe_transfer_175_dev_routes.json",
+      "run_id": "safe_transfer_s47",
+      "method": "v2 PPO transfer plus v3 safety fine-tuning",
+      "seed": 47,
+      "steps": 175000,
+      "training_steps": 501760,
+      "source_env_version": "3.1"
+    }
+  },
+  "levels": {
+    "beginner": {
+      "model": "v3_beginner",
+      "description": "模仿示范起步的初阶对手；在复杂车流中会暴露决策短板。"
+    },
+    "standard": {
+      "model": "v3_standard",
+      "description": "强化训练后的稳健对手；能处理大部分变道与超车。"
+    },
+    "expert": {
+      "model": "v3_expert",
+      "description": "迁移学习与安全微调的高阶对手；重点挑战高密度车流。"
+    }
+  }
+}

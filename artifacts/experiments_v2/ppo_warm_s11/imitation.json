@@ -1,0 +1,197 @@
+{
+  "dataset": "artifacts\\experiments_v2\\demonstrations\\rule_60000_s17011.npz",
+  "dataset_sha256": "29c664f298efee11b2efc368655296f1b33879e54bd096f6fdd34df4a96fa0bd",
+  "transitions": 60000,
+  "validation_split": "10 percent held-out demonstration episodes, selected with run seed",
+  "epochs": 15,
+  "class_weights": [
+    5.0,
+    1.0,
+    5.0,
+    4.071725368499756,
+    4.4796271324157715
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "loss": 1.0760149224749151,
+      "validation_accuracy": 0.8892287611961365,
+      "validation_recall_per_action": [
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "epoch": 2,
+      "loss": 0.905431864958889,
+      "validation_accuracy": 0.8845596313476562,
+      "validation_recall_per_action": [
+        0.0,
+        0.9936628937721252,
+        0.0,
+        0.0028409091755747795,
+        0.019157087430357933
+      ]
+    },
+    {
+      "epoch": 3,
+      "loss": 0.879486194196737,
+      "validation_accuracy": 0.881661593914032,
+      "validation_recall_per_action": [
+        0.0,
+        0.988412082195282,
+        0.0,
+        0.005681818351149559,
+        0.05747126415371895
+      ]
+    },
+    {
+      "epoch": 4,
+      "loss": 0.8643475315480862,
+      "validation_accuracy": 0.8612139821052551,
+      "validation_recall_per_action": [
+        0.0,
+        0.956545352935791,
+        0.0,
+        0.04829545319080353,
+        0.18773946166038513
+      ]
+    },
+    {
+      "epoch": 5,
+      "loss": 0.8474750333237198,
+      "validation_accuracy": 0.8512316942214966,
+      "validation_recall_per_action": [
+        0.0,
+        0.9416983723640442,
+        0.0,
+        0.08806817978620529,
+        0.2107279747724533
+      ]
+    },
+    {
+      "epoch": 6,
+      "loss": 0.8317911546185331,
+      "validation_accuracy": 0.8768314123153687,
+      "validation_recall_per_action": [
+        0.0,
+        0.9775484204292297,
+        0.0,
+        0.05681818351149559,
+        0.1034482792019844
+      ]
+    },
+    {
+      "epoch": 7,
+      "loss": 0.8109168483401245,
+      "validation_accuracy": 0.8455965518951416,
+      "validation_recall_per_action": [
+        0.0,
+        0.9264892339706421,
+        0.0,
+        0.1619318127632141,
+        0.29885056614875793
+      ]
+    },
+    {
+      "epoch": 8,
+      "loss": 0.7983515942996403,
+      "validation_accuracy": 0.8621799945831299,
+      "validation_recall_per_action": [
+        0.0,
+        0.9521998763084412,
+        0.0,
+        0.14488635957241058,
+        0.17241379618644714
+      ]
+    },
+    {
+      "epoch": 9,
+      "loss": 0.7826034814681647,
+      "validation_accuracy": 0.8470455408096313,
+      "validation_recall_per_action": [
+        0.0,
+        0.9226869344711304,
+        0.0,
+        0.3181818127632141,
+        0.20306512713432312
+      ]
+    },
+    {
+      "epoch": 10,
+      "loss": 0.7674299635977115,
+      "validation_accuracy": 0.8658831119537354,
+      "validation_recall_per_action": [
+        0.0,
+        0.9531052112579346,
+        0.0,
+        0.12784090638160706,
+        0.26436781883239746
+      ]
+    },
+    {
+      "epoch": 11,
+      "loss": 0.7520531286608498,
+      "validation_accuracy": 0.8639510273933411,
+      "validation_recall_per_action": [
+        0.0,
+        0.941879391670227,
+        0.0,
+        0.3125,
+        0.2068965584039688
+      ]
+    },
+    {
+      "epoch": 12,
+      "loss": 0.7351018772372659,
+      "validation_accuracy": 0.8510707020759583,
+      "validation_recall_per_action": [
+        0.0,
+        0.9159876704216003,
+        0.0,
+        0.3636363744735718,
+        0.37931033968925476
+      ]
+    },
+    {
+      "epoch": 13,
+      "loss": 0.7292276705211064,
+      "validation_accuracy": 0.8626630306243896,
+      "validation_recall_per_action": [
+        0.0,
+        0.9315589070320129,
+        0.0,
+        0.3863636255264282,
+        0.29501914978027344
+      ]
+    },
+    {
+      "epoch": 14,
+      "loss": 0.7082039564847946,
+      "validation_accuracy": 0.8689422011375427,
+      "validation_recall_per_action": [
+        0.0,
+        0.9368097186088562,
+        0.0,
+        0.3693181872367859,
+        0.3563218414783478
+      ]
+    },
+    {
+      "epoch": 15,
+      "loss": 0.6932838320169808,
+      "validation_accuracy": 0.8811785578727722,
+      "validation_recall_per_action": [
+        0.0,
+        0.9523809552192688,
+        0.0,
+        0.3551136255264282,
+        0.3371647596359253
+      ]
+    }
+  ],
+  "note": "Actor-only imitation. PPO reinforcement learning follows; no rule executes at inference."
+}

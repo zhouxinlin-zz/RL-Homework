@@ -1,0 +1,83 @@
+{
+  "run_id": "ppo_base_s11",
+  "algorithm": "ppo",
+  "seed": 11,
+  "traffic": "curriculum",
+  "reward": "base",
+  "env_version": "2.0",
+  "requested_timesteps": 200000,
+  "envs": 4,
+  "environment_source_sha256": "c569f0afbb28d07f9ff541718c3de5d168091f1575d211630523ee05e116f017",
+  "environment_configuration": {
+    "traffic": {
+      "light": {
+        "spacing": 100.0,
+        "speed": [
+          19.0,
+          28.0
+        ],
+        "lane_change": 0.3,
+        "headway": 1.6
+      },
+      "normal": {
+        "spacing": 76.0,
+        "speed": [
+          17.0,
+          29.0
+        ],
+        "lane_change": 0.55,
+        "headway": 1.4
+      },
+      "dense": {
+        "spacing": 58.0,
+        "speed": [
+          15.0,
+          28.0
+        ],
+        "lane_change": 0.7,
+        "headway": 1.25
+      }
+    },
+    "target_speeds": [
+      12,
+      18,
+      24,
+      30
+    ],
+    "simulation_frequency": 15,
+    "policy_frequency": 5,
+    "duration": 45,
+    "rewards": {
+      "progress_per_m": 0.025,
+      "pass": 0,
+      "collision": -12,
+      "completion": 3,
+      "danger_per_step": 0,
+      "lane_change": 0,
+      "quick_reverse_extra": 0
+    }
+  },
+  "validation_seeds": [
+    31100,
+    31101,
+    31102,
+    31103,
+    31104,
+    31105
+  ],
+  "selection_metric": "2*completion+distance/(30*duration)+.02*min(overtakes,15)-.2*danger/duration",
+  "resume_semantics": "network and optimizer restored; DQN replay restored; episode and RNG streams restart",
+  "hyperparameters": {
+    "learning_rate": 0.0003,
+    "gamma": 0.99,
+    "n_steps": 512,
+    "batch_size": 256,
+    "n_epochs": 8,
+    "ent_coef": 0.008,
+    "gae_lambda": 0.95,
+    "buffer_size": null,
+    "learning_starts": null,
+    "target_update_interval": null,
+    "exploration_fraction": null
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "env_version": "2.0",
+  "seed": 17011,
+  "transitions": 60000,
+  "episodes": 317,
+  "crashes": 90,
+  "source": "rule_action: same 30-dimensional observation and five actions",
+  "random_action_probability": 0.03,
+  "scenarios_probability": {
+    "light": 0.2,
+    "normal": 0.4,
+    "dense": 0.4
+  },
+  "label_counts": [
+    364,
+    53403,
+    346,
+    3240,
+    2647
+  ],
+  "sha256": "29c664f298efee11b2efc368655296f1b33879e54bd096f6fdd34df4a96fa0bd",
+  "environment_source_sha256": "c569f0afbb28d07f9ff541718c3de5d168091f1575d211630523ee05e116f017"
+}

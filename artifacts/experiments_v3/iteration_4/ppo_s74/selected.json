@@ -1,0 +1,13 @@
+{
+  "path": "artifacts\\experiments_v3\\iteration_4\\ppo_s74\\step_100000.zip",
+  "sha256": "6acb6494bd196ad030ddbbd14ee2635351cb0731773cbad51f387095bad83d93",
+  "steps": 100000,
+  "development": {
+    "episodes": 36,
+    "crashes": 0,
+    "qualification_rate": 0.8888888888888888,
+    "mean_score": 1586.9166666666667,
+    "mean_distance_m": 1108.4779320236937,
+    "mean_overtakes": 5.194444444444445
+  }
+}

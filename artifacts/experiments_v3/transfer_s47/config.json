@@ -1,0 +1,16 @@
+{
+  "run_id": "transfer_s47",
+  "algorithm": "ppo",
+  "seed": 47,
+  "env_version": "3.0",
+  "envs": 4,
+  "requested_timesteps": 100000,
+  "initialize_path": "artifacts\\experiments_v2\\deployment\\cal_rl_s47-e8d9265c440b.zip",
+  "initialize_sha256": "e8d9265c440bfe55b3a14423f8d979d774ca1c3133e4c525b11e92dbb22fbca7",
+  "environment_source_sha256": "e0e8899e212b1eba9ac99bb3fe64360fb9b7b495636780838992450328007a25",
+  "training_source_sha256": "60643ac4410e9f0821e92c5d88c3f036830ea6d7860216ae9a49d5a4754fb11c",
+  "validation_seed_start": 531100,
+  "validation_seed_count_per_scenario": 8,
+  "test_seed_start": 931100,
+  "selection_metric": "v2_metrics.episode quality, pooled across 3 scenarios"
+}

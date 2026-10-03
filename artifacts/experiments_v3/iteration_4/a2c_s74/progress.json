@@ -1,0 +1,81 @@
+{
+  "algorithm": "a2c",
+  "seed": 74,
+  "env_version": "3.1",
+  "requested_steps": 125000,
+  "source": null,
+  "source_sha256": null,
+  "training_source_sha256": "9df361c930b23116f0bb5ec985c75ea543882b7b2afa258bc7793e59d72265aa",
+  "environment_source_sha256": "47e504164db11206f93a4be3b55c878a79d6d8faa856b282bd2565aa1f0e3f7e",
+  "reward": "original v3.1 + .035/metre + .2/overtake; total collision penalty -60",
+  "development_start": 631100,
+  "fresh_holdout_start": 1631100,
+  "selection": "fewest development crashes, then qualification, then score",
+  "actual_steps": 125056,
+  "elapsed_s": 776.0,
+  "validations": [
+    {
+      "steps": 0,
+      "episodes": 36,
+      "crashes": 0,
+      "qualification_rate": 0.0,
+      "mean_score": 849.9444444444445,
+      "mean_distance_m": 549.8334368140012,
+      "mean_overtakes": 0.0
+    },
+    {
+      "steps": 25000,
+      "episodes": 36,
+      "crashes": 36,
+      "qualification_rate": 0.0,
+      "mean_score": 3.4444444444444446,
+      "mean_distance_m": 210.03981427228084,
+      "mean_overtakes": 0.0
+    },
+    {
+      "steps": 50000,
+      "episodes": 36,
+      "crashes": 24,
+      "qualification_rate": 0.3333333333333333,
+      "mean_score": 645.0555555555555,
+      "mean_distance_m": 648.521693214972,
+      "mean_overtakes": 2.0277777777777777
+    },
+    {
+      "steps": 75000,
+      "episodes": 36,
+      "crashes": 36,
+      "qualification_rate": 0.0,
+      "mean_score": 4.361111111111111,
+      "mean_distance_m": 185.8822970335108,
+      "mean_overtakes": 0.0
+    },
+    {
+      "steps": 100000,
+      "episodes": 36,
+      "crashes": 36,
+      "qualification_rate": 0.0,
+      "mean_score": 10.61111111111111,
+      "mean_distance_m": 195.6530652066783,
+      "mean_overtakes": 0.0
+    },
+    {
+      "steps": 125000,
+      "episodes": 36,
+      "crashes": 36,
+      "qualification_rate": 0.0,
+      "mean_score": 0.0,
+      "mean_distance_m": 164.12380403694345,
+      "mean_overtakes": 0.0
+    },
+    {
+      "steps": 125056,
+      "episodes": 36,
+      "crashes": 36,
+      "qualification_rate": 0.0,
+      "mean_score": 0.0,
+      "mean_distance_m": 164.24319516886476,
+      "mean_overtakes": 0.0
+    }
+  ]
+}

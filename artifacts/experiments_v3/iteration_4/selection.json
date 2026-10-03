@@ -1,0 +1,82 @@
+{
+  "env_version": "3.1",
+  "models": {
+    "v3_ppo_candidate": {
+      "path": "artifacts/experiments_v3/iteration_4/ppo_s74/step_25000.zip",
+      "sha256": "adbff550be2036a64e624036633ff2dad696dae4b04cc028553d4dc1d53bb3b4",
+      "algorithm": "ppo",
+      "steps": 25000,
+      "seed": 74,
+      "env_version": "3.1",
+      "run_id": "ppo_s74",
+      "training_steps": 200704,
+      "method": "PPO 安全与效率微调",
+      "method_label": "迁移初始化 → 效率与安全 PPO",
+      "config": "artifacts/experiments_v3/iteration_4/ppo_s74/config.json",
+      "config_sha256": "7843b4bff72b40238a30a7f793fd1e3a5df0ad679ef7a547857c07bab8a2a723",
+      "pretrained": true,
+      "selection_report": "artifacts/experiments_v3/iteration_4/ppo_s74/selection_25000.json",
+      "selection_summary": {
+        "episodes": 96,
+        "crashes": 2,
+        "qualification_rate": 0.7395833333333334,
+        "mean_score": 1546.9791666666667,
+        "mean_distance_m": 1088.6216618104615,
+        "mean_overtakes": 5.020833333333333
+      }
+    },
+    "v3_a2c_candidate": {
+      "path": "artifacts/experiments_v3/iteration_4/a2c_s75/step_50000.zip",
+      "sha256": "45156fe1318f9958057c53e15f0b85746a8e5548fd0de058779f4fe6f5e98eae",
+      "algorithm": "a2c",
+      "steps": 50000,
+      "seed": 75,
+      "env_version": "3.1",
+      "run_id": "a2c_s75",
+      "training_steps": 50048,
+      "method": "PPO 权重初始化后 A2C 更新",
+      "method_label": "PPO 初始化 → A2C 微调",
+      "config": "artifacts/experiments_v3/iteration_4/a2c_s75/config.json",
+      "config_sha256": "8e44e346cb8c24969db1c2d196c527fbdd679705b7c29bb740d54592e86843a4",
+      "pretrained": true,
+      "selection_report": "artifacts/experiments_v3/iteration_4/a2c_s75/selection_50000.json",
+      "selection_summary": {
+        "episodes": 96,
+        "crashes": 1,
+        "qualification_rate": 0.7395833333333334,
+        "mean_score": 1559.6145833333333,
+        "mean_distance_m": 1093.0606861026715,
+        "mean_overtakes": 5.041666666666667
+      }
+    },
+    "v3_dqn_candidate": {
+      "path": "artifacts/experiments_v3/iteration_4/dqn_s75/step_200000.zip",
+      "sha256": "fc29f0a6550dd82a1d420d92b3aad7163a8952a17b214c68992126557777105e",
+      "algorithm": "dqn",
+      "steps": 200000,
+      "seed": 75,
+      "env_version": "3.1",
+      "run_id": "dqn_s75",
+      "training_steps": 200000,
+      "method": "DQN 检查点继续训练",
+      "method_label": null,
+      "config": "artifacts/experiments_v3/iteration_4/dqn_s75/config.json",
+      "config_sha256": "0253c6792e911bc29c6c25951c290f4e9287b188e361e04c10c140666860a434",
+      "pretrained": true,
+      "selection_report": "artifacts/experiments_v3/iteration_4/dqn_s75/selection_200000.json",
+      "selection_summary": {
+        "episodes": 96,
+        "crashes": 19,
+        "qualification_rate": 0.5520833333333334,
+        "mean_score": 1221.96875,
+        "mean_distance_m": 928.6345689752671,
+        "mean_overtakes": 2.9583333333333335
+      }
+    }
+  },
+  "expert_candidate": "v3_a2c_candidate",
+  "development_start": 631200,
+  "test_start": 1631100,
+  "test_count_per_route": 100,
+  "promotion_gate": "no more crashes and higher qualification and score than previous expert on fresh held-out roads"
+}

@@ -1,0 +1,18 @@
+* text=auto
+*.py text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+*.css text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+*.zip binary
+*.npz binary
+*.png binary
+*.jpg binary
+*.glb binary
+# Release manifests authenticate the exact bytes of evaluation/config JSON.
+artifacts/** -text

@@ -1,0 +1,17 @@
+{
+  "stage": "development_only",
+  "scenario": "weave",
+  "development_seed_start": 531100,
+  "development_episodes": 80,
+  "comparison": {
+    "standard_200000": {"crashes": 0, "qualified": 67, "mean_score": 1585.8125, "mean_distance_m": 1090.8922, "mean_overtakes": 5.575},
+    "efficiency_25000": {"crashes": 4, "qualified": 65, "mean_score": 1554},
+    "efficiency_50000": {"crashes": 2, "qualified": 66, "mean_score": 1600.2875, "mean_distance_m": 1110.8057, "mean_overtakes": 5.85},
+    "efficiency_75000": {"crashes": 2, "qualified": 69, "mean_score": 1644.0875, "mean_distance_m": 1133.9389, "mean_overtakes": 6.4375},
+    "efficiency_100000": {"crashes": 10, "qualified": 66, "mean_score": 1608.2375, "mean_distance_m": 1141.9086, "mean_overtakes": 6.825}
+  },
+  "deployment_decision": "reject",
+  "reason": "The speed reward increased distance and overtakes but every trained checkpoint had more development-road collisions than the existing standard model. The 75000-step candidate improved mean score by only 3.7 percent while adding 2 crashes in 80 episodes.",
+  "held_out_test_run": false,
+  "game_model_unchanged": "v3_standard"
+}

@@ -1,0 +1,13 @@
+{
+  "path": "artifacts\\experiments_v3\\iteration_4\\dqn_s75\\step_200000.zip",
+  "sha256": "fc29f0a6550dd82a1d420d92b3aad7163a8952a17b214c68992126557777105e",
+  "steps": 200000,
+  "development": {
+    "episodes": 36,
+    "crashes": 9,
+    "qualification_rate": 0.5277777777777778,
+    "mean_score": 1156.6944444444443,
+    "mean_distance_m": 898.4428114627585,
+    "mean_overtakes": 2.7777777777777777
+  }
+}

@@ -1,0 +1,572 @@
+{
+  "path": "artifacts/experiments_v2/deployment/cal_early_ppo-fd6f303f2217.zip",
+  "algorithm": "ppo",
+  "steps": 50000,
+  "training_steps": 1001472,
+  "source_run_training_steps": 1001472,
+  "seed": 11,
+  "run_id": "ppo_curriculum_s11",
+  "env_version": "2.0",
+  "method": "pure-rl",
+  "demonstration_steps": 0,
+  "best_including_initialization_steps": 700704,
+  "selection_scope": "explicit_checkpoint",
+  "sha256": "fd6f303f221737d6e54e39705dd5ca1b14081d71d3c14a76760683dd7345382f",
+  "source_checkpoint": "artifacts/experiments_v2/ppo_curriculum_s11/checkpoints/step_50000.zip",
+  "environment_source_sha256": null,
+  "validation": {
+    "timesteps": 50000,
+    "episodes": 18,
+    "crashes": 2,
+    "crash_rate": 0.1111111111111111,
+    "crash_ci95": [
+      0.031019522645613362,
+      0.3279976513017808
+    ],
+    "mean_quality": 2.3828920562380493,
+    "mean_distance_m": 718.6752821394177,
+    "mean_speed_kmh": 68.05625118731221,
+    "mean_overtakes": 0.5,
+    "mean_lane_changes": 0.8888888888888888,
+    "mean_danger_seconds": 0.14444444444444446,
+    "mean_return": 19.39577094237433
+  },
+  "config": {
+    "run_id": "ppo_curriculum_s11",
+    "algorithm": "ppo",
+    "seed": 11,
+    "traffic": "curriculum",
+    "reward": "shaped",
+    "env_version": "2.0",
+    "requested_timesteps": 1000000,
+    "envs": 4,
+    "environment_source_sha256": "c569f0afbb28d07f9ff541718c3de5d168091f1575d211630523ee05e116f017",
+    "metrics_source_sha256": "9ed37e1301a5d68af15d40fcf8059b20fecfe39bf0787bf13ee3842ddc7912da",
+    "resume_history": [
+      {
+        "from_timesteps": 200704,
+        "previous_requested_timesteps": 200000,
+        "new_requested_timesteps": 1000000,
+        "previous_environment_source_sha256": null
+      }
+    ],
+    "imitation_transitions": 0,
+    "imitation_dataset_sha256": null,
+    "environment_configuration": {
+      "traffic": {
+        "light": {
+          "spacing": 100.0,
+          "speed": [
+            19.0,
+            28.0
+          ],
+          "lane_change": 0.3,
+          "headway": 1.6
+        },
+        "normal": {
+          "spacing": 76.0,
+          "speed": [
+            17.0,
+            29.0
+          ],
+          "lane_change": 0.55,
+          "headway": 1.4
+        },
+        "dense": {
+          "spacing": 58.0,
+          "speed": [
+            15.0,
+            28.0
+          ],
+          "lane_change": 0.7,
+          "headway": 1.25
+        }
+      },
+      "target_speeds": [
+        12,
+        18,
+        24,
+        30
+      ],
+      "simulation_frequency": 15,
+      "policy_frequency": 5,
+      "duration": 45,
+      "rewards": {
+        "progress_per_m": 0.025,
+        "pass": 0.4,
+        "collision": -12,
+        "completion": 3,
+        "danger_per_step": -0.12,
+        "lane_change": -0.02,
+        "quick_reverse_extra": -0.12
+      }
+    },
+    "validation_seeds": [
+      31100,
+      31101,
+      31102,
+      31103,
+      31104,
+      31105
+    ],
+    "selection_metric": "2*completion+distance/(30*duration)+.02*min(overtakes,15)-.2*danger/duration",
+    "resume_semantics": "network and optimizer restored; DQN replay restored; episode and RNG streams restart",
+    "hyperparameters": {
+      "learning_rate": 0.0003,
+      "gamma": 0.99,
+      "n_steps": 512,
+      "batch_size": 256,
+      "n_epochs": 8,
+      "ent_coef": 0.008,
+      "gae_lambda": 0.95,
+      "buffer_size": null,
+      "learning_starts": null,
+      "target_update_interval": null,
+      "exploration_fraction": null
+    }
+  },
+  "validation_detail": {
+    "timesteps": 50000,
+    "episodes": 18,
+    "crashes": 2,
+    "crash_rate": 0.1111111111111111,
+    "crash_ci95": [
+      0.031019522645613362,
+      0.3279976513017808
+    ],
+    "mean_quality": 2.3828920562380493,
+    "mean_distance_m": 718.6752821394177,
+    "mean_speed_kmh": 68.05625118731221,
+    "mean_overtakes": 0.5,
+    "mean_lane_changes": 0.8888888888888888,
+    "mean_danger_seconds": 0.14444444444444446,
+    "mean_return": 19.39577094237433,
+    "episodes_detail": [
+      {
+        "seed": 31100,
+        "scenario": "light",
+        "duration": 30,
+        "crashed": true,
+        "completed": false,
+        "time_s": 21.0,
+        "distance_m": 517.1948467151278,
+        "speed_kmh": 88.64592398311794,
+        "overtakes": 0,
+        "lane_changes": 0,
+        "danger_seconds": 2.6,
+        "return": -0.6301288321218035,
+        "quality": 0.5573276074612532,
+        "actions": [
+          0,
+          0,
+          0,
+          55,
+          50
+        ],
+        "steps": 105
+      },
+      {
+        "seed": 31101,
+        "scenario": "light",
+        "duration": 30,
+        "crashed": false,
+        "completed": true,
+        "time_s": 30.0,
+        "distance_m": 581.3755688757669,
+        "speed_kmh": 69.76093748120556,
+        "overtakes": 0,
+        "lane_changes": 1,
+        "danger_seconds": 0.0,
+        "return": 17.514389221894177,
+        "quality": 2.645972854306408,
+        "actions": [
+          0,
+          0,
+          40,
+          54,
+          56
+        ],
+        "steps": 150
+      },
+      {
+        "seed": 31102,
+        "scenario": "light",
+        "duration": 30,
+        "crashed": false,
+        "completed": true,
+        "time_s": 30.0,
+        "distance_m": 638.0898455430379,
+        "speed_kmh": 76.51543398102987,
+        "overtakes": 0,
+        "lane_changes": 1,
+        "danger_seconds": 0.0,
+        "return": 18.93224613857595,
+        "quality": 2.708988717270042,
+        "actions": [
+          0,
+          0,
+          48,
+          49,
+          53
+        ],
+        "steps": 150
+      },
+      {
+        "seed": 31103,
+        "scenario": "light",
+        "duration": 30,
+        "crashed": false,
+        "completed": true,
+        "time_s": 30.0,
+        "distance_m": 537.2822037332155,
+        "speed_kmh": 64.41976036866805,
+        "overtakes": 0,
+        "lane_changes": 1,
+        "danger_seconds": 0.0,
+        "return": 16.41205509333039,
+        "quality": 2.5969802263702393,
+        "actions": [
+          0,
+          0,
+          127,
+          9,
+          14
+        ],
+        "steps": 150
+      },
+      {
+        "seed": 31104,
+        "scenario": "light",
+        "duration": 30,
+        "crashed": false,
+        "completed": true,
+        "time_s": 30.0,
+        "distance_m": 655.0052581010991,
+        "speed_kmh": 78.54412758484096,
+        "overtakes": 0,
+        "lane_changes": 0,
+        "danger_seconds": 0.0,
+        "return": 19.37513145252748,
+        "quality": 2.727783620112332,
+        "actions": [
+          0,
+          0,
+          0,
+          74,
+          76
+        ],
+        "steps": 150
+      },
+      {
+        "seed": 31105,
+        "scenario": "light",
+        "duration": 30,
+        "crashed": true,
+        "completed": false,
+        "time_s": 10.0,
+        "distance_m": 168.09605318190142,
+        "speed_kmh": 60.25883116296349,
+        "overtakes": 0,
+        "lane_changes": 1,
+        "danger_seconds": 0.0,
+        "return": -7.817598670452465,
+        "quality": 0.1867733924243349,
+        "actions": [
+          0,
+          0,
+          1,
+          19,
+          30
+        ],
+        "steps": 50
+      },
+      {
+        "seed": 31100,
+        "scenario": "normal",
+        "duration": 45,
+        "crashed": false,
+        "completed": true,
+        "time_s": 45.0,
+        "distance_m": 879.64444136262,
+        "speed_kmh": 70.30882173038594,
+        "overtakes": 0,
+        "lane_changes": 1,
+        "danger_seconds": 0.0,
+        "return": 24.9711110340655,
+        "quality": 2.651588475083422,
+        "actions": [
+          0,
+          0,
+          112,
+          55,
+          58
+        ],
+        "steps": 225
+      },
+      {
+        "seed": 31101,
+        "scenario": "normal",
+        "duration": 45,
+        "crashed": false,
+        "completed": true,
+        "time_s": 45.0,
+        "distance_m": 971.6615372194406,
+        "speed_kmh": 77.75999703073482,
+        "overtakes": 2,
+        "lane_changes": 1,
+        "danger_seconds": 0.0,
+        "return": 28.071538430486022,
+        "quality": 2.7597492868292153,
+        "actions": [
+          0,
+          0,
+          148,
+          45,
+          32
+        ],
+        "steps": 225
+      },
+      {
+        "seed": 31102,
+        "scenario": "normal",
+        "duration": 45,
+        "crashed": false,
+        "completed": true,
+        "time_s": 45.0,
+        "distance_m": 706.4413780213413,
+        "speed_kmh": 56.47061438833242,
+        "overtakes": 0,
+        "lane_changes": 1,
+        "danger_seconds": 0.0,
+        "return": 20.641034450533535,
+        "quality": 2.523289909645438,
+        "actions": [
+          0,
+          0,
+          149,
+          31,
+          45
+        ],
+        "steps": 225
+      },
+      {
+        "seed": 31103,
+        "scenario": "normal",
+        "duration": 45,
+        "crashed": false,
+        "completed": true,
+        "time_s": 45.0,
+        "distance_m": 814.2029240625104,
+        "speed_kmh": 65.06191836627194,
+        "overtakes": 0,
+        "lane_changes": 1,
+        "danger_seconds": 0.0,
+        "return": 23.335073101562763,
+        "quality": 2.603113277083341,
+        "actions": [
+          0,
+          0,
+          79,
+          67,
+          79
+        ],
+        "steps": 225
+      },
+      {
+        "seed": 31104,
+        "scenario": "normal",
+        "duration": 45,
+        "crashed": false,
+        "completed": true,
+        "time_s": 45.0,
+        "distance_m": 953.5740453640874,
+        "speed_kmh": 76.27017176870004,
+        "overtakes": 2,
+        "lane_changes": 1,
+        "danger_seconds": 0.0,
+        "return": 27.619351134102196,
+        "quality": 2.746351144714139,
+        "actions": [
+          0,
+          0,
+          78,
+          74,
+          73
+        ],
+        "steps": 225
+      },
+      {
+        "seed": 31105,
+        "scenario": "normal",
+        "duration": 45,
+        "crashed": false,
+        "completed": true,
+        "time_s": 45.0,
+        "distance_m": 932.3794780990222,
+        "speed_kmh": 74.61070501727038,
+        "overtakes": 1,
+        "lane_changes": 1,
+        "danger_seconds": 0.0,
+        "return": 26.68948695247555,
+        "quality": 2.7106514652585347,
+        "actions": [
+          0,
+          0,
+          141,
+          44,
+          40
+        ],
+        "steps": 225
+      },
+      {
+        "seed": 31100,
+        "scenario": "dense",
+        "duration": 45,
+        "crashed": false,
+        "completed": true,
+        "time_s": 45.0,
+        "distance_m": 881.1537305156348,
+        "speed_kmh": 70.53101615370907,
+        "overtakes": 2,
+        "lane_changes": 1,
+        "danger_seconds": 0.0,
+        "return": 25.808843262890864,
+        "quality": 2.6927064670486183,
+        "actions": [
+          0,
+          0,
+          131,
+          45,
+          49
+        ],
+        "steps": 225
+      },
+      {
+        "seed": 31101,
+        "scenario": "dense",
+        "duration": 45,
+        "crashed": false,
+        "completed": true,
+        "time_s": 45.0,
+        "distance_m": 663.5627952006917,
+        "speed_kmh": 53.04856086792475,
+        "overtakes": 0,
+        "lane_changes": 1,
+        "danger_seconds": 0.0,
+        "return": 19.569069880017288,
+        "quality": 2.491527996444957,
+        "actions": [
+          0,
+          0,
+          172,
+          19,
+          34
+        ],
+        "steps": 225
+      },
+      {
+        "seed": 31102,
+        "scenario": "dense",
+        "duration": 45,
+        "crashed": false,
+        "completed": true,
+        "time_s": 45.0,
+        "distance_m": 701.4407739489045,
+        "speed_kmh": 56.1143718903083,
+        "overtakes": 0,
+        "lane_changes": 1,
+        "danger_seconds": 0.0,
+        "return": 20.51601934872262,
+        "quality": 2.51958575848067,
+        "actions": [
+          0,
+          0,
+          153,
+          36,
+          36
+        ],
+        "steps": 225
+      },
+      {
+        "seed": 31103,
+        "scenario": "dense",
+        "duration": 45,
+        "crashed": false,
+        "completed": true,
+        "time_s": 45.0,
+        "distance_m": 892.6555091886285,
+        "speed_kmh": 71.41603193295708,
+        "overtakes": 2,
+        "lane_changes": 1,
+        "danger_seconds": 0.0,
+        "return": 26.096387729715705,
+        "quality": 2.701226303102688,
+        "actions": [
+          0,
+          0,
+          140,
+          45,
+          40
+        ],
+        "steps": 225
+      },
+      {
+        "seed": 31104,
+        "scenario": "dense",
+        "duration": 45,
+        "crashed": false,
+        "completed": true,
+        "time_s": 45.0,
+        "distance_m": 647.6952995380593,
+        "speed_kmh": 51.745183982022006,
+        "overtakes": 0,
+        "lane_changes": 1,
+        "danger_seconds": 0.0,
+        "return": 19.172382488451483,
+        "quality": 2.479774295954118,
+        "actions": [
+          0,
+          0,
+          156,
+          30,
+          39
+        ],
+        "steps": 225
+      },
+      {
+        "seed": 31105,
+        "scenario": "dense",
+        "duration": 45,
+        "crashed": false,
+        "completed": true,
+        "time_s": 45.0,
+        "distance_m": 794.6993898384285,
+        "speed_kmh": 63.53011368117729,
+        "overtakes": 0,
+        "lane_changes": 1,
+        "danger_seconds": 0.0,
+        "return": 22.8474847459607,
+        "quality": 2.5886662146951323,
+        "actions": [
+          0,
+          0,
+          60,
+          75,
+          90
+        ],
+        "steps": 225
+      }
+    ]
+  },
+  "label": "Early PPO / 50k checkpoint",
+  "training_source_hash_status": "historical_hash_not_recorded",
+  "training_source_history_complete": false,
+  "training_resume_history": [
+    {
+      "from_timesteps": 200704,
+      "previous_requested_timesteps": 200000,
+      "new_requested_timesteps": 1000000,
+      "previous_environment_source_sha256": null
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "stage": "final",
+  "env_version": "3.1",
+  "models": {
+    "v3_beginner": {
+      "path": "artifacts/experiments_v3/deployment/v3_beginner-a9e4bde97e29.zip",
+      "sha256": "a9e4bde97e29dc4be3f1e68552bf6bdc5b63c8b2477190a0dc329592c090d318",
+      "algorithm": "ppo",
+      "env_version": "3.1",
+      "source_env_version": "3.0",
+      "run_id": "imitation_s23",
+      "method": "rule demonstrations plus PPO",
+      "seed": 23,
+      "steps": 75000,
+      "training_steps": 100352,
+      "development_report": "artifacts/experiments_v3/development_imitation_initial_dev_routes.json",
+      "test_report": "artifacts/experiments_v3/test_v3_beginner_routes.json"
+    },
+    "v3_standard": {
+      "path": "artifacts/experiments_v3/deployment/v3_standard-657ef692c8dc.zip",
+      "sha256": "657ef692c8dc33787ee096e485524af546658225696d6345dbf1630c8350548f",
+      "algorithm": "ppo",
+      "env_version": "3.1",
+      "source_env_version": "3.1",
+      "run_id": "safe_imitation_s23",
+      "method": "rule demonstrations plus PPO and safety reward",
+      "seed": 23,
+      "steps": 200000,
+      "training_steps": 501760,
+      "development_report": "artifacts/experiments_v3/development_safe_imitation_200_dev_routes.json",
+      "test_report": "artifacts/experiments_v3/test_v3_standard_routes.json"
+    },
+    "v3_expert": {
+      "path": "artifacts/experiments_v3/deployment/v3_expert-b4f0d5f66de4.zip",
+      "sha256": "b4f0d5f66de4a589f240654ad21b09705beaf52eb71a4c43abe4ce5765a5419a",
+      "algorithm": "ppo",
+      "env_version": "3.1",
+      "source_env_version": "3.1",
+      "run_id": "safe_transfer_s47",
+      "method": "v2 PPO transfer plus v3 safety fine-tuning",
+      "seed": 47,
+      "steps": 175000,
+      "training_steps": 501760,
+      "development_report": "artifacts/experiments_v3/development_safe_transfer_175_dev_routes.json",
+      "test_report": "artifacts/experiments_v3/test_v3_expert_routes.json"
+    },
+    "v3_ppo": {
+      "path": "artifacts/experiments_v3/iteration_4/ppo_s74/step_25000.zip",
+      "sha256": "adbff550be2036a64e624036633ff2dad696dae4b04cc028553d4dc1d53bb3b4",
+      "algorithm": "ppo",
+      "steps": 25000,
+      "seed": 74,
+      "env_version": "3.1",
+      "run_id": "ppo_s74",
+      "training_steps": 200704,
+      "method": "PPO 安全与效率微调",
+      "method_label": "迁移初始化 → 效率与安全 PPO",
+      "config": "artifacts/experiments_v3/iteration_4/ppo_s74/config.json",
+      "config_sha256": "7843b4bff72b40238a30a7f793fd1e3a5df0ad679ef7a547857c07bab8a2a723",
+      "pretrained": true,
+      "selection_report": "artifacts/experiments_v3/iteration_4/ppo_s74/selection_25000.json",
+      "selection_summary": {
+        "episodes": 96,
+        "crashes": 2,
+        "qualification_rate": 0.7395833333333334,
+        "mean_score": 1546.9791666666667,
+        "mean_distance_m": 1088.6216618104615,
+        "mean_overtakes": 5.020833333333333
+      }
+    },
+    "v3_dqn": {
+      "path": "artifacts/experiments_v3/iteration_4/dqn_s75/step_200000.zip",
+      "sha256": "fc29f0a6550dd82a1d420d92b3aad7163a8952a17b214c68992126557777105e",
+      "algorithm": "dqn",
+      "steps": 200000,
+      "seed": 75,
+      "env_version": "3.1",
+      "run_id": "dqn_s75",
+      "training_steps": 200000,
+      "method": "DQN 检查点继续训练",
+      "method_label": null,
+      "config": "artifacts/experiments_v3/iteration_4/dqn_s75/config.json",
+      "config_sha256": "0253c6792e911bc29c6c25951c290f4e9287b188e361e04c10c140666860a434",
+      "pretrained": true,
+      "selection_report": "artifacts/experiments_v3/iteration_4/dqn_s75/selection_200000.json",
+      "selection_summary": {
+        "episodes": 96,
+        "crashes": 19,
+        "qualification_rate": 0.5520833333333334,
+        "mean_score": 1221.96875,
+        "mean_distance_m": 928.6345689752671,
+        "mean_overtakes": 2.9583333333333335
+      }
+    },
+    "v3_a2c": {
+      "path": "artifacts/experiments_v3/iteration_4/a2c_s75/step_50000.zip",
+      "sha256": "45156fe1318f9958057c53e15f0b85746a8e5548fd0de058779f4fe6f5e98eae",
+      "algorithm": "a2c",
+      "steps": 50000,
+      "seed": 75,
+      "env_version": "3.1",
+      "run_id": "a2c_s75",
+      "training_steps": 50048,
+      "method": "PPO 权重初始化后 A2C 更新",
+      "method_label": "PPO 初始化 → A2C 微调",
+      "config": "artifacts/experiments_v3/iteration_4/a2c_s75/config.json",
+      "config_sha256": "8e44e346cb8c24969db1c2d196c527fbdd679705b7c29bb740d54592e86843a4",
+      "pretrained": true,
+      "selection_report": "artifacts/experiments_v3/iteration_4/a2c_s75/selection_50000.json",
+      "selection_summary": {
+        "episodes": 96,
+        "crashes": 1,
+        "qualification_rate": 0.7395833333333334,
+        "mean_score": 1559.6145833333333,
+        "mean_distance_m": 1093.0606861026715,
+        "mean_overtakes": 5.041666666666667
+      }
+    }
+  },
+  "evaluation": {
+    "status": "complete",
+    "report": "artifacts/experiments_v3/iteration_4/report.json",
+    "report_sha256": "8669119b7c30ac476583178bcc131c101743da1c7a2267c2286ad8fc8013a34b"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "v3_ppo_candidate": {
+    "seed": 531124,
+    "scenario": "pressure",
+    "duration": 55,
+    "crashed": false,
+    "completed": true,
+    "failed": false,
+    "time_s": 55.0,
+    "distance_m": 1276.615936638077,
+    "speed_kmh": 83.60382236906767,
+    "overtakes": 5,
+    "lane_changes": 3,
+    "danger_seconds": 8.400000000000002,
+    "return": 29.815398415951872,
+    "quality": 2.8431611737200466,
+    "actions": [
+      1,
+      167,
+      2,
+      64,
+      41
+    ],
+    "steps": 275,
+    "qualified": true,
+    "score": 1710,
+    "stars": 3
+  },
+  "v3_a2c_candidate": {
+    "seed": 531124,
+    "scenario": "pressure",
+    "duration": 55,
+    "crashed": false,
+    "completed": true,
+    "failed": false,
+    "time_s": 55.0,
+    "distance_m": 1273.5868942752936,
+    "speed_kmh": 83.36407894260414,
+    "overtakes": 5,
+    "lane_changes": 3,
+    "danger_seconds": 3.600000000000001,
+    "return": 32.61967235688235,
+    "quality": 2.8587799359244204,
+    "actions": [
+      1,
+      136,
+      2,
+      88,
+      48
+    ],
+    "steps": 275,
+    "qualified": true,
+    "score": 1731,
+    "stars": 3
+  }
+}

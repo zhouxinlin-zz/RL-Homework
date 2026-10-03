@@ -1,0 +1,1491 @@
+{
+  "schema_version": 1,
+  "split": "test",
+  "total_episodes": 4000,
+  "conditions": [
+    [
+      "light",
+      30
+    ],
+    [
+      "normal",
+      45
+    ],
+    [
+      "dense",
+      45
+    ],
+    [
+      "normal",
+      60
+    ],
+    [
+      "dense",
+      60
+    ]
+  ],
+  "models": [
+    {
+      "path": "artifacts/experiments_v2/deployment/comparison_ppo_200k.zip",
+      "algorithm": "ppo",
+      "steps": 100000,
+      "training_steps": 200704,
+      "seed": 11,
+      "run_id": "ppo_curriculum_s11",
+      "env_version": "2.0",
+      "method": "pure-rl",
+      "demonstration_steps": 0,
+      "sha256": "c995e436d8335c8d4758d5e89fbd81c4a5aa90c52969c416b3d883d1d1d3fbc1",
+      "source_checkpoint": "artifacts/experiments_v2/ppo_curriculum_s11/checkpoints/step_100000.zip",
+      "environment_source_sha256": "c569f0afbb28d07f9ff541718c3de5d168091f1575d211630523ee05e116f017",
+      "validation": {
+        "episodes": 18,
+        "crashes": 1,
+        "crash_rate": 0.05555555555555555,
+        "crash_ci95": [
+          0.009875190978303486,
+          0.25757300781871845
+        ],
+        "mean_quality": 2.518882594040231,
+        "mean_distance_m": 732.9127558184324,
+        "mean_speed_kmh": 69.40887665750859,
+        "mean_overtakes": 0.5555555555555556,
+        "mean_lane_changes": 1.0,
+        "mean_danger_seconds": 0.1222222222222222,
+        "mean_return": 20.61837445101636
+      },
+      "id": "comparison_ppo_200k",
+      "seed_start": 891000,
+      "split": "test",
+      "metrics_source_sha256": "9ed37e1301a5d68af15d40fcf8059b20fecfe39bf0787bf13ee3842ddc7912da",
+      "episodes_per_condition": 100,
+      "provenance_amendments": [
+        {
+          "reason": "Historical pilot hash was not logged; later resume metadata must not be attributed to an earlier checkpoint. Mutable best.zip source paths are resolved to matching immutable checkpoints.",
+          "changes": {
+            "source_checkpoint": {
+              "previous": "artifacts/experiments_v2/ppo_curriculum_s11/best.zip",
+              "corrected": "artifacts/experiments_v2/ppo_curriculum_s11/checkpoints/step_100000.zip"
+            },
+            "source_path_at_freeze": {
+              "previous": null,
+              "corrected": "artifacts/experiments_v2/ppo_curriculum_s11/best.zip"
+            },
+            "training_source_hash_status": {
+              "previous": null,
+              "corrected": "historical_hash_not_recorded"
+            },
+            "training_source_history_complete": {
+              "previous": null,
+              "corrected": false
+            },
+            "training_resume_history": {
+              "previous": null,
+              "corrected": [
+                {
+                  "from_timesteps": 200704,
+                  "previous_requested_timesteps": 200000,
+                  "new_requested_timesteps": 1000000,
+                  "previous_environment_source_sha256": null
+                }
+              ]
+            },
+            "training_environment_source_sha256": {
+              "previous": null,
+              "corrected": null
+            }
+          },
+          "episode_results_changed": false
+        }
+      ],
+      "source_path_at_freeze": "artifacts/experiments_v2/ppo_curriculum_s11/best.zip",
+      "training_source_hash_status": "historical_hash_not_recorded",
+      "training_source_history_complete": false,
+      "training_resume_history": [
+        {
+          "from_timesteps": 200704,
+          "previous_requested_timesteps": 200000,
+          "new_requested_timesteps": 1000000,
+          "previous_environment_source_sha256": null
+        }
+      ],
+      "training_environment_source_sha256": null
+    },
+    {
+      "path": "artifacts/experiments_v2/deployment/comparison_dqn_200k.zip",
+      "algorithm": "dqn",
+      "steps": 100000,
+      "training_steps": 200000,
+      "seed": 11,
+      "run_id": "dqn_curriculum_s11",
+      "env_version": "2.0",
+      "method": "pure-rl",
+      "demonstration_steps": 0,
+      "sha256": "4c08542eca415da9996869cfd075aaeaa739a13799652586152c086a5f8b980d",
+      "source_checkpoint": "artifacts/experiments_v2/dqn_curriculum_s11/best.zip",
+      "environment_source_sha256": "c569f0afbb28d07f9ff541718c3de5d168091f1575d211630523ee05e116f017",
+      "validation": {
+        "episodes": 18,
+        "crashes": 6,
+        "crash_rate": 0.3333333333333333,
+        "crash_ci95": [
+          0.16278774750834019,
+          0.5625053270405429
+        ],
+        "mean_quality": 2.115650317709837,
+        "mean_distance_m": 831.2457236432169,
+        "mean_speed_kmh": 89.72557289668211,
+        "mean_overtakes": 4.444444444444445,
+        "mean_lane_changes": 3.888888888888889,
+        "mean_danger_seconds": 1.1111111111111114,
+        "mean_return": 19.801143091080416
+      },
+      "id": "comparison_dqn_200k",
+      "seed_start": 891000,
+      "split": "test",
+      "metrics_source_sha256": "9ed37e1301a5d68af15d40fcf8059b20fecfe39bf0787bf13ee3842ddc7912da",
+      "episodes_per_condition": 100
+    },
+    {
+      "path": "artifacts/experiments_v2/deployment/comparison_a2c_200k.zip",
+      "algorithm": "a2c",
+      "steps": 150000,
+      "training_steps": 200064,
+      "seed": 11,
+      "run_id": "a2c_curriculum_s11",
+      "env_version": "2.0",
+      "method": "pure-rl",
+      "demonstration_steps": 0,
+      "sha256": "a7c14ff5a0e705ae303c08aee873a291c72e53e3a20e0f05d6e8258c8212617d",
+      "source_checkpoint": "artifacts/experiments_v2/a2c_curriculum_s11/best.zip",
+      "environment_source_sha256": "c569f0afbb28d07f9ff541718c3de5d168091f1575d211630523ee05e116f017",
+      "validation": {
+        "episodes": 18,
+        "crashes": 1,
+        "crash_rate": 0.05555555555555555,
+        "crash_ci95": [
+          0.009875190978303486,
+          0.25757300781871845
+        ],
+        "mean_quality": 2.5680362477497436,
+        "mean_distance_m": 782.0762687054591,
+        "mean_speed_kmh": 72.5881207434744,
+        "mean_overtakes": 1.0,
+        "mean_lane_changes": 1.0,
+        "mean_danger_seconds": 0.17777777777777778,
+        "mean_return": 21.991906717636493
+      },
+      "id": "comparison_a2c_200k",
+      "seed_start": 891000,
+      "split": "test",
+      "metrics_source_sha256": "9ed37e1301a5d68af15d40fcf8059b20fecfe39bf0787bf13ee3842ddc7912da",
+      "episodes_per_condition": 100
+    },
+    {
+      "path": "artifacts/experiments_v2/deployment/ablation_normal_200k-5f1fb671f61a.zip",
+      "algorithm": "ppo",
+      "steps": 100000,
+      "training_steps": 200704,
+      "seed": 11,
+      "run_id": "ppo_normal_s11",
+      "env_version": "2.0",
+      "method": "pure-rl",
+      "demonstration_steps": 0,
+      "sha256": "5f1fb671f61a4495aecb85abaa2e8f77340a2b80c630122479b4ed6bcafd64c2",
+      "source_checkpoint": "artifacts/experiments_v2/ppo_normal_s11/checkpoints/step_100000.zip",
+      "environment_source_sha256": "c569f0afbb28d07f9ff541718c3de5d168091f1575d211630523ee05e116f017",
+      "validation": {
+        "episodes": 18,
+        "crashes": 2,
+        "crash_rate": 0.1111111111111111,
+        "crash_ci95": [
+          0.031019522645613362,
+          0.3279976513017808
+        ],
+        "mean_quality": 2.4047886517398807,
+        "mean_distance_m": 737.7431110006673,
+        "mean_speed_kmh": 68.40604745171159,
+        "mean_overtakes": 0.4444444444444444,
+        "mean_lane_changes": 0.3333333333333333,
+        "mean_danger_seconds": 0.18888888888888894,
+        "mean_return": 19.834688886127797,
+        "mean_score": 991.2777777777778,
+        "mean_qualified": 0.16666666666666666,
+        "mean_stars": 1.0555555555555556
+      },
+      "id": "ablation_normal_200k",
+      "seed_start": 891000,
+      "split": "test",
+      "metrics_source_sha256": "9ed37e1301a5d68af15d40fcf8059b20fecfe39bf0787bf13ee3842ddc7912da",
+      "episodes_per_condition": 100
+    },
+    {
+      "path": "artifacts/experiments_v2/deployment/ablation_base_200k-c2d4fd08766c.zip",
+      "algorithm": "ppo",
+      "steps": 100000,
+      "training_steps": 200704,
+      "seed": 11,
+      "run_id": "ppo_base_s11",
+      "env_version": "2.0",
+      "method": "pure-rl",
+      "demonstration_steps": 0,
+      "sha256": "c2d4fd08766ceb2fc3b33bb7b2c5145cd7fa86208ff4b9d9289bd6a8ad133801",
+      "source_checkpoint": "artifacts/experiments_v2/ppo_base_s11/checkpoints/step_100000.zip",
+      "environment_source_sha256": "c569f0afbb28d07f9ff541718c3de5d168091f1575d211630523ee05e116f017",
+      "validation": {
+        "episodes": 18,
+        "crashes": 0,
+        "crash_rate": 0.0,
+        "crash_ci95": [
+          0,
+          0.17587922364664965
+        ],
+        "mean_quality": 2.65951600014756,
+        "mean_distance_m": 771.4133684993106,
+        "mean_speed_kmh": 70.18499558459258,
+        "mean_overtakes": 0.5555555555555556,
+        "mean_lane_changes": 1.0,
+        "mean_danger_seconds": 0.22222222222222227,
+        "mean_return": 22.35422310137166,
+        "mean_score": 1089.7222222222222,
+        "mean_qualified": 0.3333333333333333,
+        "mean_stars": 1.3888888888888888
+      },
+      "id": "ablation_base_200k",
+      "seed_start": 891000,
+      "split": "test",
+      "metrics_source_sha256": "9ed37e1301a5d68af15d40fcf8059b20fecfe39bf0787bf13ee3842ddc7912da",
+      "episodes_per_condition": 100
+    },
+    {
+      "id": "baseline_slow",
+      "baseline": "slow",
+      "env_version": "2.0",
+      "seed_start": 891000,
+      "split": "test",
+      "environment_source_sha256": "c569f0afbb28d07f9ff541718c3de5d168091f1575d211630523ee05e116f017",
+      "metrics_source_sha256": "9ed37e1301a5d68af15d40fcf8059b20fecfe39bf0787bf13ee3842ddc7912da",
+      "episodes_per_condition": 100
+    },
+    {
+      "id": "baseline_cruise",
+      "baseline": "cruise",
+      "env_version": "2.0",
+      "seed_start": 891000,
+      "split": "test",
+      "environment_source_sha256": "c569f0afbb28d07f9ff541718c3de5d168091f1575d211630523ee05e116f017",
+      "metrics_source_sha256": "9ed37e1301a5d68af15d40fcf8059b20fecfe39bf0787bf13ee3842ddc7912da",
+      "episodes_per_condition": 100
+    },
+    {
+      "id": "baseline_rule",
+      "baseline": "rule",
+      "env_version": "2.0",
+      "seed_start": 891000,
+      "split": "test",
+      "environment_source_sha256": "c569f0afbb28d07f9ff541718c3de5d168091f1575d211630523ee05e116f017",
+      "metrics_source_sha256": "9ed37e1301a5d68af15d40fcf8059b20fecfe39bf0787bf13ee3842ddc7912da",
+      "episodes_per_condition": 100
+    }
+  ],
+  "summary": [
+    {
+      "policy": "comparison_ppo_200k",
+      "scenario": "light",
+      "duration": 30,
+      "episodes": 100,
+      "crashes": 0,
+      "crash_rate": 0.0,
+      "failure_rate": 0.0,
+      "crash_ci95": [
+        0,
+        0.036993498206983715
+      ],
+      "mean_quality": 2.7044343862006013,
+      "mean_distance_m": 630.0309475805414,
+      "mean_speed_kmh": 75.5926357188456,
+      "mean_overtakes": 0.22,
+      "mean_lane_changes": 1.0,
+      "mean_danger_seconds": 0.0,
+      "mean_return": 18.818773689513534,
+      "mean_score": 937.73,
+      "mean_qualified": 0.31,
+      "mean_stars": 1.48
+    },
+    {
+      "policy": "comparison_ppo_200k",
+      "scenario": "normal",
+      "duration": 45,
+      "episodes": 100,
+      "crashes": 1,
+      "crash_rate": 0.01,
+      "failure_rate": 0.01,
+      "crash_ci95": [
+        0.0017674320641407164,
+        0.05448619617870333
+      ],
+      "mean_quality": 2.6315382740830504,
+      "mean_distance_m": 861.9366700121182,
+      "mean_speed_kmh": 69.06995002579325,
+      "mean_overtakes": 0.66,
+      "mean_lane_changes": 1.0,
+      "mean_danger_seconds": 0.030000000000000006,
+      "mean_return": 24.624416750302945,
+      "mean_score": 1179.4,
+      "mean_qualified": 0.19,
+      "mean_stars": 1.26
+    },
+    {
+      "policy": "comparison_ppo_200k",
+      "scenario": "dense",
+      "duration": 45,
+      "episodes": 100,
+      "crashes": 3,
+      "crash_rate": 0.03,
+      "failure_rate": 0.03,
+      "crash_ci95": [
+        0.010254524024039209,
+        0.08451936429052548
+      ],
+      "mean_quality": 2.4998721675905946,
+      "mean_distance_m": 745.1114262473025,
+      "mean_speed_kmh": 60.398138062937875,
+      "mean_overtakes": 0.42,
+      "mean_lane_changes": 1.0,
+      "mean_danger_seconds": 0.10400000000000002,
+      "mean_return": 21.263385656182564,
+      "mean_score": 1042.74,
+      "mean_qualified": 0.06,
+      "mean_stars": 1.06
+    },
+    {
+      "policy": "comparison_ppo_200k",
+      "scenario": "normal",
+      "duration": 60,
+      "episodes": 100,
+      "crashes": 1,
+      "crash_rate": 0.01,
+      "failure_rate": 0.01,
+      "crash_ci95": [
+        0.0017674320641407164,
+        0.05448619617870333
+      ],
+      "mean_quality": 2.6400975527987662,
+      "mean_distance_m": 1153.45959503778,
+      "mean_speed_kmh": 69.47575822670832,
+      "mean_overtakes": 0.97,
+      "mean_lane_changes": 1.0,
+      "mean_danger_seconds": 0.03400000000000001,
+      "mean_return": 32.034089875944495,
+      "mean_score": 1481.78,
+      "mean_qualified": 0.14,
+      "mean_stars": 1.18
+    },
+    {
+      "policy": "comparison_ppo_200k",
+      "scenario": "dense",
+      "duration": 60,
+      "episodes": 100,
+      "crashes": 3,
+      "crash_rate": 0.03,
+      "failure_rate": 0.03,
+      "crash_ci95": [
+        0.010254524024039209,
+        0.08451936429052548
+      ],
+      "mean_quality": 2.5111750485854865,
+      "mean_distance_m": 1001.7150874538753,
+      "mean_speed_kmh": 61.16874018410645,
+      "mean_overtakes": 0.75,
+      "mean_lane_changes": 1.0,
+      "mean_danger_seconds": 0.10000000000000002,
+      "mean_return": 27.812877186346878,
+      "mean_score": 1310.98,
+      "mean_qualified": 0.11,
+      "mean_stars": 1.11
+    },
+    {
+      "policy": "comparison_dqn_200k",
+      "scenario": "light",
+      "duration": 30,
+      "episodes": 100,
+      "crashes": 41,
+      "crash_rate": 0.41,
+      "failure_rate": 0.41,
+      "crash_ci95": [
+        0.31867313021136756,
+        0.5079856994658895
+      ],
+      "mean_quality": 1.9551368998577352,
+      "mean_distance_m": 656.7152098719614,
+      "mean_speed_kmh": 99.61969145378875,
+      "mean_overtakes": 2.43,
+      "mean_lane_changes": 3.1,
+      "mean_danger_seconds": 0.4720000000000001,
+      "mean_return": 13.891080246799026,
+      "mean_score": 813.94,
+      "mean_qualified": 0.57,
+      "mean_stars": 1.71
+    },
+    {
+      "policy": "comparison_dqn_200k",
+      "scenario": "normal",
+      "duration": 45,
+      "episodes": 100,
+      "crashes": 36,
+      "crash_rate": 0.36,
+      "failure_rate": 0.36,
+      "crash_ci95": [
+        0.2727122040140455,
+        0.45764597548390995
+      ],
+      "mean_quality": 2.045780032687503,
+      "mean_distance_m": 916.9050441281289,
+      "mean_speed_kmh": 92.06894883121566,
+      "mean_overtakes": 4.43,
+      "mean_lane_changes": 3.93,
+      "mean_danger_seconds": 0.4520000000000001,
+      "mean_return": 21.934026103203202,
+      "mean_score": 1175.52,
+      "mean_qualified": 0.55,
+      "mean_stars": 1.71
+    },
+    {
+      "policy": "comparison_dqn_200k",
+      "scenario": "dense",
+      "duration": 45,
+      "episodes": 100,
+      "crashes": 35,
+      "crash_rate": 0.35,
+      "failure_rate": 0.35,
+      "crash_ci95": [
+        0.26364248243097743,
+        0.44745556703111766
+      ],
+      "mean_quality": 1.9899313657971192,
+      "mean_distance_m": 824.8473438261112,
+      "mean_speed_kmh": 78.7876414069438,
+      "mean_overtakes": 4.12,
+      "mean_lane_changes": 3.65,
+      "mean_danger_seconds": 0.7800000000000001,
+      "mean_return": 19.43858359565278,
+      "mean_score": 1072.61,
+      "mean_qualified": 0.46,
+      "mean_stars": 1.54
+    },
+    {
+      "policy": "comparison_dqn_200k",
+      "scenario": "normal",
+      "duration": 60,
+      "episodes": 100,
+      "crashes": 44,
+      "crash_rate": 0.44,
+      "failure_rate": 0.44,
+      "crash_ci95": [
+        0.34672026630161046,
+        0.5377189534832276
+      ],
+      "mean_quality": 1.861368255076291,
+      "mean_distance_m": 1143.0388591373242,
+      "mean_speed_kmh": 92.60966386086116,
+      "mean_overtakes": 5.43,
+      "mean_lane_changes": 4.47,
+      "mean_danger_seconds": 0.676,
+      "mean_return": 26.639771478433055,
+      "mean_score": 1391.83,
+      "mean_qualified": 0.44,
+      "mean_stars": 1.42
+    },
+    {
+      "policy": "comparison_dqn_200k",
+      "scenario": "dense",
+      "duration": 60,
+      "episodes": 100,
+      "crashes": 43,
+      "crash_rate": 0.43,
+      "failure_rate": 0.43,
+      "crash_ci95": [
+        0.3373329852411035,
+        0.5278461045078743
+      ],
+      "mean_quality": 1.8356027579733905,
+      "mean_distance_m": 1063.000964352103,
+      "mean_speed_kmh": 78.6180487153921,
+      "mean_overtakes": 5.4,
+      "mean_lane_changes": 4.27,
+      "mean_danger_seconds": 0.8260000000000001,
+      "mean_return": 24.665624108802568,
+      "mean_score": 1311.38,
+      "mean_qualified": 0.4,
+      "mean_stars": 1.35
+    },
+    {
+      "policy": "comparison_a2c_200k",
+      "scenario": "light",
+      "duration": 30,
+      "episodes": 100,
+      "crashes": 0,
+      "crash_rate": 0.0,
+      "failure_rate": 0.0,
+      "crash_ci95": [
+        0,
+        0.036993498206983715
+      ],
+      "mean_quality": 2.741050577772191,
+      "mean_distance_m": 659.1455199949719,
+      "mean_speed_kmh": 79.11445275034765,
+      "mean_overtakes": 0.46,
+      "mean_lane_changes": 1.0,
+      "mean_danger_seconds": 0.08,
+      "mean_return": 19.59463799987431,
+      "mean_score": 974.86,
+      "mean_qualified": 0.59,
+      "mean_stars": 1.95
+    },
+    {
+      "policy": "comparison_a2c_200k",
+      "scenario": "normal",
+      "duration": 45,
+      "episodes": 100,
+      "crashes": 7,
+      "crash_rate": 0.07,
+      "failure_rate": 0.07,
+      "crash_ci95": [
+        0.03431926106727332,
+        0.13749514739073268
+      ],
+      "mean_quality": 2.5401693516542974,
+      "mean_distance_m": 891.2706247333009,
+      "mean_speed_kmh": 72.52458032737667,
+      "mean_overtakes": 1.05,
+      "mean_lane_changes": 1.0,
+      "mean_danger_seconds": 0.23200000000000004,
+      "mean_return": 24.492565618332534,
+      "mean_score": 1188.32,
+      "mean_qualified": 0.34,
+      "mean_stars": 1.43
+    },
+    {
+      "policy": "comparison_a2c_200k",
+      "scenario": "dense",
+      "duration": 45,
+      "episodes": 100,
+      "crashes": 16,
+      "crash_rate": 0.16,
+      "failure_rate": 0.16,
+      "crash_ci95": [
+        0.10095288488804913,
+        0.24420269389269986
+      ],
+      "mean_quality": 2.2787350424662023,
+      "mean_distance_m": 780.7163073293736,
+      "mean_speed_kmh": 66.22799983627488,
+      "mean_overtakes": 1.14,
+      "mean_lane_changes": 1.0,
+      "mean_danger_seconds": 0.534,
+      "mean_return": 20.233507683234343,
+      "mean_score": 1029.92,
+      "mean_qualified": 0.24,
+      "mean_stars": 1.24
+    },
+    {
+      "policy": "comparison_a2c_200k",
+      "scenario": "normal",
+      "duration": 60,
+      "episodes": 100,
+      "crashes": 10,
+      "crash_rate": 0.1,
+      "failure_rate": 0.1,
+      "crash_ci95": [
+        0.055229137060675976,
+        0.174365661504911
+      ],
+      "mean_quality": 2.4715805134353217,
+      "mean_distance_m": 1163.6529241835788,
+      "mean_speed_kmh": 72.08886211343626,
+      "mean_overtakes": 1.32,
+      "mean_lane_changes": 1.0,
+      "mean_danger_seconds": 0.38800000000000007,
+      "mean_return": 30.866523104589472,
+      "mean_score": 1452.86,
+      "mean_qualified": 0.23,
+      "mean_stars": 1.19
+    },
+    {
+      "policy": "comparison_a2c_200k",
+      "scenario": "dense",
+      "duration": 60,
+      "episodes": 100,
+      "crashes": 25,
+      "crash_rate": 0.25,
+      "failure_rate": 0.25,
+      "crash_ci95": [
+        0.17545211362287852,
+        0.34304463548061337
+      ],
+      "mean_quality": 2.0922667975154754,
+      "mean_distance_m": 1008.5402355278551,
+      "mean_speed_kmh": 66.69703479705916,
+      "mean_overtakes": 1.73,
+      "mean_lane_changes": 1.0,
+      "mean_danger_seconds": 0.79,
+      "mean_return": 24.66150588819637,
+      "mean_score": 1227.6,
+      "mean_qualified": 0.23,
+      "mean_stars": 1.12
+    },
+    {
+      "policy": "ablation_normal_200k",
+      "scenario": "light",
+      "duration": 30,
+      "episodes": 100,
+      "crashes": 2,
+      "crash_rate": 0.02,
+      "failure_rate": 0.02,
+      "crash_ci95": [
+        0.005501967550162523,
+        0.07001179072854186
+      ],
+      "mean_quality": 2.6523060196237687,
+      "mean_distance_m": 620.8314176613915,
+      "mean_speed_kmh": 74.5865026831357,
+      "mean_overtakes": 0.14,
+      "mean_lane_changes": 0.27,
+      "mean_danger_seconds": 0.046,
+      "mean_return": 18.243785441534786,
+      "mean_score": 914.49,
+      "mean_qualified": 0.26,
+      "mean_stars": 1.36
+    },
+    {
+      "policy": "ablation_normal_200k",
+      "scenario": "normal",
+      "duration": 45,
+      "episodes": 100,
+      "crashes": 4,
+      "crash_rate": 0.04,
+      "failure_rate": 0.04,
+      "crash_ci95": [
+        0.015663303991548,
+        0.09837071435887702
+      ],
+      "mean_quality": 2.5544935513566087,
+      "mean_distance_m": 847.3082943314214,
+      "mean_speed_kmh": 68.52425150643022,
+      "mean_overtakes": 0.37,
+      "mean_lane_changes": 0.24,
+      "mean_danger_seconds": 0.12200000000000001,
+      "mean_return": 23.65270735828553,
+      "mean_score": 1137.65,
+      "mean_qualified": 0.17,
+      "mean_stars": 1.17
+    },
+    {
+      "policy": "ablation_normal_200k",
+      "scenario": "dense",
+      "duration": 45,
+      "episodes": 100,
+      "crashes": 4,
+      "crash_rate": 0.04,
+      "failure_rate": 0.04,
+      "crash_ci95": [
+        0.015663303991548,
+        0.09837071435887702
+      ],
+      "mean_quality": 2.473571546942291,
+      "mean_distance_m": 739.7615883720936,
+      "mean_speed_kmh": 60.14454091852002,
+      "mean_overtakes": 0.28,
+      "mean_lane_changes": 0.3,
+      "mean_danger_seconds": 0.0,
+      "mean_return": 21.000039709302342,
+      "mean_score": 1029.12,
+      "mean_qualified": 0.06,
+      "mean_stars": 1.03
+    },
+    {
+      "policy": "ablation_normal_200k",
+      "scenario": "normal",
+      "duration": 60,
+      "episodes": 100,
+      "crashes": 7,
+      "crash_rate": 0.07,
+      "failure_rate": 0.07,
+      "crash_ci95": [
+        0.03431926106727332,
+        0.13749514739073268
+      ],
+      "mean_quality": 2.4888599757613563,
+      "mean_distance_m": 1109.5679563704418,
+      "mean_speed_kmh": 68.8829762650534,
+      "mean_overtakes": 0.65,
+      "mean_lane_changes": 0.33,
+      "mean_danger_seconds": 0.17000000000000004,
+      "mean_return": 29.840598909261043,
+      "mean_score": 1393.41,
+      "mean_qualified": 0.08,
+      "mean_stars": 1.03
+    },
+    {
+      "policy": "ablation_normal_200k",
+      "scenario": "dense",
+      "duration": 60,
+      "episodes": 100,
+      "crashes": 5,
+      "crash_rate": 0.05,
+      "failure_rate": 0.05,
+      "crash_ci95": [
+        0.021543679154368438,
+        0.1117504692319169
+      ],
+      "mean_quality": 2.449634619606241,
+      "mean_distance_m": 975.6623152912341,
+      "mean_speed_kmh": 60.181675075441255,
+      "mean_overtakes": 0.38,
+      "mean_lane_changes": 0.39,
+      "mean_danger_seconds": 0.0,
+      "mean_return": 26.785757882280844,
+      "mean_score": 1262.96,
+      "mean_qualified": 0.07,
+      "mean_stars": 1.03
+    },
+    {
+      "policy": "ablation_base_200k",
+      "scenario": "light",
+      "duration": 30,
+      "episodes": 100,
+      "crashes": 0,
+      "crash_rate": 0.0,
+      "failure_rate": 0.0,
+      "crash_ci95": [
+        0,
+        0.036993498206983715
+      ],
+      "mean_quality": 2.7149330970270653,
+      "mean_distance_m": 638.9637873243591,
+      "mean_speed_kmh": 76.67741089613398,
+      "mean_overtakes": 0.25,
+      "mean_lane_changes": 0.94,
+      "mean_danger_seconds": 0.004,
+      "mean_return": 19.05289468310898,
+      "mean_score": 947.68,
+      "mean_qualified": 0.35,
+      "mean_stars": 1.54
+    },
+    {
+      "policy": "ablation_base_200k",
+      "scenario": "normal",
+      "duration": 45,
+      "episodes": 100,
+      "crashes": 3,
+      "crash_rate": 0.03,
+      "failure_rate": 0.03,
+      "crash_ci95": [
+        0.010254524024039209,
+        0.08451936429052548
+      ],
+      "mean_quality": 2.5996684440875293,
+      "mean_distance_m": 872.8703995181644,
+      "mean_speed_kmh": 70.35047639829406,
+      "mean_overtakes": 0.67,
+      "mean_lane_changes": 0.98,
+      "mean_danger_seconds": 0.068,
+      "mean_return": 24.579359987954106,
+      "mean_score": 1179.46,
+      "mean_qualified": 0.25,
+      "mean_stars": 1.31
+    },
+    {
+      "policy": "ablation_base_200k",
+      "scenario": "dense",
+      "duration": 45,
+      "episodes": 100,
+      "crashes": 1,
+      "crash_rate": 0.01,
+      "failure_rate": 0.01,
+      "crash_ci95": [
+        0.0017674320641407164,
+        0.05448619617870333
+      ],
+      "mean_quality": 2.5531953325114585,
+      "mean_distance_m": 761.6756988904688,
+      "mean_speed_kmh": 61.43640094918097,
+      "mean_overtakes": 0.45,
+      "mean_lane_changes": 0.94,
+      "mean_danger_seconds": 0.002,
+      "mean_return": 22.05189247226172,
+      "mean_score": 1073.47,
+      "mean_qualified": 0.07,
+      "mean_stars": 1.1
+    },
+    {
+      "policy": "ablation_base_200k",
+      "scenario": "normal",
+      "duration": 60,
+      "episodes": 100,
+      "crashes": 10,
+      "crash_rate": 0.1,
+      "failure_rate": 0.1,
+      "crash_ci95": [
+        0.055229137060675976,
+        0.174365661504911
+      ],
+      "mean_quality": 2.4618644342140645,
+      "mean_distance_m": 1156.6519815853164,
+      "mean_speed_kmh": 70.68064485795605,
+      "mean_overtakes": 1.01,
+      "mean_lane_changes": 0.98,
+      "mean_danger_seconds": 0.276,
+      "mean_return": 30.6350995396329,
+      "mean_score": 1435.65,
+      "mean_qualified": 0.12,
+      "mean_stars": 1.07
+    },
+    {
+      "policy": "ablation_base_200k",
+      "scenario": "dense",
+      "duration": 60,
+      "episodes": 100,
+      "crashes": 1,
+      "crash_rate": 0.01,
+      "failure_rate": 0.01,
+      "crash_ci95": [
+        0.0017674320641407164,
+        0.05448619617870333
+      ],
+      "mean_quality": 2.56171945798393,
+      "mean_distance_m": 1021.5710243710735,
+      "mean_speed_kmh": 61.829912418131926,
+      "mean_overtakes": 0.71,
+      "mean_lane_changes": 0.98,
+      "mean_danger_seconds": 0.006000000000000001,
+      "mean_return": 28.64767560927684,
+      "mean_score": 1342.27,
+      "mean_qualified": 0.1,
+      "mean_stars": 1.13
+    },
+    {
+      "policy": "baseline_slow",
+      "scenario": "light",
+      "duration": 30,
+      "episodes": 100,
+      "crashes": 0,
+      "crash_rate": 0.0,
+      "failure_rate": 0.0,
+      "crash_ci95": [
+        0,
+        0.036993498206983715
+      ],
+      "mean_quality": 2.6040000000000094,
+      "mean_distance_m": 543.6000000000084,
+      "mean_speed_kmh": 65.13976036866362,
+      "mean_overtakes": 0.0,
+      "mean_lane_changes": 0.0,
+      "mean_danger_seconds": 0.0,
+      "mean_return": 16.590000000000202,
+      "mean_score": 844.0,
+      "mean_qualified": 0.0,
+      "mean_stars": 1.0
+    },
+    {
+      "policy": "baseline_slow",
+      "scenario": "normal",
+      "duration": 45,
+      "episodes": 100,
+      "crashes": 8,
+      "crash_rate": 0.08,
+      "failure_rate": 0.08,
+      "crash_ci95": [
+        0.04109346148438136,
+        0.14998107700948496
+      ],
+      "mean_quality": 2.4304807475513317,
+      "mean_distance_m": 796.2730091942966,
+      "mean_speed_kmh": 65.034408479139,
+      "mean_overtakes": 0.1,
+      "mean_lane_changes": 0.0,
+      "mean_danger_seconds": 0.30400000000000005,
+      "mean_return": 21.564425229857417,
+      "mean_score": 1054.82,
+      "mean_qualified": 0.0,
+      "mean_stars": 0.92
+    },
+    {
+      "policy": "baseline_slow",
+      "scenario": "dense",
+      "duration": 45,
+      "episodes": 100,
+      "crashes": 20,
+      "crash_rate": 0.2,
+      "failure_rate": 0.2,
+      "crash_ci95": [
+        0.13336693333103403,
+        0.2888291655931562
+      ],
+      "mean_quality": 2.1730405532658863,
+      "mean_distance_m": 755.2867469089455,
+      "mean_speed_kmh": 65.0516672115089,
+      "mean_overtakes": 0.83,
+      "mean_lane_changes": 0.0,
+      "mean_danger_seconds": 0.6820000000000002,
+      "mean_return": 18.804968672723636,
+      "mean_score": 971.23,
+      "mean_qualified": 0.0,
+      "mean_stars": 0.8
+    },
+    {
+      "policy": "baseline_slow",
+      "scenario": "normal",
+      "duration": 60,
+      "episodes": 100,
+      "crashes": 10,
+      "crash_rate": 0.1,
+      "failure_rate": 0.1,
+      "crash_ci95": [
+        0.055229137060675976,
+        0.174365661504911
+      ],
+      "mean_quality": 2.3812335552747412,
+      "mean_distance_m": 1041.288399494535,
+      "mean_speed_kmh": 64.98294463880104,
+      "mean_overtakes": 0.21,
+      "mean_lane_changes": 0.0,
+      "mean_danger_seconds": 0.4380000000000001,
+      "mean_return": 27.35340998736337,
+      "mean_score": 1292.0,
+      "mean_qualified": 0.0,
+      "mean_stars": 0.9
+    },
+    {
+      "policy": "baseline_slow",
+      "scenario": "dense",
+      "duration": 60,
+      "episodes": 100,
+      "crashes": 28,
+      "crash_rate": 0.28,
+      "failure_rate": 0.28,
+      "crash_ci95": [
+        0.20139685211186398,
+        0.37488028709920884
+      ],
+      "mean_quality": 1.9929446698468538,
+      "mean_distance_m": 955.2564057243367,
+      "mean_speed_kmh": 65.00846997041839,
+      "mean_overtakes": 1.27,
+      "mean_lane_changes": 0.0,
+      "mean_danger_seconds": 0.9460000000000001,
+      "mean_return": 22.621810143108405,
+      "mean_score": 1141.24,
+      "mean_qualified": 0.0,
+      "mean_stars": 0.72
+    },
+    {
+      "policy": "baseline_cruise",
+      "scenario": "light",
+      "duration": 30,
+      "episodes": 100,
+      "crashes": 41,
+      "crash_rate": 0.41,
+      "failure_rate": 0.41,
+      "crash_ci95": [
+        0.31867313021136756,
+        0.5079856994658895
+      ],
+      "mean_quality": 1.8967425656707173,
+      "mean_distance_m": 635.0843091036456,
+      "mean_speed_kmh": 86.37883221975608,
+      "mean_overtakes": 0.93,
+      "mean_lane_changes": 0.0,
+      "mean_danger_seconds": 1.126,
+      "mean_return": 12.42350772759117,
+      "mean_score": 736.65,
+      "mean_qualified": 0.59,
+      "mean_stars": 1.66
+    },
+    {
+      "policy": "baseline_cruise",
+      "scenario": "normal",
+      "duration": 45,
+      "episodes": 100,
+      "crashes": 63,
+      "crash_rate": 0.63,
+      "failure_rate": 0.63,
+      "crash_ci95": [
+        0.5322052958094318,
+        0.7181763946567524
+      ],
+      "mean_quality": 1.261793356800554,
+      "mean_distance_m": 660.1170316807473,
+      "mean_speed_kmh": 86.34761350420706,
+      "mean_overtakes": 2.0,
+      "mean_lane_changes": 0.0,
+      "mean_danger_seconds": 1.6159999999999997,
+      "mean_return": 9.883325792018725,
+      "mean_score": 683.47,
+      "mean_qualified": 0.37,
+      "mean_stars": 1.04
+    },
+    {
+      "policy": "baseline_cruise",
+      "scenario": "dense",
+      "duration": 45,
+      "episodes": 100,
+      "crashes": 88,
+      "crash_rate": 0.88,
+      "failure_rate": 0.88,
+      "crash_ci95": [
+        0.8018790057328883,
+        0.9300059356298042
+      ],
+      "mean_quality": 0.6417900914128315,
+      "mean_distance_m": 480.14862340732236,
+      "mean_speed_kmh": 86.32347813155026,
+      "mean_overtakes": 2.8,
+      "mean_lane_changes": 0.0,
+      "mean_danger_seconds": 2.222,
+      "mean_return": 1.5905155851830783,
+      "mean_score": 394.83,
+      "mean_qualified": 0.12,
+      "mean_stars": 0.36
+    },
+    {
+      "policy": "baseline_cruise",
+      "scenario": "normal",
+      "duration": 60,
+      "episodes": 100,
+      "crashes": 71,
+      "crash_rate": 0.71,
+      "failure_rate": 0.71,
+      "crash_ci95": [
+        0.6146110882442916,
+        0.7898516425087753
+      ],
+      "mean_quality": 1.0525142175263185,
+      "mean_distance_m": 780.2895915473732,
+      "mean_speed_kmh": 86.345669956991,
+      "mean_overtakes": 2.26,
+      "mean_lane_changes": 0.0,
+      "mean_danger_seconds": 1.8539999999999994,
+      "mean_return": 11.648839788684338,
+      "mean_score": 767.55,
+      "mean_qualified": 0.29,
+      "mean_stars": 0.71
+    },
+    {
+      "policy": "baseline_cruise",
+      "scenario": "dense",
+      "duration": 60,
+      "episodes": 100,
+      "crashes": 90,
+      "crash_rate": 0.9,
+      "failure_rate": 0.9,
+      "crash_ci95": [
+        0.825634338495089,
+        0.9447708629393241
+      ],
+      "mean_quality": 0.5399250450091078,
+      "mean_distance_m": 519.741081016394,
+      "mean_speed_kmh": 86.32284164803377,
+      "mean_overtakes": 2.94,
+      "mean_lane_changes": 0.0,
+      "mean_danger_seconds": 2.2859999999999996,
+      "mean_return": 2.297927025409855,
+      "mean_score": 428.0,
+      "mean_qualified": 0.1,
+      "mean_stars": 0.3
+    },
+    {
+      "policy": "baseline_rule",
+      "scenario": "light",
+      "duration": 30,
+      "episodes": 100,
+      "crashes": 0,
+      "crash_rate": 0.0,
+      "failure_rate": 0.0,
+      "crash_ci95": [
+        0,
+        0.036993498206983715
+      ],
+      "mean_quality": 2.8799054667019575,
+      "mean_distance_m": 755.5549200317612,
+      "mean_speed_kmh": 90.7063089240528,
+      "mean_overtakes": 2.02,
+      "mean_lane_changes": 1.37,
+      "mean_danger_seconds": 0.0,
+      "mean_return": 22.669473000794017,
+      "mean_score": 1126.21,
+      "mean_qualified": 0.95,
+      "mean_stars": 2.79
+    },
+    {
+      "policy": "baseline_rule",
+      "scenario": "normal",
+      "duration": 45,
+      "episodes": 100,
+      "crashes": 0,
+      "crash_rate": 0.0,
+      "failure_rate": 0.0,
+      "crash_ci95": [
+        0,
+        0.036993498206983715
+      ],
+      "mean_quality": 2.870651107060292,
+      "mean_distance_m": 1064.9489945313937,
+      "mean_speed_kmh": 85.23978791408918,
+      "mean_overtakes": 4.09,
+      "mean_lane_changes": 1.87,
+      "mean_danger_seconds": 0.0,
+      "mean_return": 31.21752486328483,
+      "mean_score": 1508.09,
+      "mean_qualified": 0.74,
+      "mean_stars": 2.39
+    },
+    {
+      "policy": "baseline_rule",
+      "scenario": "dense",
+      "duration": 45,
+      "episodes": 100,
+      "crashes": 0,
+      "crash_rate": 0.0,
+      "failure_rate": 0.0,
+      "crash_ci95": [
+        0,
+        0.036993498206983715
+      ],
+      "mean_quality": 2.781575697770011,
+      "mean_distance_m": 944.9671919895145,
+      "mean_speed_kmh": 75.62263875942244,
+      "mean_overtakes": 4.08,
+      "mean_lane_changes": 1.7,
+      "mean_danger_seconds": 0.0,
+      "mean_return": 28.220979799737865,
+      "mean_score": 1387.78,
+      "mean_qualified": 0.71,
+      "mean_stars": 2.31
+    },
+    {
+      "policy": "baseline_rule",
+      "scenario": "normal",
+      "duration": 60,
+      "episodes": 100,
+      "crashes": 0,
+      "crash_rate": 0.0,
+      "failure_rate": 0.0,
+      "crash_ci95": [
+        0,
+        0.036993498206983715
+      ],
+      "mean_quality": 2.901938829644846,
+      "mean_distance_m": 1425.4898933607212,
+      "mean_speed_kmh": 85.57249864054371,
+      "mean_overtakes": 5.5,
+      "mean_lane_changes": 2.29,
+      "mean_danger_seconds": 0.0,
+      "mean_return": 40.785447334018016,
+      "mean_score": 1917.96,
+      "mean_qualified": 0.69,
+      "mean_stars": 2.26
+    },
+    {
+      "policy": "baseline_rule",
+      "scenario": "dense",
+      "duration": 60,
+      "episodes": 100,
+      "crashes": 0,
+      "crash_rate": 0.0,
+      "failure_rate": 0.0,
+      "crash_ci95": [
+        0,
+        0.036993498206983715
+      ],
+      "mean_quality": 2.819917429893067,
+      "mean_distance_m": 1273.8913738075214,
+      "mean_speed_kmh": 76.4653264050849,
+      "mean_overtakes": 5.61,
+      "mean_lane_changes": 2.16,
+      "mean_danger_seconds": 0.0,
+      "mean_return": 37.04568434518802,
+      "mean_score": 1770.24,
+      "mean_qualified": 0.69,
+      "mean_stars": 2.33
+    }
+  ],
+  "paired_baseline_comparisons": [
+    {
+      "policy": "comparison_ppo_200k",
+      "reference": "baseline_slow",
+      "seed_clusters": 100,
+      "pairs": 500,
+      "bootstrap_unit": "road seed, retaining all five conditions",
+      "mean_quality_difference": 0.2810835806639356,
+      "paired_bootstrap_ci95": [
+        0.18782758067348532,
+        0.3729310650975681
+      ],
+      "crash_rate_difference": -0.11600000000000002,
+      "crash_rate_difference_ci95": [
+        -0.15600000000000008,
+        -0.07400000000000004
+      ],
+      "game_win_score": 0.6580000000000006,
+      "draw_value": 0.5,
+      "game_wins": 329,
+      "game_draws": 0,
+      "game_losses": 171,
+      "game_win_rate": 0.658,
+      "game_win_score_ci95": [
+        0.6140000000000004,
+        0.70405
+      ]
+    },
+    {
+      "policy": "comparison_ppo_200k",
+      "reference": "baseline_rule",
+      "seed_clusters": 100,
+      "pairs": 500,
+      "bootstrap_unit": "road seed, retaining all five conditions",
+      "mean_quality_difference": -0.2533742203623345,
+      "paired_bootstrap_ci95": [
+        -0.2984119371160803,
+        -0.2150159040090026
+      ],
+      "crash_rate_difference": 0.016,
+      "crash_rate_difference_ci95": [
+        0.004,
+        0.032
+      ],
+      "game_win_score": 0.027999999999999997,
+      "draw_value": 0.5,
+      "game_wins": 13,
+      "game_draws": 2,
+      "game_losses": 485,
+      "game_win_rate": 0.026,
+      "game_win_score_ci95": [
+        0.011000000000000001,
+        0.048
+      ]
+    },
+    {
+      "policy": "comparison_dqn_200k",
+      "reference": "baseline_slow",
+      "seed_clusters": 100,
+      "pairs": 500,
+      "bootstrap_unit": "road seed, retaining all five conditions",
+      "mean_quality_difference": -0.37877604290935624,
+      "paired_bootstrap_ci95": [
+        -0.5387215254807924,
+        -0.20964500087150445
+      ],
+      "crash_rate_difference": 0.2659999999999999,
+      "crash_rate_difference_ci95": [
+        0.1979999999999999,
+        0.332
+      ],
+      "game_win_score": 0.6039999999999999,
+      "draw_value": 0.5,
+      "game_wins": 302,
+      "game_draws": 0,
+      "game_losses": 198,
+      "game_win_rate": 0.604,
+      "game_win_score_ci95": [
+        0.5519999999999998,
+        0.6579999999999998
+      ]
+    },
+    {
+      "policy": "comparison_dqn_200k",
+      "reference": "baseline_rule",
+      "seed_clusters": 100,
+      "pairs": 500,
+      "bootstrap_unit": "road seed, retaining all five conditions",
+      "mean_quality_difference": -0.9132338439356268,
+      "paired_bootstrap_ci95": [
+        -1.0508488128572557,
+        -0.7717809616792826
+      ],
+      "crash_rate_difference": 0.39799999999999996,
+      "crash_rate_difference_ci95": [
+        0.3439999999999999,
+        0.452
+      ],
+      "game_win_score": 0.45399999999999985,
+      "draw_value": 0.5,
+      "game_wins": 227,
+      "game_draws": 0,
+      "game_losses": 273,
+      "game_win_rate": 0.454,
+      "game_win_score_ci95": [
+        0.4039999999999999,
+        0.5079999999999999
+      ]
+    },
+    {
+      "policy": "comparison_a2c_200k",
+      "reference": "baseline_slow",
+      "seed_clusters": 100,
+      "pairs": 500,
+      "bootstrap_unit": "road seed, retaining all five conditions",
+      "mean_quality_difference": 0.10842055138093315,
+      "paired_bootstrap_ci95": [
+        -0.011998778376583258,
+        0.21973311899159773
+      ],
+      "crash_rate_difference": -0.016000000000000007,
+      "crash_rate_difference_ci95": [
+        -0.06400000000000003,
+        0.03600000000000001
+      ],
+      "game_win_score": 0.6750000000000004,
+      "draw_value": 0.5,
+      "game_wins": 337,
+      "game_draws": 1,
+      "game_losses": 162,
+      "game_win_rate": 0.674,
+      "game_win_score_ci95": [
+        0.6209750000000004,
+        0.7259999999999998
+      ]
+    },
+    {
+      "policy": "comparison_a2c_200k",
+      "reference": "baseline_rule",
+      "seed_clusters": 100,
+      "pairs": 500,
+      "bootstrap_unit": "road seed, retaining all five conditions",
+      "mean_quality_difference": -0.42603724964533707,
+      "paired_bootstrap_ci95": [
+        -0.514905763161058,
+        -0.34243369313592914
+      ],
+      "crash_rate_difference": 0.11599999999999999,
+      "crash_rate_difference_ci95": [
+        0.08000000000000003,
+        0.154
+      ],
+      "game_win_score": 0.10700000000000003,
+      "draw_value": 0.5,
+      "game_wins": 53,
+      "game_draws": 1,
+      "game_losses": 446,
+      "game_win_rate": 0.106,
+      "game_win_score_ci95": [
+        0.07300000000000001,
+        0.142
+      ]
+    },
+    {
+      "policy": "ablation_normal_200k",
+      "reference": "baseline_slow",
+      "seed_clusters": 100,
+      "pairs": 500,
+      "bootstrap_unit": "road seed, retaining all five conditions",
+      "mean_quality_difference": 0.20743323747028888,
+      "paired_bootstrap_ci95": [
+        0.11692702307537563,
+        0.29178058440626686
+      ],
+      "crash_rate_difference": -0.08800000000000001,
+      "crash_rate_difference_ci95": [
+        -0.12600000000000006,
+        -0.04799999999999999
+      ],
+      "game_win_score": 0.6130000000000004,
+      "draw_value": 0.5,
+      "game_wins": 304,
+      "game_draws": 5,
+      "game_losses": 191,
+      "game_win_rate": 0.608,
+      "game_win_score_ci95": [
+        0.5700000000000004,
+        0.6560000000000004
+      ]
+    },
+    {
+      "policy": "ablation_normal_200k",
+      "reference": "baseline_rule",
+      "seed_clusters": 100,
+      "pairs": 500,
+      "bootstrap_unit": "road seed, retaining all five conditions",
+      "mean_quality_difference": -0.32702456355598125,
+      "paired_bootstrap_ci95": [
+        -0.384162042703206,
+        -0.27609549759710744
+      ],
+      "crash_rate_difference": 0.044000000000000004,
+      "crash_rate_difference_ci95": [
+        0.024,
+        0.06800000000000002
+      ],
+      "game_win_score": 0.013000000000000001,
+      "draw_value": 0.5,
+      "game_wins": 6,
+      "game_draws": 1,
+      "game_losses": 493,
+      "game_win_rate": 0.012,
+      "game_win_score_ci95": [
+        0.001,
+        0.028024999999999866
+      ]
+    },
+    {
+      "policy": "ablation_base_200k",
+      "reference": "baseline_slow",
+      "seed_clusters": 100,
+      "pairs": 500,
+      "bootstrap_unit": "road seed, retaining all five conditions",
+      "mean_quality_difference": 0.2619362479770453,
+      "paired_bootstrap_ci95": [
+        0.1703928429921806,
+        0.35048211504005256
+      ],
+      "crash_rate_difference": -0.10200000000000005,
+      "crash_rate_difference_ci95": [
+        -0.14200000000000007,
+        -0.06195000000000029
+      ],
+      "game_win_score": 0.688,
+      "draw_value": 0.5,
+      "game_wins": 344,
+      "game_draws": 0,
+      "game_losses": 156,
+      "game_win_rate": 0.688,
+      "game_win_score_ci95": [
+        0.6400000000000005,
+        0.7359999999999998
+      ]
+    },
+    {
+      "policy": "ablation_base_200k",
+      "reference": "baseline_rule",
+      "seed_clusters": 100,
+      "pairs": 500,
+      "bootstrap_unit": "road seed, retaining all five conditions",
+      "mean_quality_difference": -0.2725215530492249,
+      "paired_bootstrap_ci95": [
+        -0.3211893085486917,
+        -0.23136386104563847
+      ],
+      "crash_rate_difference": 0.030000000000000006,
+      "crash_rate_difference_ci95": [
+        0.013999999999999999,
+        0.05000000000000001
+      ],
+      "game_win_score": 0.026000000000000002,
+      "draw_value": 0.5,
+      "game_wins": 13,
+      "game_draws": 0,
+      "game_losses": 487,
+      "game_win_rate": 0.026,
+      "game_win_score_ci95": [
+        0.008,
+        0.044000000000000004
+      ]
+    }
+  ],
+  "limitations": [
+    "No human-level performance claim: no systematic human baseline has been collected.",
+    "Collision intervals quantify road-seed variation for each checkpoint, not training uncertainty.",
+    "Rule baseline receives the same 30 observations and five actions as RL, without future traffic information.",
+    "Delayed difficulty levels predict every N ticks and send IDLE on skipped ticks; no safety override is used."
+  ]
+}

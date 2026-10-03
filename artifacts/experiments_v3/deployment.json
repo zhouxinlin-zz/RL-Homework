@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "stage": "final",
+  "game_version": "3.1.0",
+  "env_version": "3.1",
+  "models": {
+    "v3_beginner": {
+      "path": "artifacts/experiments_v3/deployment/v3_beginner-a9e4bde97e29.zip",
+      "sha256": "a9e4bde97e29dc4be3f1e68552bf6bdc5b63c8b2477190a0dc329592c090d318",
+      "algorithm": "ppo",
+      "env_version": "3.1",
+      "source_env_version": "3.0",
+      "run_id": "imitation_s23",
+      "method": "rule demonstrations plus PPO",
+      "seed": 23,
+      "steps": 75000,
+      "training_steps": 100352,
+      "development_report": "artifacts/experiments_v3/development_imitation_initial_dev_routes.json",
+      "test_report": "artifacts/experiments_v3/test_v3_beginner_routes.json"
+    },
+    "v3_standard": {
+      "path": "artifacts/experiments_v3/deployment/v3_standard-657ef692c8dc.zip",
+      "sha256": "657ef692c8dc33787ee096e485524af546658225696d6345dbf1630c8350548f",
+      "algorithm": "ppo",
+      "env_version": "3.1",
+      "source_env_version": "3.1",
+      "run_id": "safe_imitation_s23",
+      "method": "rule demonstrations plus PPO and safety reward",
+      "seed": 23,
+      "steps": 200000,
+      "training_steps": 501760,
+      "development_report": "artifacts/experiments_v3/development_safe_imitation_200_dev_routes.json",
+      "test_report": "artifacts/experiments_v3/test_v3_standard_routes.json"
+    },
+    "v3_expert": {
+      "path": "artifacts/experiments_v3/deployment/v3_expert-b4f0d5f66de4.zip",
+      "sha256": "b4f0d5f66de4a589f240654ad21b09705beaf52eb71a4c43abe4ce5765a5419a",
+      "algorithm": "ppo",
+      "env_version": "3.1",
+      "source_env_version": "3.1",
+      "run_id": "safe_transfer_s47",
+      "method": "v2 PPO transfer plus v3 safety fine-tuning",
+      "seed": 47,
+      "steps": 175000,
+      "training_steps": 501760,
+      "development_report": "artifacts/experiments_v3/development_safe_transfer_175_dev_routes.json",
+      "test_report": "artifacts/experiments_v3/test_v3_expert_routes.json"
+    }
+  },
+  "levels": {
+    "beginner": {
+      "model": "v3_beginner",
+      "description": "模仿示范起步的初阶对手；在复杂车流中会暴露决策短板。"
+    },
+    "standard": {
+      "model": "v3_standard",
+      "description": "强化训练后的稳健对手；能处理大部分变道与超车。"
+    },
+    "expert": {
+      "model": "v3_expert",
+      "description": "迁移学习与安全微调的高阶对手；重点挑战高密度车流。"
+    }
+  },
+  "evaluation": {
+    "status": "complete",
+    "report": "artifacts/experiments_v3/evaluation_final/report.json",
+    "report_sha256": "5022053bf285de6e76f28766f909783dac93f43cc751697c5407ad546a8fb64e"
+  }
+}
