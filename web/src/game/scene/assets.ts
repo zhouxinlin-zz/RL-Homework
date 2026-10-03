@@ -119,6 +119,7 @@ export class CarLibrary {
     const geometries = new Set<THREE.BufferGeometry>();
     const materials = new Set<THREE.Material>();
     const textures = new Set<THREE.Texture>();
+    const bitmaps = new Set<ImageBitmap>();
     for (const root of [...this.templates.values(), ...this.variants.values()])
       root.traverse((object) => {
         if (!(object instanceof THREE.Mesh)) return;
@@ -127,12 +128,21 @@ export class CarLibrary {
           ? object.material
           : [object.material]) {
           materials.add(material);
-          if (material.map) textures.add(material.map);
+          if (material.map) {
+            textures.add(material.map);
+            if (
+              typeof ImageBitmap !== "undefined" &&
+              material.map.image instanceof ImageBitmap
+            )
+              bitmaps.add(material.map.image);
+          }
         }
       });
     geometries.forEach((geometry) => geometry.dispose());
     materials.forEach((material) => material.dispose());
     textures.forEach((texture) => texture.dispose());
+    // Texture.dispose releases GPU resources; GLTFLoader bitmaps also own CPU memory.
+    bitmaps.forEach((bitmap) => bitmap.close());
     this.templates.clear();
     this.variants.clear();
   }

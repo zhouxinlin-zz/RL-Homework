@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "oxlint",
+    "build": "tsc -b && vite build && node scripts/build-manifest.mjs",
+    "lint": "oxlint --ignore-pattern dist",
     "test": "vitest run",
     "test:e2e": "npm run build && playwright test",
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",

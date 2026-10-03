@@ -15,6 +15,7 @@ import webbrowser
 
 from rl_course.challenge_rules import GAME_VERSION
 from server.runtime import source_revision
+from server.frontend import build_is_current, input_files
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -40,8 +41,10 @@ def frontend_needs_build(root=ROOT):
     index = root / "web/dist/index.html"
     if not index.exists():
         return True
-    inputs = [*root.joinpath("web/src").rglob("*"), *root.joinpath("web/public").rglob("*")]
-    inputs.extend(root.joinpath("web", name) for name in ("package.json", "package-lock.json", "index.html", "vite.config.ts", "tsconfig.app.json"))
+    if (root / "web/dist/build-info.json").exists():
+        return not build_is_current(root)
+    # Older local builds have no manifest yet; rebuild once after a source edit.
+    inputs = input_files(root)
     return any(path.is_file() and path.stat().st_mtime_ns > index.stat().st_mtime_ns for path in inputs)
 
 

@@ -10,6 +10,17 @@
 
 遇到“开始无反应”或“选关空白”，请重新运行启动器。旧版服务与新版界面混用是已修复的原因；新版界面会明确提示版本不匹配。
 
+从 GitHub 下载到新电脑：
+
+```powershell
+git clone https://github.com/zhouxinlin-zz/RL-Homework.git
+cd RL-Homework
+.\Setup-Game.cmd
+.\Start-Game.cmd
+```
+
+仓库包含已训练权重、冻结评估记录、三维素材和可运行的 `web/dist`。启动器按内容哈希核对构建，因此 Git 下载产生的文件时间变化不会触发重新构建；只有实际修改前端代码、素材或构建配置后才需要 Node.js。Python 环境、个人驾驶记录、运行日志、依赖目录和临时文件不上传。DQN 的训练回放缓冲区 `*.pkl` 保留在原电脑，重新训练可生成，不影响模型推理或课堂展示。
+
 命令行方式：
 
 ```powershell
