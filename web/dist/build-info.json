@@ -60,7 +60,7 @@
     "web/src/game/useDriving.ts": "f825dfc079a916118248d88c29ea459431e9c7b64eba6ea49061002b77c99d5f",
     "web/src/index.css": "a46c0a3669578bf468c3deac28ab039fd59bba6f1e4e607ec4fe79b77cf6362b",
     "web/src/live/DriveView.css": "208777bd836fddb4b730b18023f950ac2455264665e57ef420572997ff686fe3",
-    "web/src/live/DriveView.tsx": "0e46d8a50600cd8c4fa8a6bdadbdbf95c0c6154ba4d7829f71074b04db1f6a14",
+    "web/src/live/DriveView.tsx": "63c974a2e0f1d0e8921a1559832ee8b288b13d77fa827075c66ca9bfc405cdef",
     "web/src/live/LiveRoad.tsx": "e92a162a0028510446052ed20e57fe734e4af68eb70d5ca8d6bb853f103c9c16",
     "web/src/live/api.ts": "c69e124d4f670d4b14553e5ee2069162272fc2c39aae917a163a6e935406ab76",
     "web/src/live/types.ts": "8d9cf1cc01fd13e3a1d49977b9deb83457958af2df5dfb4c6e11daf60df976e4",

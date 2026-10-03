@@ -503,7 +503,7 @@ export default function DriveView({ onResearch }: { onResearch: () => void }) {
           </div>
         )}
         <footer className="drive-footer">
-          <span>TrafficRL · 三人强化学习课程项目</span>
+          <span>TrafficRL · 强化学习课程项目</span>
           <span>
             驾驶仿真 HighwayEnv · 模型 Stable-Baselines3 · 画面 PixiJS
           </span>
