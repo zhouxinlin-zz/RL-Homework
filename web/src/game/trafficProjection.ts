@@ -1,4 +1,4 @@
-import type { WorldFrame } from "../live/types";
+import type { WorldFrame } from "./types";
 
 /** Project received physical positions without inventing or extrapolating traffic. */
 export function nearbyTraffic(frame: WorldFrame) {

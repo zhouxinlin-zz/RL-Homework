@@ -30,6 +30,97 @@ afterEach(() => {
 });
 
 describe("driving lifecycle", () => {
+  it("starts a new run while an abandoned run still has a request in flight", async () => {
+    let resolveOld!: (value: GameSession) => void;
+    let resolveNew!: (value: GameSession) => void;
+    vi.mocked(api.step)
+      .mockImplementationOnce(
+        () =>
+          new Promise((resolve) => {
+            resolveOld = resolve;
+          }),
+      )
+      .mockImplementationOnce(
+        () =>
+          new Promise((resolve) => {
+            resolveNew = resolve;
+          }),
+      );
+    const { result } = renderHook(useDriving);
+    await act(async () => {
+      await result.current.start(config);
+    });
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(3000);
+    });
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(201);
+    });
+    expect(api.step).toHaveBeenCalledTimes(1);
+    const nextRun = { ...initial, session_id: "new-run" };
+    vi.mocked(api.start).mockResolvedValue(nextRun);
+    await act(async () => {
+      await result.current.start(config);
+    });
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(3000);
+    });
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(201);
+    });
+    expect(api.step).toHaveBeenNthCalledWith(2, "new-run", 1);
+    await act(async () => {
+      resolveOld({ ...initial, done: true });
+    });
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(1000);
+    });
+    expect(api.step).toHaveBeenCalledTimes(2);
+    expect(result.current.session?.session_id).toBe("new-run");
+    expect(result.current.phase).toBe("running");
+    await act(async () => {
+      resolveNew({ ...nextRun, done: true });
+    });
+    expect(result.current.phase).toBe("finished");
+  });
+
+  it("keeps a late-created run paused when the window lost focus during loading", async () => {
+    let resolve!: (value: GameSession) => void;
+    vi.mocked(api.start).mockImplementation(
+      () =>
+        new Promise((done) => {
+          resolve = done;
+        }),
+    );
+    const { result } = renderHook(useDriving);
+    let pending!: Promise<void>;
+    act(() => {
+      pending = result.current.start(config);
+    });
+    act(() => window.dispatchEvent(new Event("blur")));
+    await act(async () => {
+      resolve(initial);
+      await pending;
+    });
+    expect(result.current.phase).toBe("paused");
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(5000);
+    });
+    expect(api.step).not.toHaveBeenCalled();
+    act(() => {
+      window.dispatchEvent(new Event("focus"));
+      result.current.resume();
+    });
+    expect(result.current.phase).toBe("countdown");
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(3000);
+    });
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(201);
+    });
+    expect(api.step).toHaveBeenCalledTimes(1);
+  });
+
   it("replaces outdated commands without losing a command on the other axis", async () => {
     const { result } = renderHook(useDriving);
     await act(async () => {

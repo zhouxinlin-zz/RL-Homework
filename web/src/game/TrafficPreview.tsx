@@ -1,4 +1,4 @@
-import type { WorldFrame } from "../live/types";
+import type { WorldFrame } from "./types";
 
 import { nearbyTraffic } from "./trafficProjection";
 

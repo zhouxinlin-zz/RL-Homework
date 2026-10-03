@@ -56,12 +56,11 @@ test("real audio starts on a gesture, produces driving output and falls silent w
     );
   const measurements: Record<string, unknown> = {};
   await page.goto("/");
-  await expect(page.locator('.title-start')).toBeEnabled();
+  await expect(page.locator(".title-start")).toBeEnabled();
   expect(await read()).toEqual([]);
-  await page.locator('.title-start').click();
+  await page.locator(".title-start").click();
   await expect.poll(async () => (await read())[0]?.state).toBe("running");
   measurements.afterGesture = await read();
-  await page.getByRole("button", { name: /驾驶入门/ }).click();
   await expect(page.locator(".driving-buttons")).toBeVisible();
   await expect(page.locator(".countdown-screen")).toHaveCount(0);
   await expect(
@@ -72,7 +71,7 @@ test("real audio starts on a gesture, produces driving output and falls silent w
     .toBeGreaterThan(0.001);
   measurements.driving = await read();
   await page.getByRole("button", { name: "暂停游戏", exact: true }).click();
-  await expect(page.getByRole("dialog", { name: "稍作停留" })).toBeVisible();
+  await expect(page.getByRole("dialog", { name: "游戏暂停" })).toBeVisible();
   await expect
     .poll(async () => (await read())[0]?.rms ?? 1)
     .toBeLessThan(0.00001);

@@ -1,6 +1,5 @@
 import * as THREE from "three";
-import type { Vehicle, WorldFrame } from "../../live/types";
-import type { Settings, Theme } from "../types";
+import type { Vehicle, WorldFrame, Settings, Theme } from "../types";
 import { CarLibrary, type CarModel } from "./assets";
 import { Scenery, palettes } from "./scenery";
 

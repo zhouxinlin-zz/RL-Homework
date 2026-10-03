@@ -2,7 +2,10 @@ import { expect, test } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
 
-const shots = path.resolve(import.meta.dirname, "../../artifacts/preview/v3");
+const shots = path.resolve(
+  import.meta.dirname,
+  "../../artifacts/browser-previews",
+);
 fs.mkdirSync(shots, { recursive: true });
 async function openSetup(page: import("@playwright/test").Page) {
   await page.goto("/");
@@ -67,7 +70,56 @@ test("one expert contest replaces extra modes and the routes describe the actual
   ).toHaveCount(0);
   await page.getByRole("button", { name: "设置", exact: true }).click();
   await expect(page.getByRole("switch", { name: "周车预览" })).toBeVisible();
+  const settings = page.getByRole("dialog", { name: "设置" });
+  await settings.getByRole("button", { name: "返回", exact: true }).focus();
+  await page.keyboard.press("Shift+Tab");
+  expect(
+    await settings.evaluate((dialog) =>
+      dialog.contains(document.activeElement),
+    ),
+  ).toBe(true);
+  await page.keyboard.press("Tab");
+  await expect(
+    settings.getByRole("button", { name: "返回", exact: true }),
+  ).toBeFocused();
+  await settings.getByRole("slider").first().focus();
+  await page.keyboard.press("Escape");
+  await expect(settings).toHaveCount(0);
   expect(errors).toEqual([]);
+});
+
+test("losing the graphics context pauses the race and lets the same session recover", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await expect(page.locator(".title-start")).toBeEnabled();
+  await page.locator(".title-start").click();
+  await expect(page.locator(".driving-buttons")).toBeVisible();
+  let requests = 0;
+  page.on("request", (request) => {
+    if (request.url().endsWith("/step")) requests++;
+  });
+  await page.locator(".game-scene canvas").evaluate((canvas) => {
+    const gl = (canvas as HTMLCanvasElement).getContext("webgl2")!;
+    gl.getExtension("WEBGL_lose_context")!.loseContext();
+  });
+  await expect(page.getByRole("dialog", { name: "游戏暂停" })).toBeVisible();
+  await expect(page.getByRole("alert")).toContainText("画面连接中断");
+  await page.waitForTimeout(350);
+  const pausedCount = requests;
+  await page.waitForTimeout(450);
+  expect(requests).toBe(pausedCount);
+  await page.getByRole("button", { name: "重试画面" }).click();
+  await expect(
+    page.locator('.game-scene[data-rendered="true"] canvas'),
+  ).toBeVisible();
+  await expect(page.getByRole("alert")).toHaveCount(0);
+  await expect(page.getByRole("dialog", { name: "游戏暂停" })).toBeVisible();
+  const resumed = page.waitForResponse(
+    (response) => response.url().endsWith("/step") && response.ok(),
+  );
+  await page.getByRole("button", { name: /继续驾驶/ }).click();
+  await resumed;
 });
 
 test("training names the deployed checkpoint and separates it from candidate algorithms", async ({

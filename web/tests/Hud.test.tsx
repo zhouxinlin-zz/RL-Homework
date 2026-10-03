@@ -4,7 +4,7 @@ import { afterEach, expect, it } from "vitest";
 import Hud from "../src/game/Hud";
 import { nearbyTraffic } from "../src/game/trafficProjection";
 import type { GameSession } from "../src/game/types";
-import type { WorldFrame } from "../src/live/types";
+import type { WorldFrame } from "../src/game/types";
 
 afterEach(cleanup);
 it("limits the preview to true nearby vehicles and honors its disabled setting", () => {

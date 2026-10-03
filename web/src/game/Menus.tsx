@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { Icon } from "./Icons";
 import {
   duelHighlights,
@@ -23,13 +23,55 @@ export function Modal({
   children: ReactNode;
   wide?: boolean;
 }) {
+  const dialog = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const previous = document.activeElement;
+    dialog.current?.focus({ preventScroll: true });
+    return () => {
+      if (previous instanceof HTMLElement && previous.isConnected)
+        previous.focus({ preventScroll: true });
+    };
+  }, []);
   return (
     <div className="game-overlay">
       <section
+        ref={dialog}
+        tabIndex={-1}
         className={`game-dialog ${wide ? "wide" : ""}`}
         role="dialog"
         aria-modal="true"
         aria-label={title}
+        onKeyDown={(event) => {
+          if (event.key !== "Tab") return;
+          const items = [
+            ...event.currentTarget.querySelectorAll<HTMLElement>(
+              'button:not(:disabled),a[href],input:not(:disabled),select:not(:disabled),summary,[tabindex="0"]',
+            ),
+          ].filter(
+            (item) => item.getClientRects().length > 0 && item.tabIndex >= 0,
+          );
+          const first = items[0],
+            last = items.at(-1);
+          if (!first || !last) {
+            event.preventDefault();
+            return;
+          }
+          if (
+            event.shiftKey &&
+            (document.activeElement === first ||
+              document.activeElement === event.currentTarget)
+          ) {
+            event.preventDefault();
+            last.focus();
+          } else if (
+            !event.shiftKey &&
+            (document.activeElement === last ||
+              document.activeElement === event.currentTarget)
+          ) {
+            event.preventDefault();
+            first.focus();
+          }
+        }}
       >
         <header className="dialog-header">
           <div>

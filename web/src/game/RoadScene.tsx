@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import type { WorldFrame } from "../live/types";
-import type { GameSession, Settings, Theme } from "./types";
+import type { GameSession, Settings, Theme, WorldFrame } from "./types";
 import { CarLibrary } from "./scene/assets";
 import { DrivingView } from "./scene/DrivingView";
 
@@ -13,6 +12,7 @@ type Props = {
   playbackRate?: number;
   replaying?: boolean;
   animate?: boolean;
+  onReadyChange: (ready: boolean) => void;
 };
 
 function attractFrame(time: number): WorldFrame {
@@ -57,17 +57,21 @@ export default function RoadScene(props: Props) {
   const host = useRef<HTMLDivElement>(null);
   const latest = useRef(props);
   const [error, setError] = useState("");
+  const [attempt, setAttempt] = useState(0);
   useEffect(() => {
     latest.current = props;
   }, [props]);
   useEffect(() => {
     const element = host.current!;
+    latest.current.onReadyChange(false);
+    delete element.dataset.rendered;
     const library = new CarLibrary();
     let renderer: THREE.WebGLRenderer | undefined;
     let views: DrivingView[] = [];
     let theme: Theme | undefined;
     let sessionId = "";
     let disposed = false;
+    let contextFailed = false;
     let raf = 0;
     let width = 0,
       height = 0,
@@ -77,7 +81,9 @@ export default function RoadScene(props: Props) {
       sampledAt = 0;
     const contextLost = (event: Event) => {
       event.preventDefault();
-      setError("画面连接中断，请刷新页面重新进入。");
+      contextFailed = true;
+      setError("画面连接中断，比赛已暂停。可以尝试重新加载画面。");
+      latest.current.onReadyChange(false);
       cancelAnimationFrame(raf);
     };
     const initialize = async () => {
@@ -99,9 +105,16 @@ export default function RoadScene(props: Props) {
           library.dispose();
           return;
         }
+        if (contextFailed) return;
         element.dataset.engine = "three";
+        setError("");
         const render = (now: number) => {
-          if (disposed || !renderer) return;
+          if (disposed || contextFailed || !renderer) return;
+          if (document.hidden) {
+            last = now;
+            raf = requestAnimationFrame(render);
+            return;
+          }
           const p = latest.current;
           const duel = p.active && Boolean(p.session?.rival);
           const selectedTheme = !p.active ? "coast" : p.theme;
@@ -170,6 +183,8 @@ export default function RoadScene(props: Props) {
           });
           sessionId = id;
           element.dataset.rendered = "true";
+          if (frames === 0 && sampledAt === 0)
+            latest.current.onReadyChange(true);
           frames++;
           if (now - sampledAt >= 1000) {
             element.dataset.fps = String(
@@ -183,10 +198,12 @@ export default function RoadScene(props: Props) {
         raf = requestAnimationFrame(render);
       } catch (reason) {
         library.dispose();
-        if (!disposed)
+        if (!disposed) {
+          latest.current.onReadyChange(false);
           setError(
             `画面加载失败：${reason instanceof Error ? reason.message : "请刷新重试"}`,
           );
+        }
       }
     };
     void initialize();
@@ -205,7 +222,7 @@ export default function RoadScene(props: Props) {
         renderer.domElement.remove();
       }
     };
-  }, []);
+  }, [attempt]);
   return (
     <>
       <div
@@ -216,7 +233,15 @@ export default function RoadScene(props: Props) {
       />
       {error && (
         <div className="game-notice" role="alert">
-          {error}
+          <span>{error}</span>
+          <button
+            onClick={() => {
+              setError("");
+              setAttempt((value) => value + 1);
+            }}
+          >
+            重试画面
+          </button>
         </div>
       )}
     </>

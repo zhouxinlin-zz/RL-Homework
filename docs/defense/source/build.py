@@ -67,7 +67,7 @@ add(
     "项目名 + 核心问题。封面不放技术栈或功能清单。",
     "我们的项目叫《变道之间》，是一款可以和强化学习策略同场比较的驾驶游戏。我们关心的不是车能不能一直向前走，而是在前方慢车、邻道后车和有限时间同时存在时，模型如何决定何时换道、何时加速、何时等待。接下来先看游戏，再说明策略怎样训练，以及我们怎样判断训练是否真的有效。",
     "先用一局游戏，把这个决策问题看清楚。", 25,
-    "README.md；PROJECT_PLAN.md", "cover",
+    "README.md；docs/architecture.md", "cover",
 )
 
 image_data = base64.b64encode((ROOT / "artifacts/preview/v3/3d-pressure.png").read_bytes()).decode("ascii")

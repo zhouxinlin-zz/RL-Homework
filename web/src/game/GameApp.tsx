@@ -104,6 +104,7 @@ export default function GameApp() {
   const [completedRounds, setCompletedRounds] = useState<GameSession[]>([]);
   const [records, setRecords] = useState<Records | null>(null);
   const [settings, setSettings] = useState(loadSettings);
+  const [sceneReady, setSceneReady] = useState(false);
   const controls = useDriveControls(
     driving.phase === "running" && !driving.session?.player_done,
     (action) => {
@@ -118,11 +119,19 @@ export default function GameApp() {
   const [replayPlaying, setReplayPlaying] = useState(false);
   const [replayRate, setReplayRate] = useState(1);
   const [replayLoading, setReplayLoading] = useState(false);
+  const sceneReadinessChanged = useCallback((ready: boolean) => {
+    setSceneReady(ready);
+    if (!ready) setReplayPlaying(false);
+  }, []);
   const replayRequest = useRef(0);
   const previousReplay = useRef({ id: "", index: -1 });
   const previousPhase = useRef(driving.phase);
   const previousOvertakes = useRef(0);
   const previousCrash = useRef(false);
+  const pauseDriving = driving.pause;
+  useEffect(() => {
+    if (!sceneReady) pauseDriving();
+  }, [sceneReady, driving.phase, pauseDriving]);
   const track =
     catalog?.tracks.find((t) => t.id === trackId) ?? catalog?.tracks[0] ?? null;
   const challengeTracks =
@@ -178,7 +187,10 @@ export default function GameApp() {
   ]);
   useEffect(() => () => gameAudio.silence(), []);
   useEffect(() => {
-    const quiet = () => gameAudio.silence();
+    const quiet = () => {
+      setReplayPlaying(false);
+      gameAudio.silence();
+    };
     const visible = () => {
       if (document.hidden) quiet();
     };
@@ -275,9 +287,13 @@ export default function GameApp() {
     setCompletedRounds([]);
   };
   const start = (selected: Track | null = track, seed?: number) => {
+    if (!sceneReady) {
+      setNotice("道路画面尚未就绪，请等待加载或重试画面。");
+      return false;
+    }
     if (!selected) {
       setNotice("道路尚未加载，请重试连接或重新运行 Start-Game.cmd。");
-      return;
+      return false;
     }
     replayRequest.current += 1;
     setReplayLoading(false);
@@ -299,11 +315,13 @@ export default function GameApp() {
       vehicle: settings.vehicle ?? "sport",
       practice: false,
     });
+    return true;
   };
   const beginChallenge = (selected: Track | null = track, seed?: number) => {
-    if (selected) setChallengeStartId(selected.id);
-    setCompletedRounds([]);
-    start(selected, seed);
+    if (start(selected, seed)) {
+      if (selected) setChallengeStartId(selected.id);
+      setCompletedRounds([]);
+    }
   };
 
   const showReplay = async (id: string, time = 0) => {
@@ -354,14 +372,7 @@ export default function GameApp() {
 
   useEffect(() => {
     function keydown(event: KeyboardEvent) {
-      if (
-        (event.target instanceof HTMLElement &&
-          event.target.matches("input,select,textarea")) ||
-        event.altKey ||
-        event.ctrlKey ||
-        event.metaKey
-      )
-        return;
+      if (event.altKey || event.ctrlKey || event.metaKey) return;
       if (event.key === "Escape") {
         event.preventDefault();
         if (replay) {
@@ -387,8 +398,8 @@ export default function GameApp() {
   const nextTrack = challengeTracks[completedRounds.length + 1];
   const continueChallenge = () => {
     if (!driving.session?.done || !nextTrack) return;
-    setCompletedRounds((rounds) => [...rounds, driving.session!]);
-    start(nextTrack, driving.session.seed);
+    if (start(nextTrack, driving.session.seed))
+      setCompletedRounds((rounds) => [...rounds, driving.session!]);
   };
 
   return (
@@ -421,6 +432,7 @@ export default function GameApp() {
           settings={settings}
           playbackRate={replay ? replayRate : 1}
           replaying={Boolean(replay)}
+          onReadyChange={sceneReadinessChanged}
           animate={
             replay ? replayPlaying : driving.phase === "running" || !active
           }
@@ -440,16 +452,17 @@ export default function GameApp() {
             </button>
           </div>
           <div className="title-content">
-            <span className="title-overline">穿过车流，向前一步。</span>
+            <span className="title-overline">人机对决</span>
             <h1>变道之间</h1>
-            <div className="title-chinese">每一次变道，都是一次抉择。</div>
+            <div className="title-chinese">三车道驾驶挑战</div>
             <p className="title-claim">
-              三段公路，一位劲敌。读懂车流，把握超车的时机。
+              与高手电脑同起点出发，在限时内安全完成行程。
             </p>
             <nav className="title-menu" aria-label="游戏主菜单">
               <button
                 className="title-start"
                 disabled={
+                  !sceneReady ||
                   !catalog?.ai_levels?.find((item) => item.id === "expert")
                     ?.available
                 }
@@ -458,7 +471,7 @@ export default function GameApp() {
                 }
               >
                 <strong>开始人机对决</strong>
-                <small>高手 · 三关连赛</small>
+                <small>{!sceneReady ? "加载道路…" : "高手 · 三关连赛"}</small>
                 <Icon name="play" />
               </button>
               <button
@@ -502,7 +515,7 @@ export default function GameApp() {
           <div className="title-road-label">
             <span>本次挑战</span>
             <strong>三关连赛</strong>
-            <small>编队突围 / 穿行车流 / 极限高压</small>
+            <small>慢车编队 / 交织车流 / 连续高压</small>
           </div>
         </div>
       )}

@@ -1,7 +1,7 @@
 :root {
-  font-family: Inter, "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
-  color: #18313a;
-  background: #f4f7f7;
+  font-family: "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+  color: #f2eee4;
+  background: #171a1d;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

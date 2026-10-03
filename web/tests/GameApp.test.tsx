@@ -11,9 +11,26 @@ import GameApp from "../src/game/GameApp";
 import { api } from "../src/game/api";
 import type { Catalog, GameSession } from "../src/game/types";
 
-vi.mock("../src/game/RoadScene", () => ({
-  default: () => <div data-testid="road-scene" />,
+const renderer = vi.hoisted(() => ({
+  ready: undefined as undefined | ((ready: boolean) => void),
 }));
+
+vi.mock("../src/game/RoadScene", async () => {
+  const { useEffect } = await import("react");
+  return {
+    default: function MockRoadScene({
+      onReadyChange,
+    }: {
+      onReadyChange: (ready: boolean) => void;
+    }) {
+      useEffect(() => {
+        renderer.ready = onReadyChange;
+        onReadyChange(true);
+      }, [onReadyChange]);
+      return <div data-testid="road-scene" />;
+    },
+  };
+});
 vi.mock("../src/game/api", () => ({
   api: {
     catalog: vi.fn(),
@@ -324,4 +341,54 @@ it("keeps the contest playable when history cannot be loaded", async () => {
   ).toBe(false);
   fireEvent.click(screen.getByRole("button", { name: /选择起始路线/ }));
   expect(screen.getByRole("dialog", { name: "赛前准备" })).toBeTruthy();
+});
+
+it("keeps the completed round and score while the road renderer is recovering", async () => {
+  prepareRound("convoy", "graphics-round-1");
+  await openGame();
+  await finishRound(screen.getByRole("button", { name: /开始人机对决/ }));
+  act(() => renderer.ready!(false));
+  fireEvent.click(screen.getByRole("button", { name: /继续下一段/ }));
+  fireEvent.click(screen.getByRole("button", { name: /继续下一段/ }));
+  expect(api.start).toHaveBeenCalledTimes(1);
+  expect(screen.getByLabelText("赛程战绩").textContent).toContain(
+    "你 1 : 0 电脑",
+  );
+  act(() => renderer.ready!(true));
+  prepareRound("weave", "graphics-round-2");
+  await finishRound(screen.getByRole("button", { name: /继续下一段/ }));
+  expect(api.start).toHaveBeenLastCalledWith(
+    expect.objectContaining({ track_id: "weave" }),
+  );
+  expect(screen.getByLabelText("赛程战绩").textContent).toContain(
+    "你 2 : 0 电脑",
+  );
+});
+
+it("pauses a replay when focus is lost and waits for an explicit resume", async () => {
+  prepareRound("convoy", "replay-focus");
+  await openGame();
+  await finishRound(screen.getByRole("button", { name: /开始人机对决/ }));
+  vi.mocked(api.replay).mockResolvedValue({
+    summary: sample("convoy", "replay-focus", true),
+    frames: [
+      sample("convoy", "replay-focus"),
+      sample("convoy", "replay-focus", true),
+    ],
+  });
+  await act(async () => {
+    fireEvent.click(screen.getByRole("button", { name: "观看回放" }));
+  });
+  expect(screen.getByRole("button", { name: "暂停回放" })).toBeTruthy();
+  act(() => window.dispatchEvent(new Event("blur")));
+  expect(screen.getByRole("button", { name: "播放回放" })).toBeTruthy();
+  await act(async () => {
+    await vi.advanceTimersByTimeAsync(40000);
+  });
+  expect(
+    (screen.getByRole("slider", { name: "回放进度" }) as HTMLInputElement)
+      .value,
+  ).toBe("0");
+  act(() => window.dispatchEvent(new Event("focus")));
+  expect(screen.getByRole("button", { name: "播放回放" })).toBeTruthy();
 });

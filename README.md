@@ -1,16 +1,14 @@
-# LANE SHIFT｜变道之间
+# LANE SHIFT · 变道之间
 
-**一个把强化学习驾驶策略变成可交互人机对决的课程项目。** 在持续补充的三车道车流中，玩家与训练后的 AI 从相同初始状态出发，比较谁能更安全、更有效率地完成行程。
+LANE SHIFT 是一个强化学习驾驶游戏，基于 HighwayEnv、Stable-Baselines3 和 Three.js。玩家与 PPO 驾驶策略从相同初始车流出发，完成三段限时行程。胜负依次比较安全完赛、里程达标和得分。
 
-项目围绕 **构建交通环境 → 设计奖励 → 训练策略 → 独立评估 → 游戏展示** 展开。正式对手是本地 PPO 模型；DQN、A2C 和规则驾驶用于实验对照。运行时无需在线推理 API，也无需重新训练。
+模型在本地训练和推理。仓库包含可运行的前端、模型权重及评估记录，安装依赖后可以离线使用。
 
-![三维人机对决](artifacts/preview/v3/3d-pressure.png)
+![人机对决](artifacts/preview/v3/3d-pressure.png)
 
-## 快速启动
+## 运行
 
-已配置的 Windows 电脑，双击 **`Start-Game.cmd`**。首次使用运行 **`Setup-Game.cmd`**；检查依赖、模型和评估记录运行 **`Check-Game.cmd`**。
-
-新电脑从 GitHub 获取：
+Windows，Python 3.12：
 
 ```powershell
 git clone https://github.com/zhouxinlin-zz/RL-Homework.git
@@ -19,174 +17,62 @@ cd RL-Homework
 .\Start-Game.cmd
 ```
 
-建议 Python 3.12。仓库包含训练权重、前端构建、三维素材和冻结评估记录；首次安装 Python 依赖需要联网，之后可离线展示。正常启动不需要 Node.js；修改前端后再安装 Node.js 24 并构建。
+已安装过依赖，直接双击 `Start-Game.cmd`。启动器会打开浏览器，默认地址为 `http://127.0.0.1:8765/`。如果端口被旧服务占用，会自动选择其他端口，请使用新打开的窗口。
 
-启动器打开本地游戏窗口，默认地址 `http://127.0.0.1:8765/`。端口冲突时自动选择其他端口，请使用新打开的窗口。启动器核对服务版本和前端内容哈希，避免新界面连接旧服务，也不会因 Git 下载改变文件时间而误触发构建。
+- `Setup-Game.cmd`：首次安装 Python 依赖，需要联网。
+- `Start-Game.cmd`：检查版本并启动游戏。
+- `Check-Game.cmd`：检查依赖、构建文件、模型及评估记录。
 
-## 怎么玩、怎么展示
+仓库内的 `web/dist` 可直接运行。只有修改前端时才需要 Node.js，建议使用 24 版本。
 
-- **开始人机对决**：依次完成慢车编队、交织车流、连续高压，驾驶时长共 135 秒，另有倒计时与结算。正式对手始终为高手 PPO。
-- **选择起始路线**：短演示直接进入连续高压，驾驶 55 秒。
-- **方向键 / WASD**：左右点按换道，上下按住调速；`Esc` 暂停。双方速度档位相同：12、18、24、30 m/s（43.2–108 km/h）。
-- **查看 AI 决策**：观察实际动作概率。结算比较双方表现，并可回看关键时刻。
-- **更多选项 → 训练成果**：查看训练、算法对照、独立测试和模型来源。
+## 操作
 
-比赛按“安全完赛 → 里程达标 → 得分”依次判定胜负。双方初始交通一致，随后各自世界中的车辆响应各自驾驶动作。主入口使用开发种子 531124，便于重复展示；选关入口使用随机车流。现场一局说明玩法，模型能力以离线多局测试为依据。
+- **开始人机对决**：慢车编队、交织车流、连续高压，共 135 秒驾驶时间。
+- **选择起始路线**：可从任意一关开始；连续高压为单局 55 秒。
+- **方向键 / WASD**：左右点按换道，上下按住调速；`Esc` 暂停。
+- **查看 AI 决策**：显示当前模型的动作概率。
+- **更多选项**：训练成果、驾驶记录、声音与画面设置。
 
-### 答辩材料
+双方使用相同物理规则，目标速度档位为 43.2、64.8、86.4、108 km/h。车流在两侧分别响应驾驶动作。三关连赛使用固定开发种子，选关使用随机车流；重试本段保留原种子。
 
-- [演示文稿初稿（离线网页）](docs/defense/LANE-SHIFT-defense.html)：12 页正文 + 2 页备答，双击后可全屏翻页。
-- [演示文稿 PDF](docs/defense/LANE-SHIFT-defense.pdf)：相同内容的固定版式，便于审阅和备用展示。
-- [逐页提纲与讲稿](docs/defense/defense-notes.html)：每页目的、画面重点、可照读讲稿、过渡及常见问题。
+切换窗口会暂停比赛或回放。图形加载失败时可以重试画面，恢复后手动继续比赛。
 
-建议讲述 8–10 分钟，其中包含约 1 分钟操作展示。网页按 `← / →` 翻页、`F` 全屏、`Esc` 打开目录、`B` 切换静态模式。当前交付是网页幻灯片和 PDF，不是可编辑的 `.pptx`。
+## 模型
 
-## 强化学习任务
+正式对手为 `v3_expert` PPO，输入 30 维车辆状态，输出换道、保持和调速五种动作，每秒决策 5 次。游戏过程中不更新模型。
 
-### 环境：让每次换道都有取舍
+当前独立测试每个策略 300 局：正式 PPO 达标率 72.3%，碰撞 0/300；规则基线达标率 63.3%，碰撞 0/300。A2C 候选达标率 79.0%，碰撞 5/300，未满足“碰撞不增加”的替换条件。DQN 和其他候选的完整结果见[训练与评估](docs/training.md)。
 
-环境基于 HighwayEnv，增加结构化交通编队、持续补车、风险反馈与关卡目标。物理仿真 **15 Hz**，模型每秒决策 **5 次**。
+最难的高压关中，正式 PPO 达标率为 32%。目前测试限于三车道直路仿真，尚无人类驾驶统计基准。
 
-- **慢车编队**：前方慢车与邻道不同速度的车队；35 秒，目标 790 米。
-- **交织车流**：前方慢车与邻道快速接近的后车；45 秒，目标 900 米。
-- **连续高压**：多车道受阻与持续接近的后车；55 秒，目标 1270 米。
+## 文档
 
-观察、动作和交通机制见 [基础环境](rl_course/driving_env.py)、[挑战环境](rl_course/driving_env_v3.py)。Three.js 呈现仿真快照，插值只改善显示，不改变碰撞和决策规则。
+- [训练与评估](docs/training.md)：状态、奖励、网络配置、训练来源、选模流程和实验结果。
+- [程序结构](docs/architecture.md)：前后端接口、会话、渲染和存档。
+- [前端开发](web/README.md)：开发服务、构建和测试命令。
+- [答辩幻灯片](docs/defense/LANE-SHIFT-defense.html)、[PDF](docs/defense/LANE-SHIFT-defense.pdf)、[逐页讲稿](docs/defense/defense-notes.html)：12 页正文和 2 页备答，约 8–10 分钟。
 
-### 输入、网络与动作
+幻灯片用浏览器打开，左右键翻页，`F` 全屏，`Esc` 打开目录。
 
-模型读取 **30 维归一化数值状态**，不读取游戏截图：
-
-1. **本车 6 维**：实际速度、目标速度、横向位置、目标车道、航向、剩余时间比例。
-2. **每条车道 8 维 × 3**：最近前车的距离 / 相对速度 / 是否存在，最近后车的同类信息，以及前后车各自的横向速度。
-
-前车观测范围 120 米、后车 80 米，数值归一化并裁剪至 `[-1, 1]`。正式 PPO 的策略分支和价值分支各有两层 128 单元隐藏层。策略输出 **左换道、保持、右换道、加速、减速**五种动作概率；价值分支辅助训练，估计未来累计回报。
-
-游戏加载固定权重做确定性推理，不在线更新参数。换道与目标速度由仿真底层控制器执行；没有额外的安全策略替神经网络修改高层选择。背景车辆使用 HighwayEnv 交通模型。
-
-### 奖励：训练时的反馈
-
-正式高手所用的 v3.1 安全奖励，每次决策后计算：
-
-```text
-正向反馈：+0.025 × 新增行驶米数，+0.4 × 新增有效超车次数
-安全完赛：+3
-风险反馈：危险跟车每步 -0.12，不安全换道请求 -2
-换道成本：每次实际改变目标车道 -0.02，短时间反向换道额外 -0.12
-事故终止：碰撞或驶离道路的惩罚项合计 -30
-```
-
-事故发生时可能叠加其他奖励项，`-30` 指事故惩罚项，不是整步奖励必然等于 -30。
-
-为改善保守减速，`iteration_4` 候选训练在**未碰撞且仍在道路上时**额外增加每米 `+0.035`、每次超车 `+0.2`，包括安全完赛的最后一步；事故惩罚项提高为 `-60`。这用于候选实验，不能说成正式高手已经采用新奖励。它改变学习偏好，不改变玩家与 AI 的速度范围、物理规则和游戏计分。
-
-### 奖励、成绩、胜负的区别
-
-- **训练奖励**更新网络，帮助策略学习长期取舍。
-- **游戏得分**约为 `里程 + 35×超车 + 300×完赛 - 250×失败 - 5×危险秒数`，取整且不低于零。结算将未安全完赛的终止视为失败。
-- **里程达标**要求安全完成整段且达到目标里程；超车目标影响星级，不是里程达标的必要条件。
-- **对决胜负**先比较安全完赛，再比较达标，最后比较得分，避免临近终点撞车仍靠前期里程获胜。
-
-具体定义见 [game_rules.py](rl_course/game_rules.py)。
-
-## 模型具体怎么训练
-
-### 1. 正式 PPO：迁移已有策略，再继续训练
-
-来源链为 `v2/cal_rl_s47 → v3/transfer_s47 → v3.1/safe_transfer_s47`，不是从零只训练 17.5 万步。最后一段使用 4 个向量化环境，在 CPU 上收集经验；课程采样从偏重慢车编队过渡到三种路况近似均匀，训练回合统一为 45 秒。
-
-每个环境收集 512 步，共 2048 条交互后进行一轮 PPO 更新；每批 256 条，重复优化 8 个 epoch。正式权重记录：学习率 `3e-4`、折扣率 `0.99`、GAE 系数 `0.95`、熵系数 `0.008`、裁剪系数 `0.2`。PPO 通过新旧策略概率比的裁剪目标限制过大的策略更新。
-
-开发道路定期评价检查点，保存权重和指标。`safe_transfer_s47` 完整记录为 **501,760 环境交互步**，交付选择其中 **175,000 步检查点**。步数是向量环境中的交互总数，不是回合数；整批采样可能使实际步数略超请求步数。更晚的检查点不保证更好。
-
-证据：[初始配置](artifacts/experiments_v3/safe_transfer_s47/config.json)、[完整进度](artifacts/experiments_v3/safe_transfer_s47/progress.json)、[训练实现](rl_course/train_v3.py)。续训后的累计请求和实际步数以 `progress.json` 为准，初始配置记录第一次运行设置。
-
-### 2. 多算法候选：尝试提高通行效率
-
-候选使用相同观测与动作，按慢车编队 / 交织 / 高压 **20% / 40% / 40%** 抽样，采用各关实际 35 / 45 / 55 秒时长及上述效率奖励。
-
-- **PPO 微调**：从正式高手继续训练 200,704 步，选中 25,000 步候选。学习率降至 `5e-5`。
-- **DQN**：从零运行 125,008 步，再从其 125,000 步检查点继续 200,000 步，选中续训的 200,000 步权重。通过经验回放和目标网络学习动作价值。
-- **A2C**：从零运行 125,056 步；另将 PPO 网络权重初始化到 A2C 后运行 50,048 步，选中迁移分支的 50,000 步检查点。初始化复制策略和价值网络，后续按 A2C 更新。
-
-五次运行合计 **700,816 步新增交互**，不含上游预训练。初始化、预算和调参条件不同，因此是**本项目的候选方案比较**，不能证明某算法普遍更强。算法也不会投票接管比赛车辆。
-
-配置、开发曲线与权重见 [iteration_4](artifacts/experiments_v3/iteration_4/)，实现见 [train_challenge_models.py](rl_course/train_challenge_models.py)。
-
-### 3. 开发选模 → 冻结 → 独立测试
-
-1. **训练中验证**：每关 12 个开发种子 `631100–631111`，观察训练并初筛检查点。
-2. **扩大开发集复核**：每关 32 个种子 `631200–631231`，共 96 局，按碰撞更少、达标更高、得分更高挑选。
-3. **冻结选择**：将各算法检查点和高手候选写入 [selection.json](artifacts/experiments_v3/iteration_4/selection.json)，记录路径与 SHA-256，拒绝重复覆盖。
-4. **独立测试验收**：每关 100 个未见种子 `1631100–1631199`，每策略 300 局；含归档对手共 7 个策略、2100 局，使用相同初始道路，保存逐局结果。
-5. **发布检查**：核对测试覆盖、模型和报告哈希。候选只有达标率与均分均提高、碰撞不增加才升级。测试用于此次发布的通过 / 不通过验收，不回头挑另一个检查点。
-
-这组测试已查看过；后续若据此改模型，应换新的未见种子验收。原高手训练开发种子与当前候选流程不同，记录分别保留。
-
-## 当前结果
-
-以下统一引用 [iteration_4/report.json](artifacts/experiments_v3/iteration_4/report.json)，**每项均为同一组 300 局**：
-
-- **正式 PPO**：达标率 **72.3%**，碰撞 **0/300**。
-- **PPO 候选**：达标率 **78.3%**，碰撞 **8/300**。
-- **DQN 候选**：达标率 **56.7%**，碰撞 **65/300**。
-- **A2C 候选**：达标率 **79.0%**，碰撞 **5/300**。
-- **规则驾驶**：达标率 **63.3%**，碰撞 **0/300**。
-
-正式 PPO 对规则驾驶，按游戏胜负规则同起点比较为 **228 胜、71 负、1 平**。A2C 对正式 PPO 为 **217 胜、72 负、11 平**，但碰撞增加，未通过预设安全门槛，所以仍部署 PPO。效率改善同时暴露了安全代价。
-
-最难的连续高压关仍有不足：正式 PPO 达标 **32/100**、碰撞 **0/100**；A2C 达标 **43/100**、碰撞 **4/100**。零次观测碰撞不等于零风险，平均成绩不能掩盖困难关卡的问题。
-
-当前权重为 `artifacts/experiments_v3/deployment/v3_expert-b4f0d5f66de4.zip`；发布结论见 [release.json](artifacts/experiments_v3/iteration_4/release.json)。旧版测试使用不同道路，保留作历史记录，不与本轮直接计算提升。
-
-**能力边界**：仅验证三车道直路仿真；AI 读取结构化状态，人类看画面，输入形式不同；没有系统人类基准或多训练随机种子的显著性分析。不能据一次现场胜负宣称超过人类或达到真实自动驾驶水平。
-
-## 开发与复现
-
-交付版无需训练。新开基础 PPO 实验示例，使用新名字，不覆盖归档：
+## 开发
 
 ```powershell
-.\.venv\Scripts\python.exe -m rl_course.train_v3 --run my_new_run --seed 13 --steps 200000
-.\.venv\Scripts\python.exe -m rl_course.evaluate_v3 --policy rule --episodes 80 --game-routes
-.\.venv\Scripts\python.exe -m rl_course.evaluate_v3 --policy my_candidate --model artifacts/experiments_v3/my_new_run/best.zip --episodes 80 --game-routes
-```
+# 后端检查
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
 
-该示例不会复现候选的额外效率奖励。多算法入口用 `python -m rl_course.train_challenge_models --help` 查看，选择未使用的 seed 作为新运行名。现有 `release_challenge_models` 发布目录已冻结；新一轮应配置独立输出目录和新测试种子。
-
-修改前端后构建：
-
-```powershell
+# 前端检查与构建
 cd web
 npm ci
-npm run build
-cd ..
-.\Start-Game.cmd
-```
-
-项目结构：
-
-- [rl_course/](rl_course/)：环境、规则、训练、评估与发布校验。
-- [server/](server/)：FastAPI、推理、对决会话、记录回放与启动器。
-- [web/src/game/](web/src/game/)：React / TypeScript / Three.js 界面和 Web Audio 音效。
-- [tests/](tests/)、[web/e2e/](web/e2e/)：环境、服务、交互和真实浏览器验证。
-- [docs/defense/](docs/defense/)：答辩幻灯片、PDF 与讲稿。
-- [PROJECT_PLAN.md](PROJECT_PLAN.md)：设计取舍、技术结构与评估边界。
-
-验证：
-
-```powershell
-.\.venv\Scripts\python.exe -m unittest discover -s tests -v
-cd web
 npm test
 npm run lint
 npm run build
 npx playwright test
 ```
 
-日志、个人驾驶记录、依赖目录和临时文件不上传。DQN 训练回放缓冲区 `*.pkl` 不提交，不影响模型推理；续训若需要历史回放数据，应在本机保留或重新生成。
+训练代码在 `rl_course/`，本地服务在 `server/`，游戏界面在 `web/src/game/`。安装依赖、构建或更改代码后，重新运行启动器即可。
 
-## 开源基础与参考
+`artifacts/experiments_v2/` 和 `artifacts/experiments_v3/` 保留模型来源及逐局测试记录。个人驾驶记录、日志、训练回放缓冲区和测试截图不提交到 Git。浏览器测试输出位于 `artifacts/browser-tests/` 和 `artifacts/browser-previews/`。
 
-交通仿真：[HighwayEnv](https://highway-env.farama.org/)。算法：[Stable-Baselines3](https://github.com/DLR-RM/stable-baselines3)，原理与接口参阅 [PPO](https://stable-baselines3.readthedocs.io/en/master/modules/ppo.html)、[DQN](https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html)、[A2C](https://stable-baselines3.readthedocs.io/en/master/modules/a2c.html) 官方文档。
+## 依赖与素材
 
-渲染：[Three.js](https://threejs.org/)。车辆：[Kenney Car Kit](https://kenney.nl/assets/car-kit)，CC0 许可见 [web/public/models/](web/public/models/)。本项目实现交通编队、任务与奖励设计、训练评估流程、人机对决和可视化；PPO、DQN、A2C 采用已有算法实现。
+交通仿真使用 [HighwayEnv](https://highway-env.farama.org/)，算法使用 [Stable-Baselines3](https://github.com/DLR-RM/stable-baselines3)，渲染使用 [Three.js](https://threejs.org/)。车辆模型来自 [Kenney Car Kit](https://kenney.nl/assets/car-kit)，采用 CC0 许可，见[素材说明](web/public/models/ASSET_CREDITS.md)。

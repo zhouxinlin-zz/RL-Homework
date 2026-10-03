@@ -2498,75 +2498,6 @@
   padding: 7px 11px;
   font-size: 11px;
 }
-.tutorial-card {
-  position: absolute;
-  z-index: 11;
-  top: 245px;
-  left: 35px;
-  width: 272px;
-  padding: 19px;
-  border: 1px solid #c6dfae40;
-  background: #10262bef;
-  backdrop-filter: blur(12px);
-  border-radius: 10px;
-  color: #d9e5d5;
-  box-shadow: 0 12px 40px #07161b33;
-}
-.tutorial-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  font-size: 10px;
-  color: #b6d193;
-}
-.tutorial-top button {
-  border: 0;
-  background: none;
-  color: #9bb09f;
-  font-size: 19px;
-  padding: 0 3px;
-}
-.tutorial-steps {
-  display: flex;
-  gap: 5px;
-  margin: 12px 0 18px;
-}
-.tutorial-steps i {
-  height: 3px;
-  flex: 1;
-  background: #6f8a773b;
-  border-radius: 3px;
-}
-.tutorial-steps i.done {
-  background: #bedf8c;
-}
-.tutorial-card > strong {
-  font-size: 17px;
-  font-weight: 600;
-}
-.tutorial-card p {
-  font-size: 12px;
-  color: #adbdaf;
-  line-height: 1.8;
-  margin: 9px 0 13px;
-}
-.tutorial-key kbd {
-  background: #b7d18e18;
-  padding: 5px 12px;
-  border: 1px solid #c2d69443;
-  border-radius: 5px;
-  display: inline-block;
-  font-family: inherit;
-  font-size: 13px;
-}
-.tutorial-key button {
-  border: 0;
-  background: none;
-  color: #bedf8c;
-  font-size: 12px;
-  padding: 5px 0;
-}
 .replay-events {
   position: absolute;
   bottom: 95px;
@@ -2618,10 +2549,6 @@
   }
   .duel-standing strong {
     font-size: 15px;
-  }
-  .tutorial-card {
-    width: 220px;
-    left: 20px;
   }
 }
 @media (max-width: 700px) {
@@ -2690,18 +2617,6 @@
   }
   .duel-standing strong {
     font-size: 12px;
-  }
-  .tutorial-card {
-    top: 215px;
-    left: 16px;
-    width: min(265px, calc(100% - 32px));
-    padding: 15px;
-  }
-  .tutorial-card p {
-    font-size: 11px;
-  }
-  .tutorial-card > strong {
-    font-size: 15px;
   }
   .replay-events {
     max-width: calc(100% - 30px);

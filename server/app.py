@@ -11,7 +11,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import RedirectResponse
 
 from rl_course.driving_env_v3 import SCENARIOS
 from rl_course.driving_env import TRAFFIC as LEGACY_TRAFFIC
@@ -173,6 +173,6 @@ def game_replay(run_id: str):
 if (ROOT / "web" / "dist").exists():
     @app.get("/research")
     def archive_research():
-        return FileResponse(ROOT / "web" / "dist" / "index.html")
+        return RedirectResponse("/", status_code=307)
 
     app.mount("/", StaticFiles(directory=ROOT / "web" / "dist", html=True), name="game")

@@ -10,7 +10,8 @@ export function useDriving() {
   const active = useRef<string | null>(null);
   const generation = useRef(0);
   const queuedActions = useRef<number[]>([]);
-  const inFlight = useRef(false);
+  const inFlight = useRef<string | null>(null);
+  const background = useRef(false);
   const currentPhase = useRef<Phase>("idle");
   const countdownRemainingMs = useRef(0);
   const countdownDeadline = useRef<number | null>(null);
@@ -65,7 +66,9 @@ export function useDriving() {
         setCountdown(3);
         countdownRemainingMs.current = 3000;
         countdownDeadline.current = null;
-        transition("countdown");
+        transition(
+          background.current || document.hidden ? "paused" : "countdown",
+        );
       } catch (reason) {
         if (token === generation.current) {
           setError(reason instanceof Error ? reason.message : "无法开始驾驶");
@@ -107,11 +110,11 @@ export function useDriving() {
     async function tick() {
       const id = active.current;
       if (cancelled || !id || currentPhase.current !== "running") return;
-      if (inFlight.current) {
+      if (inFlight.current === id) {
         timer = window.setTimeout(tick, 30);
         return;
       }
-      inFlight.current = true;
+      inFlight.current = id;
       const started = performance.now();
       const action = queuedActions.current.shift() ?? 1;
       try {
@@ -125,7 +128,7 @@ export function useDriving() {
           transition("paused");
         }
       } finally {
-        inFlight.current = false;
+        if (inFlight.current === id) inFlight.current = null;
         if (!cancelled)
           timer = window.setTimeout(
             tick,
@@ -176,13 +179,23 @@ export function useDriving() {
   }, []);
 
   useEffect(() => {
+    const blur = () => {
+      background.current = true;
+      pause();
+    };
+    const focus = () => {
+      background.current = false;
+    };
     const visibility = () => {
+      background.current = document.hidden;
       if (document.hidden) pause();
     };
-    window.addEventListener("blur", pause);
+    window.addEventListener("blur", blur);
+    window.addEventListener("focus", focus);
     document.addEventListener("visibilitychange", visibility);
     return () => {
-      window.removeEventListener("blur", pause);
+      window.removeEventListener("blur", blur);
+      window.removeEventListener("focus", focus);
       document.removeEventListener("visibilitychange", visibility);
     };
   }, [pause]);

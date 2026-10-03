@@ -1,4 +1,25 @@
-import type { WorldFrame } from "../live/types";
+export type Vehicle = {
+  id: number;
+  x: number;
+  y: number;
+  heading: number;
+  speed: number;
+  length: number;
+  width: number;
+  crashed: boolean;
+  kind?: string;
+};
+
+export type WorldFrame = {
+  step: number;
+  time_s: number;
+  action: number | null;
+  reward: number;
+  ego_id: number;
+  vehicles: Vehicle[];
+  target_speed?: number;
+  target_lane?: number;
+};
 
 export type Mode = "human" | "ai" | "duel";
 export type Theme = "coast" | "city" | "sunset" | "night";
@@ -64,14 +85,49 @@ export type TrainingCatalog = {
   algorithm: string;
   evaluation: string;
   levels: Record<string, TrainingLevel>;
-  comparison?: { id: string; algorithm: string; method: string; checkpoint_steps: number; training_steps: number; pretrained: boolean; overall: TrainingLevel["overall"]; routes?: TrainingLevel["routes"]; history: { steps: number; crashes: number; episodes: number; qualification_rate: number; mean_score: number }[] }[];
-  improvement?: { promoted: boolean; algorithm: string; before: TrainingLevel["overall"]; candidate: TrainingLevel["overall"] } | null;
-  standard_vs_beginner: { pairs: number; wins: number; losses: number; draws: number };
-  expert_vs_rule: { pairs: number; wins: number; losses: number; draws: number };
+  comparison?: {
+    id: string;
+    algorithm: string;
+    method: string;
+    checkpoint_steps: number;
+    training_steps: number;
+    pretrained: boolean;
+    overall: TrainingLevel["overall"];
+    routes?: TrainingLevel["routes"];
+    history: {
+      steps: number;
+      crashes: number;
+      episodes: number;
+      qualification_rate: number;
+      mean_score: number;
+    }[];
+  }[];
+  improvement?: {
+    promoted: boolean;
+    algorithm: string;
+    before: TrainingLevel["overall"];
+    candidate: TrainingLevel["overall"];
+  } | null;
+  standard_vs_beginner: {
+    pairs: number;
+    wins: number;
+    losses: number;
+    draws: number;
+  };
+  expert_vs_rule: {
+    pairs: number;
+    wins: number;
+    losses: number;
+    draws: number;
+  };
 };
 export type Runner = {
   model_info?: { algorithm?: string; method?: string; run_id?: string } | null;
-  decision?: { kind: "probability" | "q_value"; values: number[]; action: number } | null;
+  decision?: {
+    kind: "probability" | "q_value";
+    values: number[];
+    action: number;
+  } | null;
   done: boolean;
   crashed: boolean;
   completed?: boolean;
