@@ -50,9 +50,11 @@ cd RL-Homework
 - [训练与评估](docs/training.md)：状态、奖励、网络配置、训练来源、选模流程和实验结果。
 - [程序结构](docs/architecture.md)：前后端接口、会话、渲染和存档。
 - [前端开发](web/README.md)：开发服务、构建和测试命令。
-- [答辩幻灯片](docs/defense/LANE-SHIFT-defense.html)、[PDF](docs/defense/LANE-SHIFT-defense.pdf)、[逐页讲稿](docs/defense/defense-notes.html)：12 页正文和 2 页备答，约 8–10 分钟。
+- [答辩幻灯片](docs/defense/LANE-SHIFT-defense.html)、[逐页讲稿](docs/defense/defense-notes.html)：包含完整与精简两种播放顺序及对应讲稿。
+- [5 分钟 PDF](docs/defense/LANE-SHIFT-defense-brief.pdf)：8 页重点内容，含约 20 秒实机演示时间。
+- [完整 PDF](docs/defense/LANE-SHIFT-defense.pdf)：12 页正文和 2 页备答，约 8–10 分钟。
 
-幻灯片用浏览器打开，左右键翻页，`F` 全屏，`Esc` 打开目录。
+幻灯片用浏览器打开，左右键翻页，`F` 全屏，`Esc` 打开目录并选择汇报时长。精简模式会按顺序跳过补充页；答问时可以切回完整版本。
 
 ## 开发
 

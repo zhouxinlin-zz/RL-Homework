@@ -118,6 +118,13 @@ body.split-bg .nav-buttons{color:white}
 #overview .index-list{display:grid;grid-template-columns:1fr 1fr;gap:1.5vh 3vw}
 #overview button{background:transparent;border:0;border-top:1px solid #bbb;padding:1.4vh 0;text-align:left;font:inherit;font-size:1.5vw;cursor:pointer}
 #overview button:hover{color:var(--accent)}
+.nav-buttons button:disabled{opacity:.35;cursor:default}
+#nav .dot[hidden],#overview button[hidden]{display:none}
+#overview .deck-mode{display:flex;gap:2vw;margin-bottom:2vh}
+#overview .deck-mode button{padding:1.2vh 1.4vw;border:1px solid #999}
+#overview .deck-mode button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:white}
+#overview .mode-description{font-size:1.25vw;margin-bottom:2.5vh}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 body.low-power #deck{transition:none}
 .slide[aria-hidden="true"]{visibility:hidden}
 @media print{

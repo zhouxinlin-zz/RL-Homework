@@ -1,7 +1,7 @@
 """Build the offline defense deck and notes from the frozen project evidence.
 
 Run from anywhere: python docs/defense/source/build.py
-Uses the Python standard library; does not train, evaluate, or change reports.
+Uses Matplotlib for the archived validation plot; never changes experiment data.
 """
 from __future__ import annotations
 
@@ -9,7 +9,9 @@ import base64
 import hashlib
 import html
 import json
+import re
 from pathlib import Path
+from figures import evidence_digest, pressure_breakdown, training_figure
 
 HERE = Path(__file__).resolve().parent
 OUT = HERE.parent
@@ -28,6 +30,13 @@ EXPERT_PROGRESS = json.loads(
     (ROOT / "artifacts/experiments_v3/safe_transfer_s47/progress.json").read_text(encoding="utf-8")
 )
 assert EXPERT_PROGRESS["actual_timesteps"] == 501760
+PROGRESS_HASH = evidence_digest(ROOT / "artifacts/experiments_v3/safe_transfer_s47/progress.json")
+PRESSURE = {
+    "v3_expert": pressure_breakdown(EXPERIMENT, "test_v3_expert.json", MODELS["v3_expert"]["by_scenario"]["pressure"]),
+    "v3_a2c": pressure_breakdown(EXPERIMENT, "test_v3_a2c_candidate.json", MODELS["v3_a2c"]["by_scenario"]["pressure"]),
+}
+training_figure(EXPERT_PROGRESS, OUT / "assets/ppo-validation.png")
+TRAINING_IMAGE = base64.b64encode((OUT / "assets/ppo-validation.png").read_bytes()).decode("ascii")
 
 SLIDES: list[dict] = []
 
@@ -165,23 +174,25 @@ add(
 )
 
 add(
-    "训练记录可以追溯", "S02", "light",
-    head("06 / 模型来源", "训练记录可以追溯")
-    + '<div class="timeline-v" data-anim="timeline">'
-    '<div class="tl-node"><span class="dot"></span><span class="yr">已有 PPO</span><span class="multi">迁移初始化</span><span class="desc">v2 模型 → v3 车流编队 → v3.1 安全微调</span></div>'
-    '<div class="tl-node"><span class="dot"></span><span class="yr">安全微调</span><span class="multi">501,760 步</span><span class="desc">safe_transfer_s47 的完整交互记录；另有上游训练</span></div>'
-    '<div class="tl-node accent"><span class="dot"></span><span class="yr">正式部署</span><span class="multi">175,000 步</span><span class="desc">选中的检查点位置，不是全部训练预算</span></div></div>'
-    '<div class="kpi-row-4" data-anim="kpi">'
-    '<div class="kpi-cell"><div class="lbl">向量化环境</div><div class="nb">4</div><p class="note">CPU 收集交互</p></div>'
-    '<div class="kpi-cell"><div class="lbl">每轮采样</div><div class="nb">2,048</div><p class="note">4 × 512 条交互</p></div>'
-    '<div class="kpi-cell"><div class="lbl">每批样本</div><div class="nb">256</div><p class="note">PPO 小批量更新</p></div>'
-    '<div class="kpi-cell"><div class="lbl">每轮优化</div><div class="nb">8</div><p class="note">epoch</p></div></div>',
-    "避免把检查点步数误报为全部训练量。",
-    "上半页来源链，下半页最必要的训练配置。训练曲线另见游戏训练成果与归档。",
-    "正式模型不是从零开始只训练十七万五千步。它先继承早期 PPO，再迁移到结构化车流，最后完成安全奖励下的微调。最后一段累计交互五十万一千七百六十步，实际部署的是其中十七万五千步的检查点。我们根据开发道路表现选择，而不是默认越晚越好。四个环境各采集五百一十二步后，组成一批经历；每批二百五十六条，重复八轮优化。配置、检查点和开发指标都有归档。",
+    "训练更久，未必更好", "S22", "light",
+    '<div class="hero-img-wrap" style="background:var(--paper)"><div class="hero-overlay-block" data-anim="title-block">'
+    '<div class="t-meta">06 / 开发评估曲线</div><h2>训练更久<br>未必更好</h2>'
+    '<p style="font-size:1.2vw;line-height:1.7;margin-top:3vh">上：平均行驶里程<br>下：累计危险时间<br>蓝线：正式部署检查点</p></div>'
+    f'<img data-image-slot="s22-hero-21x9" src="data:image/png;base64,{TRAINING_IMAGE}" '
+    'style="top:10vh;height:49vh" alt="正式 PPO 安全微调：17 次开发评估的平均里程与危险时间，标注 175000 步部署点" data-anim="img"></div>'
+    '<div class="image-hero-body" data-anim="kpi"><p>起点已继承 PPO，不是从零训练。<br>'
+    '每点为同一组 24 局，回合均为 45 秒。<br>开发曲线与后面的独立测试分开解读。</p>'
+    '<div class="image-hero-stats">'
+    '<div><div class="number">50.18 万</div><div class="label">本次安全微调<br>501,760 步</div></div>'
+    '<div><div class="number">17.5 万</div><div class="label">正式部署点<br>另有上游训练</div></div>'
+    '<div><div class="number">17 次</div><div class="label">归档开发评估<br>未平滑、单训练种子</div></div>'
+    '</div></div>',
+    "用真实曲线说明训练会波动，并交代迁移起点与开发评估口径。",
+    "上图看里程，下图看危险时间。蓝线只标记已部署点，不声称它在所有指标上最高。",
+    "这里是正式 PPO 安全微调的真实记录。横轴从零开始，但零点已经继承了已有 PPO，所以它一开始就会驾驶。上图看里程，下图看危险时间：训练继续，表现仍会波动，不能默认最后一个检查点最好。本次完整训练约五十万步，蓝线标出实际部署的十七万五千步。每个点来自同样的二十四局开发道路，回合统一四十五秒。这是单次训练的开发曲线，后面三百局独立测试采用实际关卡时长，两者不能混算。",
     "在这个正式模型之外，我们还尝试了几种提高效率的候选方案。", 45,
-    "artifacts/experiments_v3/safe_transfer_s47/{config,progress}.json；deployment.json",
-    "timeline",
+    "safe_transfer_s47/progress.json：validations；deployment.json；图形生成方法参考 RL Zoo，数据均为本项目。",
+    "image-hero", True,
 )
 
 add(
@@ -258,36 +269,37 @@ def pressure_col(key, label, explanation, accent=False):
         f'<div class="col-tag">{label}</div><h3 class="col-ttl">{explanation}</h3>'
         f'<div class="metric-pair"><div><div class="value">{stats["qualification_rate"]*100:.0f}%</div>'
         f'<div class="caption">里程达标</div></div><div><div class="value">{stats["crashes"]}/100</div>'
-        '<div class="caption">碰撞局数</div></div></div></div>'
+        '<div class="caption">碰撞局数</div></div></div>'
+        f'<p class="col-desc"><strong>{PRESSURE[key]["short"]} / 100</strong> 局安全完赛，里程不足。</p></div>'
     )
 
 add(
-    "高压路况仍是瓶颈", "S08", "light",
-    head("10 / 失败分析", "高压路况仍是瓶颈", "安全通过不等于有效通行；整体均值会掩盖最难的一关。")
+    "高压关主要差在通行效率", "S08", "light",
+    head("10 / 失败分析", "高压关主要差在通行效率", "按逐局记录拆分结果：达标、安全完赛但里程不足、碰撞。")
     + '<div class="duo-compare">'
     + pressure_col("v3_expert", "正式 PPO", "更稳，但仍偏保守")
     + '<div class="vrule"></div>'
     + pressure_col("v3_a2c", "A2C 候选", "更高达标，也有事故", True)
-    + '</div><p class="chart-note">下一步围绕高压失败案例改进，使用新测试道路验证。<br>'
-    '本次零碰撞是样本结果，不能理解为安全保证。</p>',
+    + f'</div><p class="chart-note">正式 PPO 未达标的 68 局，距目标的缺口中位数为 {PRESSURE["v3_expert"]["median_shortfall"]:.1f} 米。<br>'
+    '下一步检查错过通行机会的原因，再用新道路验证；保持原有关卡目标。</p>',
     "展示对失败和局限的理解，避免声称模型问题已全部解决。",
-    "同一关的 100 局，PPO 与 A2C 各给两个数。",
-    "连续高压更能暴露问题。正式 PPO 只有百分之三十二达标，没有观测到碰撞；A2C 达标提高到百分之四十三，但有四次碰撞。我们能够确认的是安全和效率还没有同时解决，不能只因为总体达标率提高就宣布成功。后续应分析失去超车窗口、过早减速和冒险换道等失败案例，再针对性改奖励、采样和训练。是否优于人类也需要专门收集基准，目前一次现场对决无法回答这个问题。",
+    "三个结果分类覆盖每组 100 局。19.4 米的中位数仅针对正式 PPO 的 68 局未达标结果。",
+    "拆开高压关的逐局记录，正式 PPO 的三十二局达标，另外六十八局都安全跑完了五十五秒，只是里程不足。这六十八局离目标的缺口中位数约十九点四米。A2C 有四十三局达标、五十三局安全完赛但里程不足，以及四局碰撞。这说明当前值得改进的是通行效率，同时要防止增加事故。仅靠统计还不能断定是错过超车窗口还是过早减速，需要结合回放分析，也不能通过降低目标来宣布模型进步。",
     "最后用三点总结本项目已经完成的工作与结论。", 45,
-    "iteration_4/report.json：models.v3_expert / v3_a2c.by_scenario.pressure；各 n=100",
+    "iteration_4/test_v3_expert.json、test_v3_a2c_candidate.json；与 report.json 核对；各 n=100",
     "duo-compare",
 )
 
 add(
-    "总结：学习、验证、展示", "SWISS-CLOSING-ASCII", "split",
+    "结论：保留 PPO，继续改善高压关", "SWISS-CLOSING-ASCII", "split",
     '<div class="split-half"><div class="half b-accent"><canvas class="ascii-bg" aria-hidden="true"></canvas>'
     '<div class="chrome-min"><span>LANE SHIFT / 总结</span></div>'
-    '<h2 class="closing-title" data-anim="title">让策略<br>做出选择<br><i>让证据回答</i></h2>'
+    '<h2 class="closing-title" data-anim="title">正式对手<br>PPO<br><i>高压关待改进</i></h2>'
     '<p class="cover-summary" style="max-width:100%">强化学习驾驶对决</p></div>'
-    '<div class="half"><div class="chrome-min"><span>CONCLUSION</span><span>12 / 14</span></div>'
+    '<div class="half"><div class="chrome-min"><span>CONCLUSION</span><span data-page-number="12">12 / 14</span></div>'
     '<ol class="takeaways">'
     '<li data-anim="item"><h3>构建可学习的任务</h3><p>结构化车流、状态动作设计、奖励与交互展示形成完整流程。</p></li>'
-    '<li data-anim="item"><h3>用实验选择模型</h3><p>PPO 为正式对手；多算法对照说明效率提升与事故之间的取舍。</p></li>'
+    '<li data-anim="item"><h3>按评估结果选择对手</h3><p>PPO 用于正式对决；候选实验展示通行效率与碰撞的取舍。</p></li>'
     '<li data-anim="item"><h3>明确目前的边界</h3><p>高压关仍待改善；尚无足够证据支持“超过人类”。</p></li>'
     '</ol></div></div>',
     "用完整项目流程与证据意识收束，而非堆功能或夸大算法贡献。",
@@ -342,15 +354,28 @@ add(
 )
 
 
+BRIEF = {
+    1: (15, "我们的项目叫《变道之间》，是一款人机驾驶对决游戏。我们用强化学习训练驾驶策略，重点考察它能否在复杂车流中同时兼顾安全和通行效率。"),
+    2: (50, "左边由玩家控制，右边由训练好的 PPO 控制。双方从相同车流出发，动作和速度范围一致。我演示连续高压关中的二十秒，观察它接近慢车后的选择。比赛先看安全完赛，再看里程是否达标和得分。现场一局用来展示行为，模型能力由后面的独立测试说明。"),
+    4: (35, "我们把驾驶建成一个状态到动作的学习任务。模型读取三十个数，描述本车和三个车道的前后车；两层 MLP 输出五种动作，包括左右换道、保持和调速。每秒决策五次。模型读取数值状态，画面负责展示；训练时的价值分支帮助估计长期收益。"),
+    5: (40, "训练时，模型自动驾驶、接收环境奖励，收集一批经历后更新网络。PPO 利用优势估计提高好动作的概率，同时限制新策略一次改变过多。这个过程反复进行。现场程序只加载已选好的权重，不边玩边训练，也没有额外规则替它修改高层动作。"),
+    6: (35, "奖励定义了模型的驾驶偏好：前进、超车和完赛获得奖励，危险跟车和事故受到惩罚。过度强调安全会使策略保守，因此我们又尝试提高效率奖励并加重事故惩罚。左边是正式对手，右边是候选实验。奖励系数改得更严格，并不保证测试事故就更少。"),
+    7: (45, "这张图来自归档的真实训练记录。起点已继承 PPO，所以不是从零学开车。里程和危险时间都随训练波动。本次安全微调运行约五十万步，正式部署点是蓝线所示的十七万五千步。曲线每点为二十四局开发评估，不能与后面的三百局独立测试混算。"),
+    10: (45, "我们先用开发道路选模型、冻结权重，再在三百局未见道路上比较。正式 PPO 达标率为百分之七十二点三，碰撞零次；A2C 候选达标率升至百分之七十九，但发生五次碰撞。因为没有通过事先设定的安全门槛，正式比赛继续使用 PPO。不同候选的初始化和预算不同，这不是算法本身的严格排名。"),
+    12: (30, "项目完成了环境与奖励设计、模型训练、独立评估和交互展示。当前模型能稳定完成不少场景，高压关的通行效率仍有不足，也尚未建立人类统计基准。我们的结论是，模型选用需要同时看安全和效率，并能回到训练记录和具体失败案例解释结果。"),
+}
+assert sum(seconds for seconds, _ in BRIEF.values()) == 295
+
+
 def chrome(i: int) -> str:
-    return f'<div class="chrome-min"><span class="l">LANE SHIFT / 强化学习课程项目</span><span class="r">{i:02d} / {len(SLIDES):02d}</span></div>'
+    return f'<div class="chrome-min"><span class="l">LANE SHIFT / 强化学习课程项目</span><span class="r" data-page-number="{i}">{i:02d} / {len(SLIDES):02d}</span></div>'
 
 
 pages = []
 for i, s in enumerate(SLIDES, 1):
     body = s["body"]
     if s["layout"] == "S22":
-        body = body.replace('<div class="hero-img-wrap">', '<div class="hero-img-wrap">' + chrome(i))
+        body = re.sub(r'(<div class="hero-img-wrap"[^>]*>)', lambda match: match[0] + chrome(i), body, count=1)
         inner = '<div class="canvas-card image-hero-card">' + body + "</div>"
     elif s["layout"] == "SWISS-CLOSING-ASCII":
         inner = '<div class="canvas-card">' + body + "</div>"
@@ -359,7 +384,7 @@ for i, s in enumerate(SLIDES, 1):
         inner = '<div class="canvas-card">' + body + "</div>"
     else:
         inner = '<div class="canvas-card">' + chrome(i) + '<div class="body-area">' + body + f'<p class="source">依据：{html.escape(s["source"])}</p></div></div>'
-    pages.append(f'<section class="slide {s["theme"]}" data-title="{html.escape(s["title"])}" data-layout="{s["layout"]}" data-animate="{s["recipe"]}" id="slide-{i}">{inner}</section>')
+    pages.append(f'<section class="slide {s["theme"]}" data-title="{html.escape(s["title"])}" data-layout="{s["layout"]}" data-animate="{s["recipe"]}" data-brief="{str(i in BRIEF).lower()}" id="slide-{i}">{inner}</section>')
 
 css = "\n".join((HERE / name).read_text(encoding="utf-8") for name in ("theme.css", "defense.css"))
 js = (HERE / "deck.js").read_text(encoding="utf-8")
@@ -367,12 +392,17 @@ deck = (
     '<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">'
     '<meta name="viewport" content="width=device-width,initial-scale=1">'
     '<meta name="description" content="LANE SHIFT 强化学习课程项目答辩：环境、奖励、训练、评估与交互展示">'
-    '<title>LANE SHIFT · 变道之间｜答辩初稿</title><style>' + css + '</style></head>'
+    '<title>LANE SHIFT · 变道之间｜课程答辩</title><style>' + css + '</style></head>'
     '<body class="canvas-mode low-power"><main id="deck">' + "\n".join(pages) + '</main>'
     '<nav id="nav" aria-label="幻灯片导航"></nav><div class="nav-buttons">'
     '<button id="prev" aria-label="上一页">←</button><button id="contents">目录</button><button id="next" aria-label="下一页">→</button></div>'
     '<div id="hint">← → 翻页 · F 全屏 · Esc 目录 · B 静态</div>'
-    '<aside id="overview" hidden><h2>答辩目录 <button id="close-index">返回</button></h2><div class="index-list"></div></aside>'
+    '<aside id="overview" role="dialog" aria-modal="true" aria-label="答辩目录" hidden>'
+    '<h2>答辩目录 <button id="close-index">返回</button></h2>'
+    '<div class="deck-mode" role="group" aria-label="汇报时长">'
+    '<button id="mode-full" aria-pressed="true">完整汇报 · 8–10 分钟</button>'
+    '<button id="mode-brief" aria-pressed="false">精简汇报 · 约 5 分钟</button></div>'
+    '<p class="mode-description"></p><div class="index-list"></div></aside>'
     '<script>' + js + '</script></body></html>'
 )
 (OUT / "LANE-SHIFT-defense.html").write_text(deck, encoding="utf-8")
@@ -401,7 +431,7 @@ faq = [
     ("如何解释 AI 减速？",
      "减速可能是对近距离车辆的合理反应，也可能是安全惩罚下的过度保守。要同时看周车状态、达标率和失败回放，不能只看一秒钟的速度。候选实验增加效率奖励，但碰撞也增加，这正是当前尚未解决的取舍。"),
     ("下一步最值得做什么？",
-     "先分类高压关失败：错过安全窗口、长期跟车、冒险汇入等；再有针对性地调整困难场景采样或奖励，固定更公平的训练预算，保留新的测试道路验收。若要回答人类水平，需收集足量受试者、多关卡、多次尝试及统一操作规则。"),
+     "逐局记录已确认：正式 PPO 高压关的 68 次未达标均为安全完赛但里程不足，缺口中位数约 19.4 米。下一步结合回放定位错过窗口或减速的具体原因，针对性调整困难场景采样或奖励，再用新测试道路验收。若要回答人类水平，需另建足量受试者和统一操作规则的基准。"),
 ]
 
 notes_css = """
@@ -428,20 +458,27 @@ for i, s in enumerate(SLIDES, 1):
         f'<p class="meta"><strong>核对依据：</strong><code>{html.escape(s["source"])}</code></p></article>'
     )
 faqs = "".join(f'<details open><summary>{html.escape(q)}</summary><p>{html.escape(a)}</p></details>' for q, a in faq)
+brief_notes = '<section id="brief"><h2>约 5 分钟讲稿</h2><p>8 页，建议合计 4 分 55 秒，含 20 秒实机片段。每页讲完直接按右键，精简模式会跳过补充页。</p>' + "".join(
+    f'<article><div class="label">精简 {order} / 8 · 原第 {index} 页 · {seconds} 秒</div>'
+    f'<h3><a href="LANE-SHIFT-defense.html?mode=brief#{index}">{html.escape(SLIDES[index-1]["title"])}</a></h3>'
+    f'<blockquote>{html.escape(talk)}</blockquote></article>'
+    for order, (index, (seconds, talk)) in enumerate(BRIEF.items(), 1)
+) + '</section>'
 notes = (
     '<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
     '<title>LANE SHIFT｜逐页答辩提纲与讲稿</title><style>' + notes_css + '</style></head><body><main>'
     '<header><div class="label">LANE SHIFT / DEFENSE NOTES</div><h1>逐页答辩提纲与讲稿</h1>'
     '<p>12 页正文 + 2 页备答。按目前讲稿约 8–10 分钟，含约 1 分钟实机展示；具体随语速和操作略有变化。</p>'
     '<p>讲述顺序：看见任务 → 理解建模 → 解释训练 → 检查证据 → 讨论边界。页面只放核心内容，下面的讲稿用于预演或放在第二屏。</p>'
-    '<p><a href="LANE-SHIFT-defense.html">打开离线幻灯片</a> · <a href="LANE-SHIFT-defense.pdf">打开 PDF</a> · <a href="../../README.md">项目说明</a></p></header>'
+    '<p><a href="LANE-SHIFT-defense.html?mode=brief">5 分钟幻灯片</a> · <a href="LANE-SHIFT-defense-brief.pdf">精简 PDF</a> · '
+    '<a href="LANE-SHIFT-defense.html">完整幻灯片</a> · <a href="LANE-SHIFT-defense.pdf">完整 PDF</a> · <a href="../../README.md">项目说明</a></p></header>'
     '<h2>使用与预演</h2><ul>'
     '<li>双击网页幻灯片，F 全屏，左右键翻页；Esc 目录，B 静态。PDF 可作为备用，两者均不需要联网。</li>'
     '<li>先运行 Start-Game.cmd 与 Check-Game.cmd；让游戏和幻灯片同时打开。第 2 页切到游戏，从“选择起始路线”进入连续高压。</li>'
     '<li>操作阶段只解释换道、减速和结算；不同时展开设置、记录和算法页面。若时间不足，截图说明玩法，直接进入训练与评估部分。</li>'
     '<li>演示输赢都可以正常讲：这是行为展示，不是预设 AI 必胜。需要讨论泛化时引用第 10、11 页的独立测试。</li>'
-    '<li>若只有 5 分钟：讲第 1、2、4、5、9、10、12 页，实机压缩为 20 秒观察；不要临时修改测试数字。</li>'
-    '</ul><nav>' + toc + '</nav>' + "".join(articles)
+    '<li>5 分钟版本按第 1、2、4、5、6、7、10、12 页播放。Esc 打开目录，可切回完整版本回答追问；下方有对应短讲稿。</li>'
+    '</ul>' + brief_notes + '<h2>完整逐页讲稿</h2><nav>' + toc + '</nav>' + "".join(articles)
     + '<h2 id="faq">常见追问：完整回答</h2>' + faqs
     + '<h2>数字口径与证据</h2><ul>'
     '<li>独立测试：种子 1631100–1631199，三关各 100 局。图表只引用 iteration_4/report.json，不与 evaluation_final 的另一组种子混算。</li>'
@@ -449,6 +486,9 @@ notes = (
     '<li>高压关：正式 PPO 32%、0/100；A2C 43%、4/100。百分比保留一位时可能有四舍五入。</li>'
     '<li>新增五次训练合计 700,816 步。正式模型的 501,760 步为 safe_transfer_s47 完整记录，175,000 为部署检查点。均不应等同于包含上游的总预算。</li>'
     f'<li>本材料生成时 report.json 的 SHA-256：<code>{REPORT_HASH}</code>。</li>'
+    f'<li>第 7 页开发曲线读取 safe_transfer_s47/progress.json，SHA-256：<code>{PROGRESS_HASH}</code>；'
+    '17 个记录点，每点 24 局，种子 531100–531107，每关 8 局，统一 45 秒；未平滑，不代表多训练种子置信区间。</li>'
+    '<li>高压结果拆分来自原始逐局文件：正式 PPO 为 32 达标 / 68 安全完赛但里程不足 / 0 碰撞；A2C 为 43 / 53 / 4。19.4 米为正式 PPO 的 68 局未达标缺口中位数。</li>'
     '<li>原始数据：<a href="../../artifacts/experiments_v3/iteration_4/report.json">报告</a>、'
     '<a href="../../artifacts/experiments_v3/iteration_4/selection.json">冻结选择</a>、'
     '<a href="../../artifacts/experiments_v3/iteration_4/release.json">发布结果</a>。源码与证据路径在每页讲稿下方标注。</li></ul>'
@@ -457,10 +497,15 @@ notes = (
     '<li><a href="https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html">Stable-Baselines3：DQN（经验回放与目标网络）</a></li>'
     '<li><a href="https://stable-baselines3.readthedocs.io/en/master/modules/a2c.html">Stable-Baselines3：A2C（优势 actor-critic）</a></li>'
     '<li><a href="https://highway-env.farama.org/">HighwayEnv：交通仿真环境</a></li>'
-    '<li><a href="https://arxiv.org/abs/1707.06347">Schulman 等：Proximal Policy Optimization Algorithms，2017</a></li></ul>'
+    '<li><a href="https://arxiv.org/abs/1707.06347">Schulman 等：Proximal Policy Optimization Algorithms，2017</a></li>'
+    '<li><a href="https://github.com/DLR-RM/rl-baselines3-zoo">RL Baselines3 Zoo</a>：训练、定期评估和曲线展示的参考；'
+    '<a href="https://rl-baselines3-zoo.readthedocs.io/en/master/guide/plot.html">绘图文档</a>。本项目曲线由自己的日志生成。</li>'
+    '<li><a href="https://github.com/metadriverse/metadrive">MetaDrive</a>：多样化场景与安全评价的参考；'
+    '<a href="https://metadrive-simulator.readthedocs.io/en/latest/reward_cost_done.html">奖励、代价与终止条件文档</a>。当前仿真仍使用 HighwayEnv。</li>'
+    '<li><a href="https://github.com/MysterHawk/kdg-dai6-reinforcement-learning">HighwayEnv 课程项目对照</a>：参考其自定义奖励与多算法评估组织方式，未采用其中的连续动作离散映射，也不引用其模型成绩。</li></ul>'
     '<h2>修改材料</h2><p>编辑 <code>docs/defense/source/build.py</code> 中的逐页内容，执行 '
     '<code>.venv\\Scripts\\python.exe docs/defense/source/build.py</code> 重建网页与讲稿。配色和布局在同目录 CSS，翻页在 deck.js。'
-    'PDF 导出脚本为 <code>docs/defense/source/export.mjs</code>，需要 web 的 Playwright 开发依赖与 Edge。'
+    '曲线由同目录 <code>figures.py</code> 使用 Matplotlib 生成。PDF 导出脚本为 <code>docs/defense/source/export.mjs</code>，需要 web 的 Playwright 开发依赖与 Edge；一次导出完整与精简两份。'
     '源文件采用 Swiss 模板的排版基础；最终网页已内嵌样式、脚本和截图，可以单文件离线展示。</p>'
     '</main></body></html>'
 )

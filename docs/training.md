@@ -60,6 +60,14 @@
 
 证据：[初始配置](../artifacts/experiments_v3/safe_transfer_s47/config.json)、[完整进度](../artifacts/experiments_v3/safe_transfer_s47/progress.json)、[训练实现](../rl_course/train_v3.py)。续训后的累计请求和实际步数以 `progress.json` 为准，初始配置记录第一次运行设置。
 
+### 正式模型的开发评估曲线
+
+![PPO 安全微调期间的里程与危险时间](defense/assets/ppo-validation.png)
+
+曲线来自 `safe_transfer_s47/progress.json` 的 17 次评估，保留原始记录点、不做平滑。每点为相同的 24 局开发道路（三种路况各 8 个种子 `531100–531107`），回合统一 45 秒。蓝线标出 175,000 步的部署检查点；横轴零点已经继承上游 PPO 权重。
+
+上图为平均行驶里程，下图为每局累计危险时间，后者不是碰撞率。部署点的平均里程为 1095.0 米、危险时间为 0 秒；最终检查点为 1106.9 米、1.32 秒。继续训练会改变效率与风险表现。这些是单次训练的开发评估，不是后文实际关卡时长下的 300 局独立测试，也不代表多个训练种子的置信区间。
+
 ### PPO、DQN 与 A2C 候选
 
 候选使用相同观测与动作，按慢车编队 / 交织 / 高压 **20% / 40% / 40%** 抽样，采用各关实际 35 / 45 / 55 秒时长及上述效率奖励。
@@ -98,6 +106,13 @@
 
 当前权重为 `artifacts/experiments_v3/deployment/v3_expert-b4f0d5f66de4.zip`；发布结论见 [release.json](../artifacts/experiments_v3/iteration_4/release.json)。旧版测试使用不同道路，保留作历史记录，不与本轮直接计算提升。
 
+按高压关的原始逐局记录拆分：
+
+- 正式 PPO：32 局达标，68 局安全完赛但里程不足，0 局碰撞。这 68 局距离 1270 米目标的缺口中位数为 **19.4 米**。
+- A2C 候选：43 局达标，53 局安全完赛但里程不足，4 局碰撞。
+
+来源：[正式 PPO 逐局记录](../artifacts/experiments_v3/iteration_4/test_v3_expert.json)、[A2C 逐局记录](../artifacts/experiments_v3/iteration_4/test_v3_a2c_candidate.json)。生成幻灯片时会核对每组种子、分类总数和冻结报告。统计说明当前失败主要集中在通行效率，具体原因仍需结合回放分析；后续实验继续使用原有关卡目标，并采用新的未见道路验收。
+
 测试仅覆盖三车道直路仿真。AI 读取结构化状态，人类看画面，输入形式不同；目前没有系统人类基准，也未开展多训练随机种子的显著性分析。这些结果尚不能用于判断人类驾驶水平或真实道路性能。
 
 ## 开发与复现
@@ -115,3 +130,10 @@
 ## 参考
 
 算法使用 Stable-Baselines3 实现：[PPO](https://stable-baselines3.readthedocs.io/en/master/modules/ppo.html)、[DQN](https://stable-baselines3.readthedocs.io/en/master/modules/dqn.html)、[A2C](https://stable-baselines3.readthedocs.io/en/master/modules/a2c.html)。环境基于 [HighwayEnv](https://highway-env.farama.org/)。
+
+### 相近项目与参考做法
+
+- [HighwayEnv](https://github.com/Farama-Foundation/HighwayEnv)：提供高速、汇入、交叉路口等驾驶任务。本项目使用它的仿真基础，并自行实现三种交通编队与持续补车。
+- [RL Baselines3 Zoo](https://github.com/DLR-RM/rl-baselines3-zoo)：组织训练配置、定期评估与模型运行，并提供[训练和评估曲线脚本](https://rl-baselines3-zoo.readthedocs.io/en/master/guide/plot.html)。本轮参考其曲线展示方式，图中数据来自本项目的归档记录。
+- [MetaDrive](https://github.com/metadriverse/metadrive)：使用多样化场景研究泛化，并分别记录[奖励、代价和终止结果](https://metadrive-simulator.readthedocs.io/en/latest/reward_cost_done.html)。本轮参考这种区分方式，补充安全完赛但未达标的失败分类；MetaDrive 不是本项目运行依赖。
+- [HighwayEnv 课程项目](https://github.com/MysterHawk/kdg-dai6-reinforcement-learning)：组织了自定义奖励、多个算法和评估脚本，也记录了高奖励与实际驾驶效果不一致的问题。其连续动作映射和模型成绩不直接适用于当前五动作任务，因此只参考实验组织与问题分析方式。
