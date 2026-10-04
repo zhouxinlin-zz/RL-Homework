@@ -1,16 +1,23 @@
-import { useState } from "react";
 import type { TrainingCatalog } from "./types";
+import RefinementShowcase from "./RefinementShowcase";
+
+export type TrainingTab = "results" | "algorithms" | "refinement";
 
 const percent = (value: number) => `${(value * 100).toFixed(1)}%`;
 
 export default function ModelShowcase({
   training,
   onPlay,
+  onReplay,
+  tab,
+  setTab,
 }: {
   training: TrainingCatalog | null | undefined;
   onPlay: () => void;
+  onReplay: (track: string) => void;
+  tab: TrainingTab;
+  setTab: (tab: TrainingTab) => void;
 }) {
-  const [tab, setTab] = useState<"results" | "algorithms">("results");
   if (!training?.levels.expert) {
     return (
       <div className="model-unavailable">
@@ -30,19 +37,32 @@ export default function ModelShowcase({
         <div className="training-tabs" role="group" aria-label="训练展示内容">
           <button
             className={tab === "results" ? "selected" : ""}
+            aria-pressed={tab === "results"}
             onClick={() => setTab("results")}
           >
             正式对手与训练
           </button>
           <button
             className={tab === "algorithms" ? "selected" : ""}
+            aria-pressed={tab === "algorithms"}
             onClick={() => setTab("algorithms")}
           >
             PPO / DQN / A2C 对照
           </button>
+          {training.refinement && (
+            <button
+              className={tab === "refinement" ? "selected" : ""}
+              aria-pressed={tab === "refinement"}
+              onClick={() => setTab("refinement")}
+            >
+              本轮微调与回放
+            </button>
+          )}
         </div>
       )}
-      {tab === "algorithms" ? (
+      {tab === "refinement" && training.refinement ? (
+        <RefinementShowcase data={training.refinement} onReplay={onReplay} />
+      ) : tab === "algorithms" ? (
         <AlgorithmComparison training={training} />
       ) : (
         <>
@@ -50,9 +70,7 @@ export default function ModelShowcase({
             <div>
               <span className="game-eyebrow">当前实际使用的模型</span>
               <h2>高手对手 · {expert.algorithm ?? training.algorithm}</h2>
-              <p>
-              三段赛程共用同一个网络；每次驾驶动作都由网络直接决定。
-              </p>
+              <p>三段赛程共用同一个网络；每次驾驶动作都由网络直接决定。</p>
             </div>
             <div className="model-key-number">
               <strong>300</strong>
@@ -170,8 +188,8 @@ function AlgorithmComparison({ training }: { training: TrainingCatalog }) {
     <div className="algorithm-comparison">
       <h2>用候选实验，检验对手能否改进。</h2>
       <p>
-        正式对手使用 {training.algorithm}。下列 PPO、DQN、A2C
-        是候选训练实验，不在正式比赛中轮流接管车辆；三者用相同的 300
+        正式对手使用 {training.algorithm}。下列为上一轮归档的 PPO、DQN、A2C
+        候选训练实验，不在正式比赛中轮流接管车辆；三者用相同的 300
         条独立道路评估。
       </p>
       <div className="algorithm-results">
@@ -269,14 +287,14 @@ function AlgorithmComparison({ training }: { training: TrainingCatalog }) {
       </div>
       {training.improvement && (
         <p className="model-improvement">
-          本轮 {training.improvement.algorithm} 候选对原高手：安全达标率{" "}
+          该轮 {training.improvement.algorithm} 候选对当时高手：安全达标率{" "}
           {percent(training.improvement.before.qualification_rate)} →{" "}
           <b>{percent(training.improvement.candidate.qualification_rate)}</b>
           ；碰撞 {training.improvement.before.crashes} →{" "}
           <b>{training.improvement.candidate.crashes}</b> 次。
           {training.improvement.promoted
             ? "已通过安全与效率门槛，升级为高手对手。"
-            : "碰撞增加，没有通过升级门槛。正式比赛继续使用原 PPO，候选用于实验对照。"}
+            : "未通过升级门槛，该轮保留原 PPO。最新微调结果见单独的训练回放页。"}
         </p>
       )}
       <p className="comparison-note">

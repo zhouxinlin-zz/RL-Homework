@@ -19,6 +19,98 @@ async function openSetup(page: import("@playwright/test").Page) {
   );
 }
 
+test("training comparison replays show both policies without creating player records", async ({
+  page,
+  request,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  const before = await (await request.get("/api/game/records")).json();
+  await page.goto("/");
+  await expect(
+    page.locator('.game-scene[data-rendered="true"] canvas'),
+  ).toBeVisible();
+  await page.locator(".title-more summary").click();
+  await page.getByRole("button", { name: "训练成果", exact: true }).click();
+  await page
+    .getByRole("button", { name: "本轮微调与回放", exact: true })
+    .click();
+  await expect(page.getByLabel("PPO 训练前后对照")).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "本轮微调与回放", exact: true }),
+  ).toHaveAttribute("aria-pressed", "true");
+  await page.screenshot({
+    path: path.join(shots, "08-refinement-results.png"),
+    animations: "disabled",
+  });
+  let releaseReplay!: () => void;
+  const heldReplay = new Promise<void>((resolve) => {
+    releaseReplay = resolve;
+  });
+  await page.route("**/api/game/training/replays/pressure", async (route) => {
+    await heldReplay;
+    await route.continue();
+  });
+  await page.getByRole("button", { name: /连续高压.*可暂停与慢放/ }).click();
+  await expect(page.getByText("读取行程", { exact: true })).toBeVisible();
+  await page.keyboard.press("Escape");
+  const canceledResponse = page.waitForResponse(
+    "**/api/game/training/replays/pressure",
+  );
+  releaseReplay();
+  await canceledResponse;
+  await expect(page.getByRole("dialog", { name: "训练成果" })).toBeVisible();
+  await expect(page.locator(".comparison-hud")).toHaveCount(0);
+  await page.unroute("**/api/game/training/replays/pressure");
+  await page.getByRole("button", { name: /连续高压.*可暂停与慢放/ }).click();
+  await expect(page.locator(".comparison-hud")).toContainText("微调前 PPO");
+  await expect(page.locator(".comparison-hud")).toContainText("微调后 PPO");
+  await page.getByRole("button", { name: "暂停回放", exact: true }).click();
+  const progress = page.getByRole("slider", { name: "回放进度" });
+  await progress.fill("100");
+  await expect(page.locator(".hud-time")).toContainText("20.0");
+  await page.getByRole("button", { name: "比较动作概率", exact: true }).click();
+  await expect(page.locator(".comparison-policy > div")).toHaveCount(10);
+  await page.screenshot({ path: path.join(shots, "09-training-replay.png") });
+  const collision = await page
+    .locator(".comparison-sides section")
+    .evaluateAll((nodes) => {
+      const context = document
+        .querySelector(".comparison-context")!
+        .getBoundingClientRect();
+      return nodes.some((node) => {
+        const r = node.getBoundingClientRect();
+        return (
+          Math.min(r.right, context.right) > Math.max(r.left, context.left) &&
+          Math.min(r.bottom, context.bottom) > Math.max(r.top, context.top)
+        );
+      });
+    });
+  expect(collision).toBe(false);
+  await page.evaluate(() => (document.activeElement as HTMLElement)?.blur());
+  await page.keyboard.press("ArrowRight");
+  await expect(page.locator(".hud-time")).toContainText("21.0");
+  await page.keyboard.press("ArrowLeft");
+  await expect(page.locator(".hud-time")).toContainText("20.0");
+  await page.keyboard.press("Space");
+  await expect(
+    page.getByRole("button", { name: "暂停回放", exact: true }),
+  ).toBeVisible();
+  await page.keyboard.press("Space");
+  await expect(
+    page.getByRole("button", { name: "播放回放", exact: true }),
+  ).toBeVisible();
+  await page.getByRole("combobox", { name: "回放倍速" }).selectOption("4");
+  await progress.fill((await progress.getAttribute("max")) ?? "275");
+  await expect(page.locator(".comparison-sides")).toContainText(/安全|碰撞/);
+  await page.getByRole("button", { name: "退出回放", exact: true }).click();
+  await expect(page.getByRole("dialog", { name: "训练成果" })).toBeVisible();
+  await expect(page.getByLabel("PPO 训练前后对照")).toBeVisible();
+  const after = await (await request.get("/api/game/records")).json();
+  expect(after.total_runs).toBe(before.total_runs);
+  expect(errors).toEqual([]);
+});
+
 test("an older backend shows recovery instructions instead of an empty game", async ({
   page,
 }) => {
@@ -166,6 +258,9 @@ test("three real rounds preserve the checkpoint, paired traffic, verdicts and sc
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
+  const expectedExpert = (
+    await (await page.request.get("/api/game/catalog")).json()
+  ).training.levels.expert;
   let wins = 0,
     losses = 0;
   for (const [index, track] of ["convoy", "weave", "pressure"].entries()) {
@@ -187,7 +282,10 @@ test("three real rounds preserve the checkpoint, paired traffic, verdicts and sc
     expect(session.seed).toBe(531124);
     expect(session.frame.vehicles).toEqual(session.rival.frame.vehicles);
     expect(session.rival.model_info.algorithm).toBe("ppo");
-    expect(session.rival.model_steps).toBe(175000);
+    expect(session.rival.model_steps).toBe(expectedExpert.checkpoint_steps);
+    expect(session.rival.model_info.sha256).toBe(
+      expectedExpert.checkpoint_sha256,
+    );
     await expect(page.locator(".countdown-screen")).toHaveCount(0);
     await expect(page.locator(".duel-standing")).toContainText(
       `第 ${index + 1} / 3 段`,

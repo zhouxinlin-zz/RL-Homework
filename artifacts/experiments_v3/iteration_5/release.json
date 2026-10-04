@@ -1,0 +1,21 @@
+{
+  "stage": "final",
+  "env_version": "3.1",
+  "promoted": false,
+  "model": {
+    "path": "artifacts/experiments_v3/deployment/v3_expert-b4f0d5f66de4.zip",
+    "sha256": "b4f0d5f66de4a589f240654ad21b09705beaf52eb71a4c43abe4ce5765a5419a",
+    "algorithm": "ppo",
+    "env_version": "3.1",
+    "source_env_version": "3.1",
+    "run_id": "safe_transfer_s47",
+    "method": "v2 PPO transfer plus v3 safety fine-tuning",
+    "seed": 47,
+    "steps": 175000,
+    "training_steps": 501760,
+    "development_report": "artifacts/experiments_v3/development_safe_transfer_175_dev_routes.json",
+    "test_report": "artifacts/experiments_v3/test_v3_expert_routes.json"
+  },
+  "report": "artifacts/experiments_v3/iteration_5/report.json",
+  "report_sha256": "856d43179b053d2d2f9b99f174c237d024e015d7b1b4aa1b76a48450646c876d"
+}

@@ -1,0 +1,37 @@
+{
+  "algorithm": "ppo",
+  "seed": 127,
+  "requested_steps": 180000,
+  "env_version": "3.1",
+  "source": "artifacts/experiments_v3/deployment/v3_expert-b4f0d5f66de4.zip",
+  "source_sha256": "b4f0d5f66de4a589f240654ad21b09705beaf52eb71a4c43abe4ce5765a5419a",
+  "training_source_sha256": "f171b3a8d5ffc894cadea1c68bc200c425f95d6c31cb5f3d4cdc7cb82fb357ee",
+  "environment_source_sha256": "47e504164db11206f93a4be3b55c878a79d6d8faa856b282bd2565aa1f0e3f7e",
+  "initialization": "deployed PPO actor and critic; fresh optimizer; explicit training seed",
+  "reward": "v3.1 + .015/metre while safe and on-road; +6 for qualified completion; collision penalty -60 total",
+  "route_probabilities": [
+    0.2,
+    0.2,
+    0.6
+  ],
+  "durations": [
+    35,
+    45,
+    55
+  ],
+  "learning_rate": 5e-05,
+  "clip_range": 0.08,
+  "target_kl": 0.01,
+  "n_envs": 4,
+  "n_steps": 512,
+  "batch_size": 256,
+  "n_epochs": 4,
+  "gamma": 0.99,
+  "gae_lambda": 0.95,
+  "ent_coef": 0.001,
+  "development_start": 741100,
+  "selection_start": 741200,
+  "test_start": 1741100,
+  "test_count_per_route": 100,
+  "promotion_gate": "no more crashes overall or per route; higher overall qualification and score; no route qualification regression"
+}

@@ -36,6 +36,12 @@ def inspect() -> list[dict]:
         checks.append({"name": "Challenge evaluation", "ok": report_ok,
                        "detail": "verified" if report_ok else "missing or changed final report",
                        "required": True})
+        if challenge.get("refinement"):
+            from server.refinement import checked_file
+            for replay in challenge["refinement"]["replays"]:
+                checked_file(ROOT, replay["path"], replay["sha256"])
+            checks.append({"name": "Refinement evidence and comparison replays", "ok": True,
+                           "detail": "verified", "required": True})
         for level in ("beginner", "standard", "expert"):
             spec = challenge.get("levels", {}).get(level, {})
             checks.append({"name": f"Challenge level {level}",

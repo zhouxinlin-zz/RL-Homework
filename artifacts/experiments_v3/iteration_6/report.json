@@ -1,0 +1,651 @@
+{
+  "stage": "final",
+  "env_version": "3.1",
+  "seed_start": 2741100,
+  "episodes_per_route": 100,
+  "selection_sha256": "32345287b17488ae64566cd2dd8bd522a8bc30e5d7b5224a40c4cc5c4cfc3f65",
+  "models": {
+    "previous": {
+      "overall": {
+        "episodes": 300,
+        "crashes": 2,
+        "qualification_rate": 0.7366666666666667,
+        "mean_score": 1547.5133333333333,
+        "mean_distance_m": 1082.5628502218938,
+        "mean_overtakes": 4.82
+      },
+      "routes": {
+        "convoy": {
+          "episodes": 100,
+          "crashes": 2,
+          "qualification_rate": 0.98,
+          "mean_score": 1401.97,
+          "mean_distance_m": 920.4652846549916,
+          "mean_overtakes": 5.5
+        },
+        "weave": {
+          "episodes": 100,
+          "crashes": 0,
+          "qualification_rate": 0.88,
+          "mean_score": 1511.09,
+          "mean_distance_m": 1068.0285628662562,
+          "mean_overtakes": 4.09
+        },
+        "pressure": {
+          "episodes": 100,
+          "crashes": 0,
+          "qualification_rate": 0.35,
+          "mean_score": 1729.48,
+          "mean_distance_m": 1259.1947031444329,
+          "mean_overtakes": 4.87
+        }
+      },
+      "qualification_ci95": [
+        0.6840604965627431,
+        0.7832884970576387
+      ],
+      "pressure_short": 65
+    },
+    "candidate": {
+      "overall": {
+        "episodes": 300,
+        "crashes": 4,
+        "qualification_rate": 0.74,
+        "mean_score": 1546.5366666666666,
+        "mean_distance_m": 1084.5331111391893,
+        "mean_overtakes": 4.8533333333333335
+      },
+      "routes": {
+        "convoy": {
+          "episodes": 100,
+          "crashes": 4,
+          "qualification_rate": 0.96,
+          "mean_score": 1384.86,
+          "mean_distance_m": 915.0729795386432,
+          "mean_overtakes": 5.49
+        },
+        "weave": {
+          "episodes": 100,
+          "crashes": 0,
+          "qualification_rate": 0.89,
+          "mean_score": 1523.58,
+          "mean_distance_m": 1077.4917908837772,
+          "mean_overtakes": 4.19
+        },
+        "pressure": {
+          "episodes": 100,
+          "crashes": 0,
+          "qualification_rate": 0.37,
+          "mean_score": 1731.17,
+          "mean_distance_m": 1261.0345629951466,
+          "mean_overtakes": 4.88
+        }
+      },
+      "qualification_ci95": [
+        0.6875519770721543,
+        0.7863793967400639
+      ],
+      "pressure_short": 63
+    },
+    "rule": {
+      "overall": {
+        "episodes": 300,
+        "crashes": 0,
+        "qualification_rate": 0.68,
+        "mean_score": 1454.9833333333333,
+        "mean_distance_m": 1028.7418921889803,
+        "mean_overtakes": 3.6066666666666665
+      },
+      "routes": {
+        "convoy": {
+          "episodes": 100,
+          "crashes": 0,
+          "qualification_rate": 0.88,
+          "mean_score": 1243.35,
+          "mean_distance_m": 830.2436416491234,
+          "mean_overtakes": 3.23
+        },
+        "weave": {
+          "episodes": 100,
+          "crashes": 0,
+          "qualification_rate": 0.66,
+          "mean_score": 1367.79,
+          "mean_distance_m": 988.719319972904,
+          "mean_overtakes": 2.26
+        },
+        "pressure": {
+          "episodes": 100,
+          "crashes": 0,
+          "qualification_rate": 0.5,
+          "mean_score": 1753.81,
+          "mean_distance_m": 1267.262714944913,
+          "mean_overtakes": 5.33
+        }
+      },
+      "qualification_ci95": [
+        0.6252238889196547,
+        0.7302246414395092
+      ],
+      "pressure_short": 50
+    }
+  },
+  "promoted": false,
+  "official": "previous",
+  "histories": [
+    {
+      "run_id": "ppo_s191",
+      "seed": 191,
+      "learning_rate": 5e-06,
+      "anchor_strength": 0.5,
+      "actual_steps": 65536,
+      "points": [
+        {
+          "steps": 0,
+          "episodes": 24,
+          "crashes": 0,
+          "qualification_rate": 0.7916666666666666,
+          "mean_score": 1546.375,
+          "mean_distance_m": 1085.7962946601776,
+          "mean_overtakes": 4.75,
+          "routes": {
+            "convoy": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 1.0,
+              "mean_score": 1450.25,
+              "mean_distance_m": 945.6367340929905,
+              "mean_overtakes": 5.875
+            },
+            "weave": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 0.875,
+              "mean_score": 1476.375,
+              "mean_distance_m": 1055.1669159302817,
+              "mean_overtakes": 3.625
+            },
+            "pressure": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 0.5,
+              "mean_score": 1712.5,
+              "mean_distance_m": 1256.5852339572602,
+              "mean_overtakes": 4.75
+            }
+          }
+        },
+        {
+          "steps": 16384,
+          "episodes": 24,
+          "crashes": 0,
+          "qualification_rate": 0.75,
+          "mean_score": 1521.8333333333333,
+          "mean_distance_m": 1067.8625786119926,
+          "mean_overtakes": 4.416666666666667,
+          "routes": {
+            "convoy": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 1.0,
+              "mean_score": 1411.875,
+              "mean_distance_m": 923.740935239606,
+              "mean_overtakes": 5.375
+            },
+            "weave": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 0.875,
+              "mean_score": 1434.5,
+              "mean_distance_m": 1025.384417720343,
+              "mean_overtakes": 3.125
+            },
+            "pressure": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 0.375,
+              "mean_score": 1719.125,
+              "mean_distance_m": 1254.4623828760282,
+              "mean_overtakes": 4.75
+            }
+          }
+        },
+        {
+          "steps": 32768,
+          "episodes": 24,
+          "crashes": 0,
+          "qualification_rate": 0.7083333333333334,
+          "mean_score": 1516.625,
+          "mean_distance_m": 1064.9919573889047,
+          "mean_overtakes": 4.333333333333333,
+          "routes": {
+            "convoy": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 1.0,
+              "mean_score": 1411.375,
+              "mean_distance_m": 923.1658682405185,
+              "mean_overtakes": 5.375
+            },
+            "weave": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 0.875,
+              "mean_score": 1424.125,
+              "mean_distance_m": 1023.7111440396185,
+              "mean_overtakes": 2.875
+            },
+            "pressure": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 0.25,
+              "mean_score": 1714.375,
+              "mean_distance_m": 1248.098859886577,
+              "mean_overtakes": 4.75
+            }
+          }
+        },
+        {
+          "steps": 49152,
+          "episodes": 24,
+          "crashes": 0,
+          "qualification_rate": 0.7083333333333334,
+          "mean_score": 1516.6666666666667,
+          "mean_distance_m": 1064.9665934833426,
+          "mean_overtakes": 4.333333333333333,
+          "routes": {
+            "convoy": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 1.0,
+              "mean_score": 1411.125,
+              "mean_distance_m": 922.7929402771106,
+              "mean_overtakes": 5.375
+            },
+            "weave": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 0.875,
+              "mean_score": 1424.0,
+              "mean_distance_m": 1023.4160861439611,
+              "mean_overtakes": 2.875
+            },
+            "pressure": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 0.25,
+              "mean_score": 1714.875,
+              "mean_distance_m": 1248.6907540289567,
+              "mean_overtakes": 4.75
+            }
+          }
+        },
+        {
+          "steps": 65536,
+          "episodes": 24,
+          "crashes": 0,
+          "qualification_rate": 0.7083333333333334,
+          "mean_score": 1514.9166666666667,
+          "mean_distance_m": 1064.73008247982,
+          "mean_overtakes": 4.291666666666667,
+          "routes": {
+            "convoy": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 1.0,
+              "mean_score": 1411.25,
+              "mean_distance_m": 923.0807616871858,
+              "mean_overtakes": 5.375
+            },
+            "weave": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 0.875,
+              "mean_score": 1424.0,
+              "mean_distance_m": 1023.3008772809624,
+              "mean_overtakes": 2.875
+            },
+            "pressure": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 0.25,
+              "mean_score": 1709.5,
+              "mean_distance_m": 1247.808608471312,
+              "mean_overtakes": 4.625
+            }
+          }
+        }
+      ]
+    },
+    {
+      "run_id": "ppo_s203",
+      "seed": 203,
+      "learning_rate": 5e-06,
+      "anchor_strength": 2.0,
+      "actual_steps": 65536,
+      "points": [
+        {
+          "steps": 0,
+          "episodes": 24,
+          "crashes": 0,
+          "qualification_rate": 0.7916666666666666,
+          "mean_score": 1546.375,
+          "mean_distance_m": 1085.7962946601776,
+          "mean_overtakes": 4.75,
+          "routes": {
+            "convoy": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 1.0,
+              "mean_score": 1450.25,
+              "mean_distance_m": 945.6367340929905,
+              "mean_overtakes": 5.875
+            },
+            "weave": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 0.875,
+              "mean_score": 1476.375,
+              "mean_distance_m": 1055.1669159302817,
+              "mean_overtakes": 3.625
+            },
+            "pressure": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 0.5,
+              "mean_score": 1712.5,
+              "mean_distance_m": 1256.5852339572602,
+              "mean_overtakes": 4.75
+            }
+          }
+        },
+        {
+          "steps": 16384,
+          "episodes": 24,
+          "crashes": 0,
+          "qualification_rate": 0.75,
+          "mean_score": 1519.875,
+          "mean_distance_m": 1067.3619876767477,
+          "mean_overtakes": 4.375,
+          "routes": {
+            "convoy": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 1.0,
+              "mean_score": 1412.0,
+              "mean_distance_m": 923.6462903469724,
+              "mean_overtakes": 5.375
+            },
+            "weave": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 0.875,
+              "mean_score": 1429.625,
+              "mean_distance_m": 1024.678453088517,
+              "mean_overtakes": 3.0
+            },
+            "pressure": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 0.375,
+              "mean_score": 1718.0,
+              "mean_distance_m": 1253.7612195947536,
+              "mean_overtakes": 4.75
+            }
+          }
+        },
+        {
+          "steps": 32768,
+          "episodes": 24,
+          "crashes": 0,
+          "qualification_rate": 0.7083333333333334,
+          "mean_score": 1516.5833333333333,
+          "mean_distance_m": 1064.9025693626575,
+          "mean_overtakes": 4.333333333333333,
+          "routes": {
+            "convoy": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 1.0,
+              "mean_score": 1411.5,
+              "mean_distance_m": 923.2750697193155,
+              "mean_overtakes": 5.375
+            },
+            "weave": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 0.875,
+              "mean_score": 1424.0,
+              "mean_distance_m": 1023.407880014831,
+              "mean_overtakes": 2.875
+            },
+            "pressure": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 0.25,
+              "mean_score": 1714.25,
+              "mean_distance_m": 1248.0247583538253,
+              "mean_overtakes": 4.75
+            }
+          }
+        },
+        {
+          "steps": 49152,
+          "episodes": 24,
+          "crashes": 0,
+          "qualification_rate": 0.7083333333333334,
+          "mean_score": 1512.5,
+          "mean_distance_m": 1063.7554056444435,
+          "mean_overtakes": 4.25,
+          "routes": {
+            "convoy": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 1.0,
+              "mean_score": 1411.375,
+              "mean_distance_m": 923.2675413490736,
+              "mean_overtakes": 5.375
+            },
+            "weave": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 0.875,
+              "mean_score": 1417.0,
+              "mean_distance_m": 1020.7146154576906,
+              "mean_overtakes": 2.75
+            },
+            "pressure": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 0.25,
+              "mean_score": 1709.125,
+              "mean_distance_m": 1247.2840601265661,
+              "mean_overtakes": 4.625
+            }
+          }
+        },
+        {
+          "steps": 65536,
+          "episodes": 24,
+          "crashes": 0,
+          "qualification_rate": 0.75,
+          "mean_score": 1524.9166666666667,
+          "mean_distance_m": 1070.876096388363,
+          "mean_overtakes": 4.416666666666667,
+          "routes": {
+            "convoy": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 1.0,
+              "mean_score": 1447.0,
+              "mean_distance_m": 941.4376521196689,
+              "mean_overtakes": 5.875
+            },
+            "weave": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 0.875,
+              "mean_score": 1417.25,
+              "mean_distance_m": 1020.9925265728095,
+              "mean_overtakes": 2.75
+            },
+            "pressure": {
+              "episodes": 8,
+              "crashes": 0,
+              "qualification_rate": 0.375,
+              "mean_score": 1710.5,
+              "mean_distance_m": 1250.1981104726108,
+              "mean_overtakes": 4.625
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "candidate_spec": {
+    "path": "artifacts/experiments_v3/iteration_6/ppo_s203/step_16384.zip",
+    "sha256": "77d88a6372429424dbdab20a8f90483627c2827102df7edb2fbb905923633a36",
+    "algorithm": "ppo",
+    "env_version": "3.1",
+    "steps": 16384,
+    "seed": 203,
+    "run_id": "ppo_s203",
+    "training_steps": 65536,
+    "method": "PPO efficiency refinement with close-following reference KL retention",
+    "pretrained": true,
+    "method_label": "PPO → 效率微调 → 跟车风险约束",
+    "config": "artifacts/experiments_v3/iteration_6/ppo_s203/config.json",
+    "config_sha256": "c5129247f5d54051f957df0f78aa3b654310228ac593c65777b3443b804591a5"
+  },
+  "previous_spec": {
+    "path": "artifacts/experiments_v3/deployment/v3_expert-b4f0d5f66de4.zip",
+    "sha256": "b4f0d5f66de4a589f240654ad21b09705beaf52eb71a4c43abe4ce5765a5419a",
+    "algorithm": "ppo",
+    "env_version": "3.1",
+    "source_env_version": "3.1",
+    "run_id": "safe_transfer_s47",
+    "method": "v2 PPO transfer plus v3 safety fine-tuning",
+    "seed": 47,
+    "steps": 175000,
+    "training_steps": 501760,
+    "development_report": "artifacts/experiments_v3/development_safe_transfer_175_dev_routes.json",
+    "test_report": "artifacts/experiments_v3/test_v3_expert_routes.json"
+  },
+  "paired": {
+    "convoy": {
+      "pairs": 100,
+      "wins": 71,
+      "losses": 20,
+      "draws": 9
+    },
+    "weave": {
+      "pairs": 100,
+      "wins": 75,
+      "losses": 19,
+      "draws": 6
+    },
+    "pressure": {
+      "pairs": 100,
+      "wins": 67,
+      "losses": 30,
+      "draws": 3
+    },
+    "all": {
+      "pairs": 300,
+      "wins": 213,
+      "losses": 69,
+      "draws": 18
+    }
+  },
+  "expert_vs_rule": {
+    "pairs": 300,
+    "wins": 220,
+    "losses": 79,
+    "draws": 1
+  },
+  "total_training_steps": 131072,
+  "upstream_refinement_steps": 421888,
+  "promotion_gate": "no more crashes overall or per route; higher overall qualification and score; no route qualification regression",
+  "replays": [
+    {
+      "id": "convoy",
+      "name": "慢车编队",
+      "seed": 841203,
+      "duration": 35,
+      "path": "artifacts/experiments_v3/iteration_6/replay_convoy.json.gz",
+      "sha256": "20c340e918cf38de9af7327b4f0df896dddb7bbe6be51035ca392e8bf995ee4d"
+    },
+    {
+      "id": "weave",
+      "name": "交织车流",
+      "seed": 841203,
+      "duration": 45,
+      "path": "artifacts/experiments_v3/iteration_6/replay_weave.json.gz",
+      "sha256": "5451e0e9d72b0ea2dd5a3c317f1e4ce7b01794ff570462c4aca43a2db2bba83a"
+    },
+    {
+      "id": "pressure",
+      "name": "连续高压",
+      "seed": 841203,
+      "duration": 55,
+      "path": "artifacts/experiments_v3/iteration_6/replay_pressure.json.gz",
+      "sha256": "0fceacb1012584a690e44c42494bc380f3147746bfbe72fe1002ffa8ef6604b8"
+    }
+  ],
+  "training_method": {
+    "algorithm": "ppo",
+    "seed": 203,
+    "requested_steps": 65536,
+    "env_version": "3.1",
+    "source": "artifacts/experiments_v3/iteration_5/ppo_s91/step_114688.zip",
+    "source_sha256": "719af166f77c850d47c9e663cc5c18d7250216e2ad73cbbdca3be5c07cb451f8",
+    "reference": "artifacts/experiments_v3/deployment/v3_expert-b4f0d5f66de4.zip",
+    "reference_sha256": "b4f0d5f66de4a589f240654ad21b09705beaf52eb71a4c43abe4ce5765a5419a",
+    "training_source_sha256": "ba9a0cb545de554b4abd4839a2e80b9f7c6244f2a05975f00d0d0879e92b0730",
+    "base_training_source_sha256": "f171b3a8d5ffc894cadea1c68bc200c425f95d6c31cb5f3d4cdc7cb82fb357ee",
+    "environment_source_sha256": "47e504164db11206f93a4be3b55c878a79d6d8faa856b282bd2565aa1f0e3f7e",
+    "initialization": "iteration_5 PPO actor and critic; fresh optimizer; explicit training seed",
+    "method": "PPO efficiency refinement with close-following reference KL retention",
+    "reward": "iteration_5 reward; additional -0.25 per dangerous-following step while safe and on-road",
+    "anchor_strength": 2.0,
+    "anchor_epochs": 1,
+    "anchor_condition": "front bumper gap <20m or positive closing TTC <3.5s in current or target lane",
+    "route_probabilities": [
+      0.2,
+      0.2,
+      0.6
+    ],
+    "durations": [
+      35,
+      45,
+      55
+    ],
+    "learning_rate": 5e-06,
+    "clip_range": 0.05,
+    "target_kl": 0.01,
+    "n_envs": 4,
+    "n_steps": 512,
+    "batch_size": 256,
+    "n_epochs": 4,
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "ent_coef": 0.001,
+    "development_start": 841100,
+    "selection_start": 841200,
+    "test_start": 2741100,
+    "test_count_per_route": 100,
+    "promotion_gate": "no more crashes overall or per route; higher overall qualification and score; no route qualification regression"
+  },
+  "sources": {
+    "rl_course/train_safety_refinement.py": "ba9a0cb545de554b4abd4839a2e80b9f7c6244f2a05975f00d0d0879e92b0730",
+    "rl_course/release_refinement.py": "e72dae86a43613ec2b0eb1e5bb70b5a1a3c84a08744ac85e8356af71d304e955",
+    "rl_course/train_refinement.py": "f171b3a8d5ffc894cadea1c68bc200c425f95d6c31cb5f3d4cdc7cb82fb357ee",
+    "rl_course/driving_env.py": "c569f0afbb28d07f9ff541718c3de5d168091f1575d211630523ee05e116f017",
+    "rl_course/driving_env_v3.py": "47e504164db11206f93a4be3b55c878a79d6d8faa856b282bd2565aa1f0e3f7e",
+    "rl_course/game_rules.py": "82119f256a533084b9254d1f7260d982782a8f8a3a1b4024899d0beeed8c3cb7",
+    "rl_course/challenge_rules.py": "4217e49bc8745909442bb4732f33ec7fcda13cd669cbcf100f87b81c509fde3d"
+  },
+  "limitations": [
+    "Single frozen candidate tested once on new roads; development configurations differ in seeds and reference-loss coefficients.",
+    "No human benchmark; finite simulation evidence does not establish human-level or universal safety."
+  ]
+}

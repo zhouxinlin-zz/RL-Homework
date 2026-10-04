@@ -27,8 +27,15 @@ async function request<T>(
 export const api = {
   catalog: async () => {
     const catalog = await request<Catalog>("catalog");
-    if (!catalog.version?.startsWith("3.") || !catalog.tracks?.some((track) => track.id === "weave" && track.env_version === "3.1")) {
-      throw new Error("当前连接的是旧版游戏服务。请重新运行 Start-Game.cmd，并使用它新打开的游戏窗口。");
+    if (
+      !catalog.version?.startsWith("3.") ||
+      !catalog.tracks?.some(
+        (track) => track.id === "weave" && track.env_version === "3.1",
+      )
+    ) {
+      throw new Error(
+        "当前连接的是旧版游戏服务。请重新运行 Start-Game.cmd，并使用它新打开的游戏窗口。",
+      );
     }
     return catalog;
   },
@@ -41,4 +48,6 @@ export const api = {
   close: (id: string) => request<void>(`sessions/${id}`, undefined, "DELETE"),
   records: () => request<Records>("records"),
   replay: (id: string) => request<Replay>(`records/${id}/replay`),
+  trainingReplay: (track: string) =>
+    request<Replay>(`training/replays/${encodeURIComponent(track)}`),
 };

@@ -1,8 +1,38 @@
 import { useState } from "react";
-import type { GameSession, Runner } from "./types";
+import type { GameSession, Runner, Replay } from "./types";
 import { Icon } from "./Icons";
 import TrafficPreview from "./TrafficPreview";
 import { opponentName } from "./opponents";
+
+function PolicyChoices({
+  decision,
+}: {
+  decision: NonNullable<Runner["decision"]>;
+}) {
+  const low = Math.min(...decision.values),
+    high = Math.max(...decision.values);
+  return (
+    <>
+      {decision.values.map((value, index) => (
+        <div className={index === decision.action ? "chosen" : ""} key={index}>
+          <span>{["左移", "保持", "右移", "加速", "减速"][index]}</span>
+          <i>
+            <b
+              style={{
+                width: `${100 * (decision.kind === "probability" ? value : (value - low) / Math.max(0.001, high - low))}%`,
+              }}
+            />
+          </i>
+          <small>
+            {decision.kind === "probability"
+              ? `${Math.round(value * 100)}%`
+              : value.toFixed(1)}
+          </small>
+        </div>
+      ))}
+    </>
+  );
+}
 
 function Speed({ runner, label }: { runner: Runner; label: string }) {
   const ego = runner.frame.vehicles.find((v) => v.id === runner.frame.ego_id);
@@ -40,12 +70,14 @@ export default function Hud({
   replay = false,
   trafficPreview = true,
   challenge,
+  comparison,
 }: {
   session: GameSession;
   pause: () => void;
   replay?: boolean;
   trafficPreview?: boolean;
   challenge?: { round: number; total: number; player: number; rival: number };
+  comparison?: Replay["comparison"];
 }) {
   const [inspectAI, setInspectAI] = useState(false);
   const elapsed = Math.max(
@@ -58,8 +90,97 @@ export default function Hud({
   const aiRunner = session.rival ?? (session.mode === "ai" ? session : null);
   const algorithm = aiRunner?.model_info?.algorithm?.toUpperCase() ?? "PPO";
   const decision = aiRunner?.decision;
-  const low = decision ? Math.min(...decision.values) : 0;
-  const high = decision ? Math.max(...decision.values) : 1;
+  if (comparison && session.rival)
+    return (
+      <div className="game-hud split comparison-hud">
+        <div className="hud-top">
+          <div className="hud-track">
+            <span>TRAINING REPLAY</span>
+            <strong>{session.track.name} · 训练前后</strong>
+          </div>
+          <div className="hud-time">
+            <small>回放时间</small>
+            <strong>
+              {elapsed.toFixed(1)}
+              <em>s</em>
+            </strong>
+          </div>
+          <button
+            className="game-icon-button"
+            aria-label="退出回放"
+            onClick={pause}
+          >
+            <Icon name="close" />
+          </button>
+        </div>
+        <div className="split-divider" />
+        <div className="comparison-sides">
+          {[session, session.rival].map((runner, index) => (
+            <section key={index}>
+              <span>{index ? comparison.right : comparison.left}</span>
+              <strong>
+                {runner.distance_m.toFixed(0)}{" "}
+                <small>/ {session.track.target_m} m</small>
+              </strong>
+              <p>
+                {runner.crashed
+                  ? "发生碰撞"
+                  : runner.done
+                    ? !runner.completed
+                      ? "未安全完赛"
+                      : runner.qualified
+                        ? "安全达标"
+                        : "安全完赛 · 里程不足"
+                    : aiAction[runner.frame.action ?? 1]}{" "}
+                · {runner.overtakes} 次超车
+              </p>
+              <div className="progress-line">
+                <i
+                  style={{
+                    width: `${Math.min(100, (runner.distance_m / session.track.target_m) * 100)}%`,
+                  }}
+                />
+              </div>
+              {inspectAI && runner.decision && (
+                <div
+                  className="policy-readout comparison-policy"
+                  aria-label={`${index ? comparison.right : comparison.left} 动作概率`}
+                >
+                  <PolicyChoices decision={runner.decision} />
+                </div>
+              )}
+            </section>
+          ))}
+        </div>
+        <div className="comparison-context">
+          <strong>
+            {Math.abs(gap) < 2
+              ? "行驶里程接近"
+              : `微调后${gap < 0 ? "领先" : "落后"} ${Math.abs(gap).toFixed(0)} m`}
+          </strong>
+          <span>相同起点 · 固定开发道路 {comparison.seed}</span>
+          <small>{comparison.note}</small>
+          <button
+            className="comparison-inspect"
+            aria-expanded={inspectAI}
+            onClick={() => setInspectAI((value) => !value)}
+          >
+            {inspectAI ? "收起动作概率" : "比较动作概率"}
+          </button>
+          {inspectAI && (
+            <small>
+              各自决策前的策略输出，高亮为刚执行的动作；概率不是安全评分。
+            </small>
+          )}
+        </div>
+        <div className="hud-speed">
+          <Speed runner={session} label={comparison.left} />
+        </div>
+        <div className="hud-rival-speed">
+          <Speed runner={session.rival} label={comparison.right} />
+        </div>
+      </div>
+    );
   return (
     <div className={`game-hud ${session.rival ? "split" : ""}`}>
       <div className="hud-top">
@@ -185,26 +306,7 @@ export default function Hud({
               {decision.kind === "probability" ? "动作概率" : "动作价值 Q"}
             </small>
           </header>
-          {decision.values.map((value, index) => (
-            <div
-              className={index === decision.action ? "chosen" : ""}
-              key={index}
-            >
-              <span>{["左移", "保持", "右移", "加速", "减速"][index]}</span>
-              <i>
-                <b
-                  style={{
-                    width: `${100 * (decision.kind === "probability" ? value : (value - low) / Math.max(0.001, high - low))}%`,
-                  }}
-                />
-              </i>
-              <small>
-                {decision.kind === "probability"
-                  ? `${Math.round(value * 100)}%`
-                  : value.toFixed(1)}
-              </small>
-            </div>
-          ))}
+          <PolicyChoices decision={decision} />
         </div>
       )}
       {session.risk.danger && !session.player_done && (

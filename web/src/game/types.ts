@@ -82,6 +82,7 @@ export type TrainingLevel = {
   routes: Record<string, TrainingRoute>;
 };
 export type TrainingCatalog = {
+  refinement?: Refinement | null;
   algorithm: string;
   evaluation: string;
   levels: Record<string, TrainingLevel>;
@@ -208,7 +209,47 @@ export type Records = {
     >;
   };
 };
-export type Replay = { summary: GameSession; frames: GameSession[] };
+export type Replay = {
+  summary: GameSession;
+  frames: GameSession[];
+  comparison?: { left: string; right: string; seed: number; note: string };
+};
+export type Refinement = {
+  promoted: boolean;
+  official: "previous" | "candidate";
+  total_training_steps: number;
+  episodes_per_route: number;
+  seed_start: number;
+  checkpoint_steps: number;
+  candidate_run: string;
+  safety_retention: boolean;
+  upstream_refinement_steps: number;
+  models: Record<
+    "previous" | "candidate" | "rule",
+    {
+      overall: TrainingRoute;
+      routes: Record<string, TrainingRoute>;
+      qualification_ci95: number[];
+      pressure_short: number;
+    }
+  >;
+  histories: {
+    run_id: string;
+    seed: number;
+    learning_rate: number;
+    anchor_strength?: number | null;
+    actual_steps: number;
+    points: (TrainingRoute & {
+      steps: number;
+      routes: Record<string, TrainingRoute>;
+    })[];
+  }[];
+  replays: { id: string; name: string; duration: number; seed: number }[];
+  paired: Record<
+    string,
+    { pairs: number; wins: number; losses: number; draws: number }
+  >;
+};
 export type Settings = {
   sound: boolean;
   guides: boolean;

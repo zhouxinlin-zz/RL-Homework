@@ -489,6 +489,211 @@
 .policy-readout .chosen b {
   background: var(--accent);
 }
+.refinement-results {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid #ffffff20;
+  margin-top: 22px;
+}
+.refinement-results article {
+  padding: 20px 24px;
+}
+.refinement-results article + article {
+  border-left: 1px solid #ffffff20;
+  background: #bdf47c08;
+}
+.refinement-results h3 {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0 0 12px;
+}
+.refinement-results article > strong {
+  font:
+    44px Bahnschrift,
+    sans-serif;
+  display: block;
+  color: var(--accent);
+}
+.refinement-results article > span {
+  font-size: 12px;
+  color: #afbab6;
+}
+.refinement-results p {
+  font-size: 13px;
+  margin: 14px 0 0;
+}
+.refinement-results p b {
+  color: #788a82;
+  padding: 0 8px;
+}
+.refinement-routes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 22px 0 28px;
+}
+.refinement-routes > div {
+  display: grid;
+  gap: 7px;
+  padding: 0 18px;
+  border-left: 1px solid #ffffff20;
+}
+.refinement-routes > div:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+.refinement-routes span {
+  font-size: 13px;
+}
+.refinement-routes strong {
+  font:
+    22px Bahnschrift,
+    sans-serif;
+}
+.refinement-routes i {
+  font-style: normal;
+  color: #75877f;
+  margin: 0 6px;
+}
+.refinement-routes small {
+  color: #a6b5ae;
+  font-size: 11px;
+}
+.refinement-replays {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.refinement-replays button {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 9px;
+  text-align: left;
+  border: 1px solid #ffffff25;
+  background: #ffffff05;
+  color: #edf0e8;
+  padding: 17px;
+  cursor: pointer;
+}
+.refinement-replays button:hover {
+  border-color: var(--accent);
+  background: #bdf47c0b;
+}
+.refinement-replays span {
+  font-size: 15px;
+}
+.refinement-replays small {
+  grid-row: 2;
+  color: #a6b5ae;
+  font-size: 11px;
+}
+.refinement-replays b {
+  grid-row: 1 / 3;
+  grid-column: 2;
+  align-self: center;
+  color: var(--accent);
+  font-size: 22px;
+}
+.refinement-curves {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.refinement-curves figure {
+  margin: 15px 0 0;
+}
+.refinement-curves figcaption {
+  font-size: 12px;
+  color: #c0cfc5;
+}
+.refinement-curves svg {
+  width: 100%;
+  margin-top: 12px;
+}
+.refinement-curves text {
+  fill: #a9b9b0;
+  font: 12px sans-serif;
+}
+.comparison-sides {
+  position: absolute;
+  top: 106px;
+  left: 3%;
+  width: 94%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10%;
+}
+.comparison-sides section {
+  max-width: 310px;
+  padding: 15px 18px;
+  background: #122128d9;
+  border-left: 3px solid #aab5b0;
+}
+.comparison-sides section + section {
+  border-left-color: var(--accent);
+  justify-self: end;
+  width: 310px;
+}
+.comparison-sides section > span {
+  display: block;
+  font-size: 13px;
+  color: #dce6df;
+}
+.comparison-sides section > strong {
+  display: block;
+  font:
+    30px Bahnschrift,
+    sans-serif;
+  margin: 8px 0;
+}
+.comparison-sides section > strong small {
+  font-size: 15px;
+  color: #a8b8ad;
+}
+.comparison-sides p {
+  font-size: 12px;
+  margin: 8px 0 12px;
+}
+.comparison-context {
+  position: absolute;
+  top: 107px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 270px;
+  padding: 14px 17px;
+  background: #122128ed;
+  text-align: center;
+  display: grid;
+  gap: 8px;
+}
+.comparison-context strong {
+  font-size: 18px;
+  color: var(--accent);
+}
+.comparison-context span {
+  font-size: 11px;
+  color: #c6d4ca;
+}
+.comparison-context small {
+  font-size: 10px;
+  color: #93a69b;
+  line-height: 1.6;
+}
+.comparison-inspect {
+  padding: 8px 12px;
+  border: 1px solid #ffffff25;
+  background: #ffffff09;
+  color: #e9efe8;
+  font: inherit;
+  font-size: 12px;
+}
+.policy-readout.comparison-policy {
+  position: static;
+  width: 100%;
+  padding: 4px 0 0;
+  border: 0;
+  background: transparent;
+  backdrop-filter: none;
+}
 .training-tabs {
   display: flex;
   gap: 6px;
@@ -2526,6 +2731,9 @@
 .replay-events small {
   color: #91a895;
   font-size: 9px;
+}
+.lane-game:has(.comparison-hud) .replay-events {
+  max-width: 48%;
 }
 .replay-events .collision {
   border-color: #d8a17455;

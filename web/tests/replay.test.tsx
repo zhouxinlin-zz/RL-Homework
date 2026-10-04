@@ -2,6 +2,16 @@ import { expect, it } from "vitest";
 import { frameBefore, frameTime, replayMarkers } from "../src/game/replay";
 import type { GameSession } from "../src/game/types";
 
+it("does not skip a frame when a one-second seek meets floating point timestamps", () => {
+  const frames = [19.8, 20.00000000000004, 20.2, 20.99999999999997].map(
+    (time) => ({ frame: { time_s: time } }) as GameSession,
+  );
+  const forward = frameBefore(frames, frameTime(frames[1]) + 1);
+  expect(forward).toBe(3);
+  expect(frameBefore(frames, frameTime(frames[forward]) - 1)).toBe(1);
+  expect(frameBefore(frames, 19.99)).toBe(0);
+});
+
 it("uses both clocks and locates real overtake/collision events without duplicates", () => {
   const sample = (
     time: number,

@@ -8,7 +8,8 @@ ROOT = Path(__file__).resolve().parents[1]
 def source_revision(root=ROOT):
     digest = hashlib.sha256()
     paths = [*root.joinpath("server").glob("*.py"), *root.joinpath("rl_course").glob("*.py")]
-    for relative in ("artifacts/experiments_v3/deployment.json", "artifacts/experiments_v3/iteration_4/release.json"):
+    for relative in ("artifacts/experiments_v3/deployment.json", "artifacts/experiments_v3/iteration_4/release.json",
+                     "artifacts/experiments_v3/iteration_5/release.json", "artifacts/experiments_v3/iteration_6/release.json"):
         if root.joinpath(relative).exists():
             paths.append(root / relative)
     for path in sorted(paths):

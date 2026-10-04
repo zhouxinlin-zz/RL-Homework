@@ -21,7 +21,7 @@ import {
 } from "./Menus";
 import { Icon } from "./Icons";
 import { gameAudio, tone } from "./sound";
-import ModelShowcase from "./ModelShowcase";
+import ModelShowcase, { type TrainingTab } from "./ModelShowcase";
 import { frameBefore, frameTime, replayMarkers } from "./replay";
 import type {
   Catalog,
@@ -98,6 +98,7 @@ export default function GameApp() {
   const driving = useDriving();
   const [catalog, setCatalog] = useState<Catalog | null>(null);
   const [panel, setPanel] = useState<Panel>("menu");
+  const [trainingTab, setTrainingTab] = useState<TrainingTab>("results");
   const [returnPanel, setReturnPanel] = useState<Panel>("menu");
   const [trackId, setTrackId] = useState("pressure");
   const [challengeStartId, setChallengeStartId] = useState("pressure");
@@ -145,7 +146,7 @@ export default function GameApp() {
   const sceneSession = replay ? replay.frames[replayIndex] : driving.session;
   const active = driving.phase !== "idle" || replay !== null;
   const markers = useMemo(
-    () => (replay ? replayMarkers(replay.frames) : []),
+    () => (replay ? replayMarkers(replay.frames, replay.comparison) : []),
     [replay],
   );
   useEffect(() => {
@@ -324,14 +325,16 @@ export default function GameApp() {
     }
   };
 
-  const showReplay = async (id: string, time = 0) => {
+  const showReplay = async (id: string, time = 0, training = false) => {
     const request = ++replayRequest.current;
     setReplayLoading(true);
     setNotice("");
     try {
-      const content = await api.replay(id);
+      const content = await (training
+        ? api.trainingReplay(id)
+        : api.replay(id));
       if (request !== replayRequest.current) return;
-      if (driving.phase !== "finished") driving.stop();
+      if (training || driving.phase !== "finished") driving.stop();
       setPanel(null);
       setReplay(content);
       setReplayIndex(frameBefore(content.frames, Math.max(0, time - 3)));
@@ -345,9 +348,11 @@ export default function GameApp() {
     }
   };
   const exitReplay = () => {
+    const training = Boolean(replay?.comparison);
     setReplay(null);
     setReplayPlaying(false);
-    if (driving.phase === "finished") setPanel(null);
+    if (training) open("training");
+    else if (driving.phase === "finished") setPanel(null);
     else open("records");
   };
   useEffect(() => {
@@ -373,8 +378,37 @@ export default function GameApp() {
   useEffect(() => {
     function keydown(event: KeyboardEvent) {
       if (event.altKey || event.ctrlKey || event.metaKey) return;
+      if (
+        replay &&
+        sceneReady &&
+        event.target instanceof HTMLElement &&
+        !event.target.closest(
+          "input,select,textarea,button,a,[contenteditable]",
+        )
+      ) {
+        if (event.key === " ") {
+          event.preventDefault();
+          if (replayIndex === replay.frames.length - 1) setReplayIndex(0);
+          setReplayPlaying((value) => !value);
+          return;
+        }
+        if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+          event.preventDefault();
+          const time =
+            frameTime(replay.frames[replayIndex]) +
+            (event.key === "ArrowRight" ? 1 : -1);
+          setReplayIndex(frameBefore(replay.frames, Math.max(0, time)));
+          setReplayPlaying(false);
+          return;
+        }
+      }
       if (event.key === "Escape") {
         event.preventDefault();
+        if (replayLoading) {
+          replayRequest.current += 1;
+          setReplayLoading(false);
+          return;
+        }
         if (replay) {
           exitReplay();
           return;
@@ -544,7 +578,10 @@ export default function GameApp() {
           wide
         >
           <ModelShowcase
+            tab={trainingTab}
+            setTab={setTrainingTab}
             training={catalog.training}
+            onReplay={(id) => void showReplay(id, 0, true)}
             onPlay={() =>
               beginChallenge(
                 catalog.tracks.find((item) => item.id === "pressure") ?? null,
@@ -602,6 +639,7 @@ export default function GameApp() {
           session={sceneSession}
           pause={replay ? exitReplay : driving.pause}
           replay={Boolean(replay)}
+          comparison={replay?.comparison}
           trafficPreview={settings.trafficPreview !== false}
           challenge={
             !replay
@@ -734,6 +772,7 @@ export default function GameApp() {
                 <button
                   key={`${marker.index}-${index}`}
                   className={marker.kind}
+                  disabled={!sceneReady}
                   onClick={() => {
                     setReplayIndex(
                       frameBefore(replay.frames, Math.max(0, marker.time - 3)),
@@ -757,6 +796,8 @@ export default function GameApp() {
             <button
               className="game-icon-button"
               aria-label={replayPlaying ? "暂停回放" : "播放回放"}
+              title="空格暂停或继续；左右键逐秒查看（光标不在控件上时）"
+              disabled={!sceneReady}
               onClick={() => {
                 if (replayIndex === replay.frames.length - 1) setReplayIndex(0);
                 setReplayPlaying((p) => !p);

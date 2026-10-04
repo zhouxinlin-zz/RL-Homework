@@ -2,6 +2,7 @@
 from pathlib import Path
 import hashlib
 import json
+from server.refinement import evidence as refinement_evidence, public_summary
 
 from rl_course.game_rules import ENV_VERSION, GAME_VERSION, TRACKS
 from rl_course.challenge_rules import CHALLENGE_TRACKS, ENV_VERSION as CHALLENGE_ENV_VERSION, challenge_track_by_id
@@ -120,6 +121,13 @@ def challenge_deployment() -> dict:
                 data = {**data, "models": {**data["models"], **release["models"]}, "evaluation": evaluation}
         except (KeyError, ValueError, TypeError, OSError):
             pass
+    refinement = refinement_evidence(ROOT)
+    if refinement:
+        release, report = refinement
+        data = {**data, "models": {**data["models"], "v3_expert": release["model"]},
+                "levels": {**data["levels"], "expert": {**data["levels"]["expert"],
+                    "evaluation": report["models"][report["official"]]["overall"]}},
+                "refinement": report}
     return data
 
 
@@ -220,12 +228,19 @@ def challenge_training_catalog() -> dict | None:
                              "overall": record["summary"],
                              "routes": record["by_scenario"]}
         paired = report["paired_game_outcomes"]
+        refinement = manifest.get("refinement")
+        expert_vs_rule = paired["expert_vs_rule"]["paired"]["all"]
+        if refinement:
+            selected = refinement["models"][refinement["official"]]
+            levels["expert"].update(overall=selected["overall"], routes=selected["routes"])
+            expert_vs_rule = refinement["expert_vs_rule"]
         return {"algorithm": manifest["models"][manifest["levels"]["expert"]["model"]]["algorithm"].upper(),
                 "evaluation": "300 条独立测试道路，每关 100 条",
                 "levels": levels,
                 "comparison": report.get("algorithm_comparison", []),
                 "improvement": report.get("improvement"),
+                "refinement": public_summary(refinement) if refinement else None,
                 "standard_vs_beginner": paired["standard_vs_beginner"]["paired"]["all"],
-                "expert_vs_rule": paired["expert_vs_rule"]["paired"]["all"]}
+                "expert_vs_rule": expert_vs_rule}
     except (KeyError, TypeError, ValueError):
         return None

@@ -1,0 +1,30 @@
+{
+  "purpose": "Diagnostic only: prior test road used to identify a failure, not part of the new holdout.",
+  "source_report": "artifacts/experiments_v3/iteration_5/test_candidate.json",
+  "source_report_sha256": "10a5c8fd2f2dc3dd090655cb5c32cbeb225fc0f49c5a4b7add4a72598dc06769",
+  "frozen_candidate_sha256": "77d88a6372429424dbdab20a8f90483627c2827102df7edb2fbb905923633a36",
+  "episode": {
+    "seed": 1741107,
+    "scenario": "pressure",
+    "duration": 55,
+    "crashed": false,
+    "completed": true,
+    "failed": false,
+    "time_s": 55.0,
+    "distance_m": 1312.2910764614867,
+    "speed_kmh": 85.94425629088377,
+    "overtakes": 5,
+    "lane_changes": 3,
+    "danger_seconds": 5.000000000000002,
+    "return": 34.74727691153717,
+    "quality": 2.8771461069463555,
+    "actions": [
+      1,
+      134,
+      2,
+      94,
+      44
+    ],
+    "steps": 275
+  }
+}

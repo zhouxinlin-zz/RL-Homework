@@ -19,4 +19,4 @@
 *.jpg binary
 *.glb binary
 # Release manifests authenticate the exact bytes of evaluation/config JSON.
-artifacts/** -text
+artifacts/** -text whitespace=cr-at-eol

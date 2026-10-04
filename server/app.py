@@ -20,6 +20,7 @@ from server.catalog import ROOT, driver_catalog, ai_catalog, VEHICLES, LEGACY_TR
 from rl_course.challenge_rules import CHALLENGE_TRACKS, GAME_VERSION as CHALLENGE_GAME_VERSION, ENV_VERSION as CHALLENGE_ENV_VERSION
 from server.game import game
 from server.runtime import LOADED_REVISION
+from server.refinement import replay as refinement_replay
 
 
 app = FastAPI(title="Lane Shift", version=CHALLENGE_GAME_VERSION)
@@ -168,6 +169,11 @@ def game_records():
 @app.get("/api/game/records/{run_id}/replay")
 def game_replay(run_id: str):
     return game_call(game.store.replay, run_id)
+
+
+@app.get("/api/game/training/replays/{track}")
+def training_replay(track: Literal["convoy", "weave", "pressure"]):
+    return game_call(refinement_replay, ROOT, track)
 
 
 if (ROOT / "web" / "dist").exists():

@@ -1,0 +1,153 @@
+{
+  "env_version": "3.1",
+  "candidate": {
+    "path": "artifacts/experiments_v3/iteration_6/ppo_s203/step_16384.zip",
+    "sha256": "77d88a6372429424dbdab20a8f90483627c2827102df7edb2fbb905923633a36",
+    "algorithm": "ppo",
+    "env_version": "3.1",
+    "steps": 16384,
+    "seed": 203,
+    "run_id": "ppo_s203",
+    "training_steps": 65536,
+    "method": "PPO efficiency refinement with close-following reference KL retention",
+    "pretrained": true,
+    "method_label": "PPO → 效率微调 → 跟车风险约束",
+    "config": "artifacts/experiments_v3/iteration_6/ppo_s203/config.json",
+    "config_sha256": "c5129247f5d54051f957df0f78aa3b654310228ac593c65777b3443b804591a5"
+  },
+  "previous": {
+    "path": "artifacts/experiments_v3/deployment/v3_expert-b4f0d5f66de4.zip",
+    "sha256": "b4f0d5f66de4a589f240654ad21b09705beaf52eb71a4c43abe4ce5765a5419a",
+    "algorithm": "ppo",
+    "env_version": "3.1",
+    "source_env_version": "3.1",
+    "run_id": "safe_transfer_s47",
+    "method": "v2 PPO transfer plus v3 safety fine-tuning",
+    "seed": 47,
+    "steps": 175000,
+    "training_steps": 501760,
+    "development_report": "artifacts/experiments_v3/development_safe_transfer_175_dev_routes.json",
+    "test_report": "artifacts/experiments_v3/test_v3_expert_routes.json"
+  },
+  "selection_report": "artifacts/experiments_v3/iteration_6/ppo_s203/selection_16384.json",
+  "selection_summary": {
+    "episodes": 96,
+    "crashes": 0,
+    "qualification_rate": 0.7291666666666666,
+    "mean_score": 1556.3854166666667,
+    "mean_distance_m": 1086.394598921757,
+    "mean_overtakes": 4.864583333333333
+  },
+  "finalists": [
+    {
+      "model": {
+        "path": "artifacts/experiments_v3/iteration_6/ppo_s191/step_16384.zip",
+        "sha256": "6aeef4d95ce69dac216dd3ed836af2becf00a2726bcb3a60e822e6ca0c6b595b",
+        "algorithm": "ppo",
+        "env_version": "3.1",
+        "steps": 16384,
+        "seed": 191,
+        "run_id": "ppo_s191",
+        "training_steps": 65536,
+        "method": "PPO efficiency refinement with close-following reference KL retention",
+        "pretrained": true,
+        "method_label": "PPO → 效率微调 → 跟车风险约束",
+        "config": "artifacts/experiments_v3/iteration_6/ppo_s191/config.json",
+        "config_sha256": "b267b2e3f429cffcb05fa750f28ce08f5ce22fae2ad683cb4e64e0d07a9476ed"
+      },
+      "report": "artifacts/experiments_v3/iteration_6/ppo_s191/selection_16384.json",
+      "summary": {
+        "episodes": 96,
+        "crashes": 0,
+        "qualification_rate": 0.7291666666666666,
+        "mean_score": 1552.5833333333333,
+        "mean_distance_m": 1084.2031984774487,
+        "mean_overtakes": 4.8125
+      }
+    },
+    {
+      "model": {
+        "path": "artifacts/experiments_v3/iteration_6/ppo_s191/step_49152.zip",
+        "sha256": "2cb69daac36fc34c09496767c47de1be33b967215301fdacbd548d5a83cd8107",
+        "algorithm": "ppo",
+        "env_version": "3.1",
+        "steps": 49152,
+        "seed": 191,
+        "run_id": "ppo_s191",
+        "training_steps": 65536,
+        "method": "PPO efficiency refinement with close-following reference KL retention",
+        "pretrained": true,
+        "method_label": "PPO → 效率微调 → 跟车风险约束",
+        "config": "artifacts/experiments_v3/iteration_6/ppo_s191/config.json",
+        "config_sha256": "b267b2e3f429cffcb05fa750f28ce08f5ce22fae2ad683cb4e64e0d07a9476ed"
+      },
+      "report": "artifacts/experiments_v3/iteration_6/ppo_s191/selection_49152.json",
+      "summary": {
+        "episodes": 96,
+        "crashes": 1,
+        "qualification_rate": 0.6875,
+        "mean_score": 1527.1979166666667,
+        "mean_distance_m": 1069.678899921783,
+        "mean_overtakes": 4.666666666666667
+      }
+    },
+    {
+      "model": {
+        "path": "artifacts/experiments_v3/iteration_6/ppo_s203/step_65536.zip",
+        "sha256": "265c9776df70ca70cf8562c4b4ffdd5ad9b2fe54f2648e4cf4365ca93f1fb654",
+        "algorithm": "ppo",
+        "env_version": "3.1",
+        "steps": 65536,
+        "seed": 203,
+        "run_id": "ppo_s203",
+        "training_steps": 65536,
+        "method": "PPO efficiency refinement with close-following reference KL retention",
+        "pretrained": true,
+        "method_label": "PPO → 效率微调 → 跟车风险约束",
+        "config": "artifacts/experiments_v3/iteration_6/ppo_s203/config.json",
+        "config_sha256": "c5129247f5d54051f957df0f78aa3b654310228ac593c65777b3443b804591a5"
+      },
+      "report": "artifacts/experiments_v3/iteration_6/ppo_s203/selection_65536.json",
+      "summary": {
+        "episodes": 96,
+        "crashes": 0,
+        "qualification_rate": 0.6875,
+        "mean_score": 1543.6666666666667,
+        "mean_distance_m": 1078.2062929935573,
+        "mean_overtakes": 4.729166666666667
+      }
+    },
+    {
+      "model": {
+        "path": "artifacts/experiments_v3/iteration_6/ppo_s203/step_16384.zip",
+        "sha256": "77d88a6372429424dbdab20a8f90483627c2827102df7edb2fbb905923633a36",
+        "algorithm": "ppo",
+        "env_version": "3.1",
+        "steps": 16384,
+        "seed": 203,
+        "run_id": "ppo_s203",
+        "training_steps": 65536,
+        "method": "PPO efficiency refinement with close-following reference KL retention",
+        "pretrained": true,
+        "method_label": "PPO → 效率微调 → 跟车风险约束",
+        "config": "artifacts/experiments_v3/iteration_6/ppo_s203/config.json",
+        "config_sha256": "c5129247f5d54051f957df0f78aa3b654310228ac593c65777b3443b804591a5"
+      },
+      "report": "artifacts/experiments_v3/iteration_6/ppo_s203/selection_16384.json",
+      "summary": {
+        "episodes": 96,
+        "crashes": 0,
+        "qualification_rate": 0.7291666666666666,
+        "mean_score": 1556.3854166666667,
+        "mean_distance_m": 1086.394598921757,
+        "mean_overtakes": 4.864583333333333
+      }
+    }
+  ],
+  "development_start": 841100,
+  "selection_start": 841200,
+  "test_start": 2741100,
+  "test_count_per_route": 100,
+  "replay_seed": 841203,
+  "promotion_gate": "no more crashes overall or per route; higher overall qualification and score; no route qualification regression"
+}

@@ -23,6 +23,7 @@
 - `RoadScene.tsx`：单个 WebGLRenderer，分别绘制玩家和对手视口。画面未就绪或图形上下文丢失时暂停比赛，可重建渲染器后继续。
 - `scene/DrivingView.ts`、`scene/scenery.ts`、`scene/assets.ts`：快照插值、场景、车辆素材和资源释放。
 - `ModelShowcase.tsx`：展示服务端返回的冻结训练报告。
+- `RefinementShowcase.tsx`：本轮 PPO 微调的同道路结果、开发曲线与训练前后回放入口。
 - `sound.ts`：引擎、事件音效和音乐，首次用户操作后启用音频。
 
 物理频率为 15 Hz，决策频率为 5 Hz。画面在快照之间插值，不外推车辆位置，也不影响仿真。切换窗口暂停驾驶和回放；恢复焦点后由用户继续。
@@ -38,6 +39,8 @@
 `server/records.py` 保存 SQLite 比赛记录和回放快照，默认目录为 `artifacts/game/`。用 `LANE_SHIFT_DATA_DIR` 可以指定其他目录。浏览器与音频测试使用各自的临时目录，不写入日常驾驶记录。
 
 回放读取已保存的快照，不重新运行模型。回放定位以双方较晚的仿真时间为准，玩家先发生碰撞后仍能查看对手剩余的行程。
+
+训练对照回放使用同一套 Three.js 场景与播放控制，单独标注两侧模型。`GET /api/game/training/replays/{track}` 读取归档的压缩快照，先核对发布报告与回放文件的 SHA-256；不创建比赛会话，也不写入玩家存档。`server/refinement.py` 同时检查最新报告与部署权重是否一致。
 
 ## 目录约定
 

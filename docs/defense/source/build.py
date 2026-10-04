@@ -366,6 +366,9 @@ BRIEF = {
 }
 assert sum(seconds for seconds, _ in BRIEF.values()) == 295
 
+from refinement import update as apply_refinement
+REFINEMENT_NOTES, REFINEMENT_ANSWERS = apply_refinement(SLIDES, BRIEF, ROOT)
+
 
 def chrome(i: int) -> str:
     return f'<div class="chrome-min"><span class="l">LANE SHIFT / 强化学习课程项目</span><span class="r" data-page-number="{i}">{i:02d} / {len(SLIDES):02d}</span></div>'
@@ -408,6 +411,8 @@ deck = (
 (OUT / "LANE-SHIFT-defense.html").write_text(deck, encoding="utf-8")
 
 faq = [
+    ("跟车安全约束具体是什么？",
+     "先执行 PPO 更新，再对本轮采样中接近前车的状态，额外优化参考策略与当前策略之间的 KL 散度。参考是原 PPO，参数固定；接近条件来自模型已有的车距和相对速度观测。另增加危险跟车惩罚。游戏只加载一个最终网络，参考模型不接管动作。它帮助保留已有行为，但不是安全证明；也不能从这两组设置单独归因出某一项的贡献。"),
     ("PPO 的目标函数怎么解释？",
      "核心裁剪目标可写为 E[min(ρₜAₜ, clip(ρₜ, 1−ε, 1+ε)Aₜ)]，其中 ρₜ 是同一动作在新旧策略下的概率比，Aₜ 是优势估计。直观上，好的动作增加概率，但不要一步改变太大。实现还包含价值损失与熵项。PPO 的裁剪不是碰撞安全约束，不能保证车辆不撞。"),
     ("奖励和得分为什么不一样？",
@@ -457,7 +462,7 @@ for i, s in enumerate(SLIDES, 1):
         f'<p class="transition"><strong>过渡：</strong>{html.escape(s["transition"])}</p>'
         f'<p class="meta"><strong>核对依据：</strong><code>{html.escape(s["source"])}</code></p></article>'
     )
-faqs = "".join(f'<details open><summary>{html.escape(q)}</summary><p>{html.escape(a)}</p></details>' for q, a in faq)
+faqs = "".join(f'<details open><summary>{html.escape(q)}</summary><p>{html.escape(REFINEMENT_ANSWERS.get(q, a))}</p></details>' for q, a in faq)
 brief_notes = '<section id="brief"><h2>约 5 分钟讲稿</h2><p>8 页，建议合计 4 分 55 秒，含 20 秒实机片段。每页讲完直接按右键，精简模式会跳过补充页。</p>' + "".join(
     f'<article><div class="label">精简 {order} / 8 · 原第 {index} 页 · {seconds} 秒</div>'
     f'<h3><a href="LANE-SHIFT-defense.html?mode=brief#{index}">{html.escape(SLIDES[index-1]["title"])}</a></h3>'
@@ -477,15 +482,15 @@ notes = (
     '<li>先运行 Start-Game.cmd 与 Check-Game.cmd；让游戏和幻灯片同时打开。第 2 页切到游戏，从“选择起始路线”进入连续高压。</li>'
     '<li>操作阶段只解释换道、减速和结算；不同时展开设置、记录和算法页面。若时间不足，截图说明玩法，直接进入训练与评估部分。</li>'
     '<li>演示输赢都可以正常讲：这是行为展示，不是预设 AI 必胜。需要讨论泛化时引用第 10、11 页的独立测试。</li>'
-    '<li>5 分钟版本按第 1、2、4、5、6、7、10、12 页播放。Esc 打开目录，可切回完整版本回答追问；下方有对应短讲稿。</li>'
-    '</ul>' + brief_notes + '<h2>完整逐页讲稿</h2><nav>' + toc + '</nav>' + "".join(articles)
+    '<li>5 分钟版本按第 ' + '、'.join(str(i) for i in BRIEF) + ' 页播放。Esc 打开目录，可切回完整版本回答追问；下方有对应短讲稿。</li>'
+    '</ul>' + REFINEMENT_NOTES + brief_notes + '<h2>完整逐页讲稿</h2><nav>' + toc + '</nav>' + "".join(articles)
     + '<h2 id="faq">常见追问：完整回答</h2>' + faqs
     + '<h2>数字口径与证据</h2><ul>'
-    '<li>独立测试：种子 1631100–1631199，三关各 100 局。图表只引用 iteration_4/report.json，不与 evaluation_final 的另一组种子混算。</li>'
-    '<li>正式 PPO：72.3%、0/300；规则：63.3%、0/300；PPO 候选：78.3%、8/300；DQN：56.7%、65/300；A2C：79.0%、5/300。</li>'
-    '<li>高压关：正式 PPO 32%、0/100；A2C 43%、4/100。百分比保留一位时可能有四舍五入。</li>'
-    '<li>新增五次训练合计 700,816 步。正式模型的 501,760 步为 safe_transfer_s47 完整记录，175,000 为部署检查点。均不应等同于包含上游的总预算。</li>'
-    f'<li>本材料生成时 report.json 的 SHA-256：<code>{REPORT_HASH}</code>。</li>'
+    '<li>上一轮独立测试：种子 1631100–1631199，三关各 100 局，引用 iteration_4/report.json，不与本轮或 evaluation_final 的另一组种子混算。</li>'
+    '<li>上一轮原 PPO：72.3%、0/300；规则：63.3%、0/300；PPO 候选：78.3%、8/300；DQN：56.7%、65/300；A2C：79.0%、5/300。</li>'
+    '<li>上一轮高压关：原 PPO 32%、0/100；A2C 43%、4/100。百分比保留一位时可能有四舍五入。</li>'
+    '<li>上一轮五次训练合计 700,816 步。原 PPO 的 501,760 步为 safe_transfer_s47 完整记录，175,000 为当时部署检查点。均不应等同于包含上游的总预算。</li>'
+    f'<li>上一轮 iteration_4/report.json 的 SHA-256：<code>{REPORT_HASH}</code>。</li>'
     f'<li>第 7 页开发曲线读取 safe_transfer_s47/progress.json，SHA-256：<code>{PROGRESS_HASH}</code>；'
     '17 个记录点，每点 24 局，种子 531100–531107，每关 8 局，统一 45 秒；未平滑，不代表多训练种子置信区间。</li>'
     '<li>高压结果拆分来自原始逐局文件：正式 PPO 为 32 达标 / 68 安全完赛但里程不足 / 0 碰撞；A2C 为 43 / 53 / 4。19.4 米为正式 PPO 的 68 局未达标缺口中位数。</li>'
@@ -498,6 +503,7 @@ notes = (
     '<li><a href="https://stable-baselines3.readthedocs.io/en/master/modules/a2c.html">Stable-Baselines3：A2C（优势 actor-critic）</a></li>'
     '<li><a href="https://highway-env.farama.org/">HighwayEnv：交通仿真环境</a></li>'
     '<li><a href="https://arxiv.org/abs/1707.06347">Schulman 等：Proximal Policy Optimization Algorithms，2017</a></li>'
+    '<li><a href="https://arxiv.org/abs/1803.03835">Schmitt 等：Kickstarting Deep Reinforcement Learning，2018</a>：已有策略辅助强化学习的参考；本项目仅采用局部状态上的简化参考策略约束，不复现论文完整方法。</li>'
     '<li><a href="https://github.com/DLR-RM/rl-baselines3-zoo">RL Baselines3 Zoo</a>：训练、定期评估和曲线展示的参考；'
     '<a href="https://rl-baselines3-zoo.readthedocs.io/en/master/guide/plot.html">绘图文档</a>。本项目曲线由自己的日志生成。</li>'
     '<li><a href="https://github.com/metadriverse/metadrive">MetaDrive</a>：多样化场景与安全评价的参考；'

@@ -1,0 +1,205 @@
+{
+  "env_version": "3.1",
+  "candidate": {
+    "path": "artifacts/experiments_v3/iteration_5/ppo_s91/step_114688.zip",
+    "sha256": "719af166f77c850d47c9e663cc5c18d7250216e2ad73cbbdca3be5c07cb451f8",
+    "algorithm": "ppo",
+    "env_version": "3.1",
+    "steps": 114688,
+    "seed": 91,
+    "run_id": "ppo_s91",
+    "training_steps": 120832,
+    "method": "PPO 小步微调：实际赛程与高压场景采样",
+    "pretrained": true,
+    "method_label": "已有 PPO → 实际赛程微调",
+    "config": "artifacts/experiments_v3/iteration_5/ppo_s91/config.json",
+    "config_sha256": "82d57c7a1420cc02cdea972a2c0785556303c24da027ee7866afdf833210aaba"
+  },
+  "previous": {
+    "path": "artifacts/experiments_v3/deployment/v3_expert-b4f0d5f66de4.zip",
+    "sha256": "b4f0d5f66de4a589f240654ad21b09705beaf52eb71a4c43abe4ce5765a5419a",
+    "algorithm": "ppo",
+    "env_version": "3.1",
+    "source_env_version": "3.1",
+    "run_id": "safe_transfer_s47",
+    "method": "v2 PPO transfer plus v3 safety fine-tuning",
+    "seed": 47,
+    "steps": 175000,
+    "training_steps": 501760,
+    "development_report": "artifacts/experiments_v3/development_safe_transfer_175_dev_routes.json",
+    "test_report": "artifacts/experiments_v3/test_v3_expert_routes.json"
+  },
+  "selection_report": "artifacts/experiments_v3/iteration_5/ppo_s91/selection_114688.json",
+  "selection_summary": {
+    "episodes": 96,
+    "crashes": 0,
+    "qualification_rate": 0.7916666666666666,
+    "mean_score": 1576.3854166666667,
+    "mean_distance_m": 1098.7960890409606,
+    "mean_overtakes": 5.125
+  },
+  "finalists": [
+    {
+      "model": {
+        "path": "artifacts/experiments_v3/iteration_5/ppo_s103/step_81920.zip",
+        "sha256": "7a60aa2563f05108ce87f942470c824049fde162ce89a66ab23a2a03715cd7a1",
+        "algorithm": "ppo",
+        "env_version": "3.1",
+        "steps": 81920,
+        "seed": 103,
+        "run_id": "ppo_s103",
+        "training_steps": 120832,
+        "method": "PPO 小步微调：实际赛程与高压场景采样",
+        "pretrained": true,
+        "method_label": "已有 PPO → 实际赛程微调",
+        "config": "artifacts/experiments_v3/iteration_5/ppo_s103/config.json",
+        "config_sha256": "c7131b2f15a4ffe5209b777059364308c696d451367812dff001dfb66461c146"
+      },
+      "report": "artifacts/experiments_v3/iteration_5/ppo_s103/selection_81920.json",
+      "summary": {
+        "episodes": 96,
+        "crashes": 2,
+        "qualification_rate": 0.78125,
+        "mean_score": 1554.4895833333333,
+        "mean_distance_m": 1091.8210057355093,
+        "mean_overtakes": 5.052083333333333
+      }
+    },
+    {
+      "model": {
+        "path": "artifacts/experiments_v3/iteration_5/ppo_s103/step_65536.zip",
+        "sha256": "4e96f6f7279b1d8364b8633638bc2079f4e0a7a959ff7f85faa49166af1309e3",
+        "algorithm": "ppo",
+        "env_version": "3.1",
+        "steps": 65536,
+        "seed": 103,
+        "run_id": "ppo_s103",
+        "training_steps": 120832,
+        "method": "PPO 小步微调：实际赛程与高压场景采样",
+        "pretrained": true,
+        "method_label": "已有 PPO → 实际赛程微调",
+        "config": "artifacts/experiments_v3/iteration_5/ppo_s103/config.json",
+        "config_sha256": "c7131b2f15a4ffe5209b777059364308c696d451367812dff001dfb66461c146"
+      },
+      "report": "artifacts/experiments_v3/iteration_5/ppo_s103/selection_65536.json",
+      "summary": {
+        "episodes": 96,
+        "crashes": 2,
+        "qualification_rate": 0.7708333333333334,
+        "mean_score": 1547.5625,
+        "mean_distance_m": 1086.4368248830858,
+        "mean_overtakes": 4.958333333333333
+      }
+    },
+    {
+      "model": {
+        "path": "artifacts/experiments_v3/iteration_5/ppo_s127/step_131072.zip",
+        "sha256": "b51328eb865b6158201ea3dd56078ed715cc860af139516d7368b34d1c842ec7",
+        "algorithm": "ppo",
+        "env_version": "3.1",
+        "steps": 131072,
+        "seed": 127,
+        "run_id": "ppo_s127",
+        "training_steps": 180224,
+        "method": "PPO 小步微调：实际赛程与高压场景采样",
+        "pretrained": true,
+        "method_label": "已有 PPO → 实际赛程微调",
+        "config": "artifacts/experiments_v3/iteration_5/ppo_s127/config.json",
+        "config_sha256": "05dbd011bb6da6865d3f417d31bd56a0f82ac58b6a535661d4ef833767e208bc"
+      },
+      "report": "artifacts/experiments_v3/iteration_5/ppo_s127/selection_131072.json",
+      "summary": {
+        "episodes": 96,
+        "crashes": 0,
+        "qualification_rate": 0.7708333333333334,
+        "mean_score": 1570.53125,
+        "mean_distance_m": 1094.1710577973806,
+        "mean_overtakes": 5.09375
+      }
+    },
+    {
+      "model": {
+        "path": "artifacts/experiments_v3/iteration_5/ppo_s127/step_98304.zip",
+        "sha256": "765df77eeb839876ae0db1d359bb761c568f1994e1c55d52ace0979641eb5d47",
+        "algorithm": "ppo",
+        "env_version": "3.1",
+        "steps": 98304,
+        "seed": 127,
+        "run_id": "ppo_s127",
+        "training_steps": 180224,
+        "method": "PPO 小步微调：实际赛程与高压场景采样",
+        "pretrained": true,
+        "method_label": "已有 PPO → 实际赛程微调",
+        "config": "artifacts/experiments_v3/iteration_5/ppo_s127/config.json",
+        "config_sha256": "05dbd011bb6da6865d3f417d31bd56a0f82ac58b6a535661d4ef833767e208bc"
+      },
+      "report": "artifacts/experiments_v3/iteration_5/ppo_s127/selection_98304.json",
+      "summary": {
+        "episodes": 96,
+        "crashes": 0,
+        "qualification_rate": 0.78125,
+        "mean_score": 1562.7395833333333,
+        "mean_distance_m": 1091.1991047806553,
+        "mean_overtakes": 4.947916666666667
+      }
+    },
+    {
+      "model": {
+        "path": "artifacts/experiments_v3/iteration_5/ppo_s91/step_120832.zip",
+        "sha256": "998ebd85766c6341490dcdfcafd8d40101d08711ad88ab7e0926962acf580f43",
+        "algorithm": "ppo",
+        "env_version": "3.1",
+        "steps": 120832,
+        "seed": 91,
+        "run_id": "ppo_s91",
+        "training_steps": 120832,
+        "method": "PPO 小步微调：实际赛程与高压场景采样",
+        "pretrained": true,
+        "method_label": "已有 PPO → 实际赛程微调",
+        "config": "artifacts/experiments_v3/iteration_5/ppo_s91/config.json",
+        "config_sha256": "82d57c7a1420cc02cdea972a2c0785556303c24da027ee7866afdf833210aaba"
+      },
+      "report": "artifacts/experiments_v3/iteration_5/ppo_s91/selection_120832.json",
+      "summary": {
+        "episodes": 96,
+        "crashes": 0,
+        "qualification_rate": 0.7916666666666666,
+        "mean_score": 1574.6354166666667,
+        "mean_distance_m": 1097.9915369141434,
+        "mean_overtakes": 5.104166666666667
+      }
+    },
+    {
+      "model": {
+        "path": "artifacts/experiments_v3/iteration_5/ppo_s91/step_114688.zip",
+        "sha256": "719af166f77c850d47c9e663cc5c18d7250216e2ad73cbbdca3be5c07cb451f8",
+        "algorithm": "ppo",
+        "env_version": "3.1",
+        "steps": 114688,
+        "seed": 91,
+        "run_id": "ppo_s91",
+        "training_steps": 120832,
+        "method": "PPO 小步微调：实际赛程与高压场景采样",
+        "pretrained": true,
+        "method_label": "已有 PPO → 实际赛程微调",
+        "config": "artifacts/experiments_v3/iteration_5/ppo_s91/config.json",
+        "config_sha256": "82d57c7a1420cc02cdea972a2c0785556303c24da027ee7866afdf833210aaba"
+      },
+      "report": "artifacts/experiments_v3/iteration_5/ppo_s91/selection_114688.json",
+      "summary": {
+        "episodes": 96,
+        "crashes": 0,
+        "qualification_rate": 0.7916666666666666,
+        "mean_score": 1576.3854166666667,
+        "mean_distance_m": 1098.7960890409606,
+        "mean_overtakes": 5.125
+      }
+    }
+  ],
+  "development_start": 741100,
+  "selection_start": 741200,
+  "test_start": 1741100,
+  "test_count_per_route": 100,
+  "replay_seed": 741203,
+  "promotion_gate": "no more crashes overall or per route; higher overall qualification and score; no route qualification regression"
+}

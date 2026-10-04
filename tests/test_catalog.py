@@ -61,7 +61,8 @@ class TrainingSummaryTests(unittest.TestCase):
         self.assertEqual(expert["run_id"], selected["run_id"])
         report = json.loads((catalog.ROOT / manifest["evaluation"]["report"]).read_text(encoding="utf-8"))
         self.assertEqual(summary["levels"]["standard"]["routes"], report["models"]["v3_standard"]["by_scenario"])
-        self.assertEqual(summary["expert_vs_rule"]["wins"], report["paired_game_outcomes"]["expert_vs_rule"]["paired"]["all"]["wins"])
+        expected = manifest.get("refinement", {}).get("expert_vs_rule", report["paired_game_outcomes"]["expert_vs_rule"]["paired"]["all"])
+        self.assertEqual(summary["expert_vs_rule"], expected)
 
         altered = catalog.challenge_deployment()
         altered["evaluation"] = {**altered["evaluation"], "report_sha256": "0" * 64}
